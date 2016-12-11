@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:panelGrid columns="2" cellpadding="1">
+
+        <p:outputLabel for="outType" value="#{msg.schedulingOf}: "/>
+        <p:outputLabel id="outType" value="#{schedulingBean.scheduling.type}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outPutDate" value="Pegou em: " style="margin-right: 1px"/>
+        <p:outputLabel id="outPutDate" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+        
+        <p:outputLabel for="outDateReturn" value="#{msg.devolution}: "/>
+        <p:outputLabel id="outDateReturn" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+        
+        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;"/>
+        
+        <p:outputLabel for="outDescription" value="#{msg.description}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outDescription" value="#{schedulingBean.scheduling.equipment.description}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outResponsible" value="#{msg.requestor}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outResponsible" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outEquipmentReason" value="#{msg.reason}: " />
+        <p:outputLabel id="outEquipmentReason" value="#{schedulingBean.scheduling.schedulingReason}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="equipmentObservations" value="#{msg.observations}: "/>
+        <p:outputLabel id="equipmentObservations" value="#{schedulingBean.scheduling.observations}" style="font-weight: bold;"/>
+    </h:panelGrid>
+
+</html>

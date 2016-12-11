@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:head>
+        <!--icon="ui-icon ui-icon-help"-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style.css"/>
+        <title><ui:insert name="title">#{(msg.scheduler).concat(" - ").concat(msg.login)}</ui:insert></title>
+    </h:head>
+
+    <h:body style="background: #436996">
+
+        <f:metadata>
+            <f:event listener="#{loginBean.preRender}" type="preRenderView"/>
+        </f:metadata>
+
+        <div style="padding-top: 50px; text-align: center">
+            <p:graphicImage library="images" name="logo-uepb.png" height="100" width="150"/>
+        </div>
+
+        <p:dialog closable="false" visible="true" resizable="false" 
+                  draggable="false" id="loginDialog">
+            <h:form id="loginForm">
+                <p:messages id="loginMessages" autoUpdate="true" closable="true"/>
+
+
+                <h:panelGrid columns="2" cellpadding="4" id="loginPanelGrid">
+                    <h:panelGroup>
+
+                        <p:graphicImage library="images" name="Login.png"/>
+                        <p:outputLabel/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+
+                        <h:panelGrid columns="2" cellpadding="4">
+
+
+                            <p:outputLabel for="j_username" value="#{msg.user}: "/>
+                            <p:inputText id="j_username" required="true" requiredMessage="#{msg.mandatoryUserName}" 
+                                         size="20"/>
+
+                            <p:outputLabel for="j_password" value="#{msg.password}: "/>
+                            <p:password id="j_password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"
+                                        />
+
+                            <p:commandButton value="#{msg.enter}" id="loginEnterButton" icon="fa fa-key"
+                                             action="#{loginBean.login}" update="@form" ajax="false"/>
+                            <p:commandButton id="lostPasswordLink" onclick="PF('loginPasswordRecover').show();
+                                    return false;" icon="fa fa-question" style="float: right;"/>
+
+                            <p:tooltip for="lostPasswordLink" value="#{msg.helpToRecoverPassword}" showEffect="fade"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+
+                <p:button icon="fa fa-unlock-alt" style="float: right" outcome="home"/>
+            </h:form>
+        </p:dialog>
+
+        <div id="credits" style="float: right; right: 0px; bottom: 0px; padding: 10px; position: absolute; font-size: 8px">
+            <p:outputLabel value="#{msg.developedBy}: "/>
+            <a href="http://www.cassioliveira.com.br" target="_blank">
+                <p:outputLabel value="Cássio Oliveira"/>
+            </a>
+        </div>
+
+
+    </h:body>
+</html>

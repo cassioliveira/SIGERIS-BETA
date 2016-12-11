@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+
+    <p:tabView>
+        <p:tab title="Dados">
+            <h:panelGrid columns="2" border="0">
+                <p:outputLabel for="dateForecast" value="#{msg.forecastReturn}: "/>
+                <h:panelGroup>
+                    <p:calendar id="dateForecast" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
+                                size="15" locale="pt" required="true" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" mask="true"
+                                mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}" requiredMessage="#{msg.mandatorySchedulingDate}">
+                        <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="passengersNumber" value="#{msg.passengersNumber}: " style="margin-left: 7px"/>
+                    <p:spinner id="passengersNumber" value="#{schedulingBean.scheduling.travel.numberOfPassengers}" placeholder="#{msg.passengersNumber}"    
+                               converterMessage="#{msg.fieldOnlyAcceptsNumber}" title="#{msg.typeOrClickButtons}" min="0" size="2">
+                        <f:convertNumber integerOnly="true" type="number"/>
+                    </p:spinner>
+                </h:panelGroup>
+
+                <p:outputLabel for="driver" value="#{msg.driver}:" />
+                <h:panelGroup>
+                    <p:selectOneMenu id="driver" value="#{schedulingBean.scheduling.travel.driver}" style="width: 160px; height: 25px; background: none">
+                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                        <f:selectItems value="#{driverBean.drivers}" itemValue="#{driver}" itemLabel="#{driver.name}" var="driver"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="distance" value="#{msg.distance}: " style="margin-left: 7px;"/>
+                    <p:inputText id="distance" value="#{schedulingBean.scheduling.travel.distance}" 
+                                 maxlength="12" style="margin-left: 14px; width: 52px">
+                        <f:convertNumber type="number" maxFractionDigits="2" locale="pt_BR"/>
+                    </p:inputText> Km
+                </h:panelGroup>
+
+                <p:outputLabel for="observations" value="#{msg.observations}: "/>
+                <p:inputTextarea id="observations" value="#{schedulingBean.scheduling.observations}"
+                                 cols="47" rows="3" autoResize="false"/>
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
+
+
+    <p:tabView>
+
+        <p:tab title="#{msg.origin}">
+            <h:panelGrid columns="2" cellpadding="1" border="0">
+                <p:outputLabel for="originUf" value="#{msg.state}:" />
+                <p:selectOneMenu id="originUf" value="#{schedulingBean.scheduling.travel.originUf}" style="width: 180px">
+                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                    <f:selectItems value="#{schedulingBean.originStates}" itemValue="#{uf}" itemLabel="#{uf.description}" var="uf"/>
+                    <p:ajax process="@this" event="change" update="originCity" listener="#{schedulingBean.loadOriginCities()}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="originCity" value="#{msg.city}: "/>
+                <p:selectOneMenu id="originCity" value="#{schedulingBean.scheduling.travel.originCity}" filter="true" style="width: 180px" 
+                                 filterMatchMode="startsWith" disabled="#{schedulingBean.scheduling.travel.originUf eq null}" editable="true">
+                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                    <f:selectItems value="#{schedulingBean.loadOriginCities()}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="originStreet" value="#{msg.street}: "/>
+                <h:panelGroup>
+                    <p:inputText id="originStreet" value="#{schedulingBean.scheduling.travel.originStreet}" 
+                                 maxlength="100" style="width: 261px"/>
+
+                    <p:inputText id="originNumber" value="#{schedulingBean.scheduling.travel.originNumber}"
+                                 maxlength="6" size="5"  placeholder="Nº" style="margin-left: 2px"/>
+                </h:panelGroup>
+
+                <p:outputLabel for="originNeighborhood" value="#{msg.neighborhood}: " />
+                <p:inputText id="originNeighborhood" value="#{schedulingBean.scheduling.travel.originNeighborhood}"
+                             maxlength="30" style="width: 333px"/>
+            </h:panelGrid>
+        </p:tab>
+
+        <p:tab title="#{msg.destination}">
+            <h:panelGrid columns="2" cellpadding="1" border="0">
+                <p:outputLabel for="uf" value="#{msg.state}:" />
+                <p:selectOneMenu id="uf" value="#{schedulingBean.scheduling.travel.uf}" style="width: 180px">
+                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                    <f:selectItems value="#{schedulingBean.destinationStates}" itemValue="#{uf}" itemLabel="#{uf.description}" var="uf"/>
+                    <p:ajax process="@this" event="change" update="city" listener="#{schedulingBean.loadDestinationCities()}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="city" value="#{msg.city}: "/>
+                <p:selectOneMenu id="city" value="#{schedulingBean.scheduling.travel.destinationCity}" filter="true" style="width: 180px" 
+                                 filterMatchMode="startsWith" disabled="#{schedulingBean.scheduling.travel.uf eq null}" editable="true">
+                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                    <f:selectItems value="#{schedulingBean.loadDestinationCities()}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="street" value="#{msg.street}: "/>
+                <h:panelGroup>
+                    <p:inputText id="street" value="#{schedulingBean.scheduling.travel.destinationStreet}" 
+                                 maxlength="100" style="width: 261px"/>
+
+                    <p:inputText id="number" value="#{schedulingBean.scheduling.travel.destinationNumber}"
+                                 maxlength="6" size="5"  placeholder="Nº" style="margin-left: 2px"/>
+                </h:panelGroup>
+
+                <p:outputLabel for="neighborhood" value="#{msg.neighborhood}: " />
+                <p:inputText id="neighborhood" value="#{schedulingBean.scheduling.travel.destinationNeighborhood}"
+                             maxlength="30" style="width: 333px"/>
+            </h:panelGrid>
+        </p:tab>
+
+        <p:tab title="#{msg.reason}">
+
+            <h:panelGrid columns="2" cellpadding="1" border="0">
+                <p:outputLabel for="travelReason" value="#{msg.travelReason}:" />
+                <p:selectOneMenu id="travelReason" value="#{schedulingBean.scheduling.travel.reason}" style="width: 279px">
+                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                    <f:selectItems value="#{schedulingBean.travelReasons}" itemValue="#{reason}" itemLabel="#{reason.description}" var="reason"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="reasonDetails" value="#{msg.reasonDetails}: "/>
+                <p:inputTextarea id="reasonDetails" value="#{schedulingBean.scheduling.travel.reasonDetails}"
+                                 rows="3" autoResize="false" style="width: 271px"/>
+            </h:panelGrid>
+        </p:tab>
+
+    </p:tabView>
+
+
+</html>

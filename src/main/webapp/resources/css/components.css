@@ -1,0 +1,154 @@
+/* TOGGLE */
+.aw-toggle {
+    float: right;
+    line-height: 50px;
+    margin-right: 15px;
+
+    color: #fff;
+}
+
+/* MENU */
+.aw-menu {
+    font-size: 1.1em;
+}
+
+.aw-menu > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aw-menu > ul a {
+    display: block;
+    padding: 10px 15px;
+
+    text-decoration: none;
+    font-weight: 500;
+    color: #373737;
+} 
+
+.aw-menu > ul i {
+    margin-right: 6px;
+}
+
+.aw-menu > ul a:hover, .aw-menu > ul a:focus {
+    background-color: #dfdfdf;
+}
+
+.aw-menu > ul .is-selected {
+    border-left: 3px solid #1e94d2;
+    background-color: #f3f3f3;
+}
+
+.aw-menu > ul .is-selected a {
+    margin-left: -3px;
+    color: #1e94d2;
+}
+
+/* PAGE-TITLE */
+.aw-page-title {
+    margin: 0;
+    padding: 20px 0;
+
+    font-size: 1.5em;
+    color: #373737;
+}
+
+.welcome-message-home{
+    margin-top: 5%;
+    color: darkcyan;
+    text-shadow: #E0E0E0 2px -2px 3px, #E0E0E0 -2px 2px 3px;
+    vertical-align: middle;
+}
+
+/*Personaliza os textos dos fieldsets*/
+.ui-fieldset .ui-fieldset-legend {
+    background: none;
+    text-align: center !important;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1E94D2;
+    padding: 2px;
+}
+
+/*Dialog login*/
+.transparent-dialog-login{
+    background: rgba(10,10,10,0.6) !important;
+    color: black !important;
+    border: 0px !important;
+    border-radius: 30px !important;
+}
+
+/*Campos input Dialog login*/
+.transparent-dialog-login .ui-inputfield {
+    color: white;  
+    text-shadow: 1px 1px 1px black;
+    background: none;
+}
+/*Campos output Dialog login*/
+.transparent-dialog-login .ui-outputlabel {
+    color: whitesmoke !important;  
+    text-shadow: 3px 3px 3px black !important;
+}
+
+/*Botao Dialog login*/
+.transparent-dialog-login .ui-button{
+    background: none !important;
+    border: none !important;
+}
+
+/*Texto do botão Dialog login*/
+.transparent-dialog-login .ui-button-text{
+    display: none;
+}
+
+/*Barra de título Dialog login*/
+.transparent-dialog-login .ui-dialog-titlebar{
+    background: none !important;
+    border: none !important;
+}
+
+.msg-isroom-yes{
+    color: #4AA02C;
+    font-weight: bold;
+}
+
+.msg-isroom-no{
+    color: tomato;
+}
+
+#lostPassword{
+    font-size: 11px;
+    float: right;
+}
+
+#logo-login{
+    float: bottom; 
+    padding-top: 50px; 
+    position: relative; 
+    text-align: center;
+}
+
+.backgroundLoginImage{
+
+    background-image: url('../images/cdsa-bg-1366w.png');
+    background-repeat: no-repeat;
+    background-size:100%;
+    bottom: 0;
+    color: black;
+    left: 0;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    background-size: cover;
+
+    /*    background: url(../images/cdsa-bg-1366w.png) no-repeat center center fixed;
+        background-size: cover;
+        -webkit-background-size: cover; 
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;*/
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+    <h:panelGrid columns="2">
+        <p:outputLabel for="roomNumber" value="#{msg.roomNumber}: " />
+        <p:selectOneMenu id="roomNumber" value="#{schedulingBean.scheduling.room}" required="true" style="width: 160px"
+                         requiredMessage="#{msg.mandatoryRoomType}">
+            <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+            <f:selectItems value="#{roomBean.rooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
+        </p:selectOneMenu>
+
+        <p:outputLabel for="endingDate" value="#{msg.scheduledAt}: "/>
+        <p:calendar id="endingDate" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
+                    size="15" locale="pt" required="true" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" mask="true"
+                    mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}" requiredMessage="#{msg.mandatorySchedulingDate}"
+                    converterMessage="Deve informar a data e hora">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:calendar>
+
+        <p:outputLabel for="reasonRoom" value="#{msg.reason}: " style="margin-right: 20px"/>
+        <p:inputText id="reasonRoom" value="#{schedulingBean.scheduling.schedulingReason}" maxlength="50" 
+                     style="width: 273px"/>
+
+        <p:outputLabel for="observationsRoom" value="#{msg.observations}: "/>
+        <p:inputTextarea id="observationsRoom" value="#{schedulingBean.scheduling.observations}"
+                         cols="43" rows="3" autoResize="false"/>
+    </h:panelGrid>
+
+</html>

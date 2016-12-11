@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/templates/Layout.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="scheduling" value="#{schedulingBean.scheduling}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:growl id="messages" autoUpdate="true"/>
+            <p:fieldset id="fildSet" legend="#{schedulingBean.editing ? 'Alterar agendamento' : 'Novo agendamento'}" >
+
+                <p:wizard id="schedulingWizard" backLabel="#{msg.back}" nextLabel="#{msg.next}">
+
+                    <h:inputHidden id="dateTime" value="#{schedulingBean.scheduling.registerDate}">
+                        <f:convertDateTime type="both" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                    </h:inputHidden>
+
+                    <p:tab title="#{msg.scheduling}">
+
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="schedulingType" value="#{msg.schedulingOf}: "/>
+                            <p:selectOneRadio id="schedulingType" value="#{schedulingBean.scheduling.type}" required="true"
+                                              requiredMessage="#{msg.mandatorySchedulingType}">
+                                <c:if test="#{schedulingBean.editing eq false}">
+                                    <f:selectItem itemLabel="#{msg.room}" itemValue="#{msg.room}"/>
+                                </c:if>
+                                <c:if test="#{schedulingBean.editing eq true}">
+                                    <f:selectItem itemDisabled="#{schedulingBean.scheduling.type eq msg.equipment}" itemLabel="#{msg.room}" itemValue="#{msg.room}" />
+                                </c:if>
+
+                                <c:if test="#{schedulingBean.editing eq false}">
+                                    <f:selectItem itemLabel="#{msg.equipment}" itemValue="#{msg.equipment}"/>
+                                </c:if>
+                                <c:if test="#{schedulingBean.editing eq true}">
+                                    <f:selectItem itemDisabled="#{schedulingBean.scheduling.type eq msg.room}" itemLabel="#{msg.equipment}" itemValue="#{msg.equipment}" />
+                                </c:if>
+                                <p:ajax update="@form"/>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel for="date" value="#{msg.schedulingTo}: " style="margin-right: 1px"/>
+                            <p:calendar id="date" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="16" 
+                                        mask="true" size="18" locale="pt" required="true" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" 
+                                        requiredMessage="#{msg.mandatorySchedulingDate}" >
+                                <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                            </p:calendar>
+
+                            <p:outputLabel for="requestor" value="#{msg.requestor}: " style="margin-right: 20px"/>
+                            <p:selectOneMenu id="requestor" value="#{schedulingBean.scheduling.responsible}" required="true" style="width: 178px"
+                                             requiredMessage="#{msg.mandatorySchedulingRequestor}">
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{responsibleBean.responsibles}" itemLabel="#{requestorRoom.name}" itemValue="#{requestorRoom}" var="requestorRoom"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="craftUpload" value="#{msg.attachCraft}: " style="margin-right: 20px"/>
+                            <p:fileUpload id="craftUpload" cancelLabel="#{msg.cancel}" dragDropSupport="true" fileLimit="1" label="#{msg.selectFile}....." 
+                                          mode="simple" uploadLabel="Enviar..." skinSimple="true" value="#{schedulingBean.scheduling.craft}"/>
+                        </h:panelGrid>
+
+                    </p:tab>
+
+                    <p:tab title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.room}">
+                        <ui:include src="/sala/agenda-sala.xhtml" />
+                    </p:tab>
+
+                    <p:tab  title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.equipment}">
+                        <ui:include src="/equipamento/agenda-equipamento.xhtml" />
+                    </p:tab>
+
+<!--                    <p:tab  title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.travel}">
+    <ui:include src="/viagem/agenda-viagem.xhtml" />
+</p:tab>-->
+
+                    <p:tab title="#{msg.confirmation}">
+
+                        <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.room}">
+                            <ui:include src="/sala/confirmar-dados-sala.xhtml" />
+                        </h:panelGroup>
+
+<!--                        <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.travel}">
+                            <ui:include src="/viagem/confirmar-dados-viagem.xhtml"/>
+                        </h:panelGroup>-->
+
+                        <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.equipment}">
+                            <ui:include src="/equipamento/confirmar-dados-equipamento.xhtml"/>
+                        </h:panelGroup>
+
+                        <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
+                            <f:facet name="left">
+                                <p:commandButton style="font-size: 13px;" value="#{msg.save}" action="#{schedulingBean.save}"  
+                                                 id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
+                            </f:facet>
+
+                            <f:facet name="left">
+                                <p:button style="font-size: 13px;" value="#{msg.cancel}" id="cancelButton"  
+                                          icon="fa fa-close" outcome="/home" rendered="#{schedulingBean.editing}"/>
+                            </f:facet>
+                        </p:toolbar> 
+                    </p:tab>
+                </p:wizard>
+            </p:fieldset>
+            <p:blockUI id="blockSchedulingForm" block="form" trigger="saveButton">
+                <p:graphicImage library="images" name="loading.gif"/>
+            </p:blockUI>
+        </h:form>
+    </ui:define>
+</ui:composition>
