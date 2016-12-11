@@ -67,11 +67,11 @@
                     </p:tab>
 
                     <p:tab title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.room}">
-                        <ui:include src="/sala/agenda-sala.xhtml" />
+                        <ui:include src="/Agendador/sala/agenda-sala.xhtml" />
                     </p:tab>
 
                     <p:tab  title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.equipment}">
-                        <ui:include src="/equipamento/agenda-equipamento.xhtml" />
+                        <ui:include src="/Agendador/equipamento/agenda-equipamento.xhtml" />
                     </p:tab>
 
 <!--                    <p:tab  title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.travel}">
@@ -81,7 +81,7 @@
                     <p:tab title="#{msg.confirmation}">
 
                         <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.room}">
-                            <ui:include src="/sala/confirmar-dados-sala.xhtml" />
+                            <ui:include src="/Agendador/sala/confirmar-dados-sala.xhtml" />
                         </h:panelGroup>
 
 <!--                        <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.travel}">
@@ -89,7 +89,7 @@
                         </h:panelGroup>-->
 
                         <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.equipment}">
-                            <ui:include src="/equipamento/confirmar-dados-equipamento.xhtml"/>
+                            <ui:include src="/Agendador/equipamento/confirmar-dados-equipamento.xhtml"/>
                         </h:panelGroup>
 
                         <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">

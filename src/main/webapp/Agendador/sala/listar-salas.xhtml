@@ -16,7 +16,7 @@
             <p:fieldset legend="Salas cadastradas" >
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:button outcome="/sala/cadastro-sala" value="#{msg.newRegistering}" style="text-align: right"/>
+                        <p:button outcome="/Agendador/sala/cadastro-sala" value="#{msg.newRegistering}" style="text-align: right"/>
                     </f:facet>
                 </p:toolbar>    
 
@@ -140,7 +140,7 @@
 
                     <p:column headerText="#{msg.actions}" style="text-align: center" width="25">
 
-                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/sala/cadastro-sala">
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/sala/cadastro-sala">
                             <f:param  name="room" value="#{room.id}"/>
                             <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
                         </p:button>

@@ -12,7 +12,7 @@
         <p:fieldset legend="Schedulings cadastrados" >
             <p:toolbar>
                 <f:facet name="right">
-                    <p:button outcome="/agendamento/cadastro-agendamento" value="Novo cadastro" style="text-align: right"/>
+                    <p:button outcome="/Agendador/agendamento/cadastro-agendamento" value="Novo cadastro" style="text-align: right"/>
                 </f:facet>
             </p:toolbar>    
 
@@ -59,7 +59,7 @@
                 </p:column>
 
                 <p:column headerText="Ações" style="text-align: center" width="25">
-                    <p:button id="editButton" title="Editar" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/agendamento/cadastro-agendamento">
+                    <p:button id="editButton" title="Editar" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento">
                         <f:param  name="scheduling" value="#{scheduling.id}"/>
                         <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
                     </p:button>

@@ -16,7 +16,7 @@
             <p:fieldset legend="#{(msg.searchCadastre).concat(msg.driver)}" >
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:button outcome="/motorista/cadastro-motorista" value="#{msg.newRegistering}" style="text-align: right"/>
+                        <p:button outcome="/Agendador/motorista/cadastro-motorista" value="#{msg.newRegistering}" style="text-align: right"/>
                     </f:facet>
                 </p:toolbar>    
 
@@ -60,7 +60,7 @@
 
                     <p:column headerText="#{msg.actions}" style="text-align: center" width="25">
 
-                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/motorista/cadastro-motorista">
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/motorista/cadastro-motorista">
                             <f:param  name="driver" value="#{driver.id}"/>
                             <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
                         </p:button>

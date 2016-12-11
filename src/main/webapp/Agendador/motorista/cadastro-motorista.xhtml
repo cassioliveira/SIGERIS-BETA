@@ -123,12 +123,12 @@
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
 
                         <p:button style="font-size: 13px;" value="#{msg.cancel}" 
-                                  id="deleteButton" outcome="/motorista/listar-motoristas" icon="fa fa-times" rendered="#{driverBean.editing}">
+                                  id="deleteButton" outcome="/Agendador/motorista/listar-motoristas" icon="fa fa-times" rendered="#{driverBean.editing}">
                         </p:button>
                     </f:facet>    
 
                     <f:facet name="right">
-                        <p:button value="#{msg.search}" id="newRegister" outcome="/motorista/listar-motoristas" 
+                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/motorista/listar-motoristas" 
                                   icon="ui-icon ui-icon-pencil"/>
                     </f:facet>
                 </p:toolbar> 

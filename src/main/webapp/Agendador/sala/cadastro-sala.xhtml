@@ -81,12 +81,12 @@
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
                         
                         <p:button style="font-size: 13px;" value="#{msg.cancel}" 
-                                  id="deleteButton" outcome="/sala/listar-salas" icon="fa fa-times" rendered="#{roomBean.editing}">
+                                  id="deleteButton" outcome="/Agendador/sala/listar-salas" icon="fa fa-times" rendered="#{roomBean.editing}">
                         </p:button>
                     </f:facet>    
 
                     <f:facet name="right">
-                        <p:button value="#{msg.search}" id="newRegister" outcome="/sala/listar-salas" 
+                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/sala/listar-salas" 
                                   icon="ui-icon ui-icon-pencil"/>
                     </f:facet>
                 </p:toolbar> 
