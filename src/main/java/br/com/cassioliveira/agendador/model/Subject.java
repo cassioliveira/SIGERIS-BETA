@@ -35,7 +35,7 @@ public class Subject implements Serializable {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "subject_group", joinColumns = @JoinColumn(name = "subject_id"), 
+    @JoinTable(name = "subject_group", joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
     private List<GroupType> groups = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package br.com.cassioliveira.agendador.util.cdi;
 
-import br.com.cassioliveira.agendador.exceptions.SchedulerException;
 import java.util.Set;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -17,7 +16,7 @@ public class CDIServiceLocator {
     private CDIServiceLocator() {
     }
 
-    private static BeanManager getBeanManager(){
+    private static BeanManager getBeanManager() {
         try {
             InitialContext initialContext = new InitialContext();
             return (BeanManager) initialContext.lookup("java:comp/BeanManager");
@@ -28,7 +27,7 @@ public class CDIServiceLocator {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T getBean(Class<T> clazz){
+    public static <T> T getBean(Class<T> clazz) {
         BeanManager bm = getBeanManager();
         Set<Bean<?>> beans = (Set<Bean<?>>) bm.getBeans(clazz);
 

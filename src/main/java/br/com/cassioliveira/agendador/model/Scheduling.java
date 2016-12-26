@@ -2,9 +2,7 @@ package br.com.cassioliveira.agendador.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -64,10 +62,8 @@ public class Scheduling implements Serializable {
     @Lob
     @Column(name = "file")
     private byte[] craft;
-
-//    @Embedded
-//    private Travel travel;
-    @Embedded
+    
+    @OneToOne
     private Equipment equipment;
 
     @OneToOne
@@ -77,10 +73,5 @@ public class Scheduling implements Serializable {
     @OneToOne
     @JoinColumn(name = "responsibleFK_id")
     private Responsible responsible;
-
-    @PostConstruct
-    public void init() {
-        this.equipment = new Equipment();
-    }
 
 }

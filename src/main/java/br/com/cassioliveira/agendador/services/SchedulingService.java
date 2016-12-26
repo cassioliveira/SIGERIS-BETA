@@ -43,22 +43,24 @@ public class SchedulingService implements Serializable {
     public List<Scheduling> findAll() {
         return schedulings.findAll();
     }
-    
+
     /**
-     * Método responsável por gerar o codido do agendamento baseado nas regras definidas pelo desenvolvedor.
+     * Método responsável por gerar o codido do agendamento baseado nas regras
+     * definidas pelo desenvolvedor.
+     *
      * @param scheduling
      * @param room
-     * @return 
+     * @return
      */
-    public String schedulingCode(Scheduling scheduling, Room room){
+    public String schedulingCode(Scheduling scheduling, Room room) {
         LocalDate dateToday = null;
         String code = null;
-        if(scheduling.getType().equals("Sala")){
+        if (scheduling.getType().equals("Sala")) {
             code = "AS" + dateToday.getMonthValue() + "0" + room.getId();
-        }else if(scheduling.getType().equals("Equipamento")){
+        } else if (scheduling.getType().equals("Equipamento")) {
             code = "AE" + dateToday.getMonthValue() + "0" + scheduling.getId();
         }
-        
+
         return code;
     }
 }

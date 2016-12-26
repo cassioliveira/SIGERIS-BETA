@@ -34,14 +34,14 @@
 
                 <h:panelGrid columns="2">
                     <h:panelGroup>
-                        <p:outputLabel for="roomType" value="#{msg.roomType}: " style="margin-right: 42px;"/>
+                        <p:outputLabel for="roomType" value="#{msg.roomType}: " style="margin-right: 45px"/>
                         <p:selectOneMenu id="roomType" value="#{roomBean.room.type}" required="true" requiredMessage="#{msg.mandatoryRoomType}">
                             <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                             <f:selectItems value="#{roomBean.roomTypes}" var="roomTypes" itemLabel="#{roomTypes.description}" itemValue="#{roomTypes}"/>
                         </p:selectOneMenu>
                     </h:panelGroup>
 
-                    <p:spinner id="capacity" value="#{roomBean.room.capacity}" converterMessage="#{msg.fieldOnlyAcceptsNumber}" size="10" 
+                    <p:spinner id="capacity" value="#{roomBean.room.capacity}" converterMessage="#{msg.fieldOnlyAcceptsNumber}" size="3" 
                                placeholder="#{msg.capacity}" min="0" title="#{msg.typeOrClickButtons}">
                         <f:convertNumber integerOnly="true" type="number"/>
                     </p:spinner>
@@ -51,13 +51,13 @@
 
                     <p:outputLabel for="number" value="#{msg.nameOrNumber}: " style="margin-right: 9px"/>
                     <p:inputText id="number" value="#{roomBean.room.number}" maxlength="20" required="true" disabled="#{roomBean.editing}"
-                                 requiredMessage="#{msg.mandatoryRoomNumber}" style="margin-bottom: 3px; width: 208px"/>
+                                 requiredMessage="#{msg.mandatoryRoomNumber}" style="margin-bottom: 3px; width: 230px"/>
                     <p:outputLabel/>
                     <p:outputLabel/>
                     <!--</h:panelGrid>-->
 
                     <p:outputLabel for="description" value="#{msg.description}: " style="margin-right: 17px;"/>
-                    <p:inputTextarea id="description" rows="3" cols="32" maxlength="255" value="#{roomBean.room.description}"
+                    <p:inputTextarea id="description" rows="3" cols="24" maxlength="255" value="#{roomBean.room.description}"
                                      autoResize="false" counter="counterDescription" counterTemplate="{0} #{msg.charactersLeft}"/>
                     <h:outputLabel/>
                     <h:outputLabel/>
@@ -67,7 +67,7 @@
                     <p:outputLabel/>
 
                     <p:outputLabel for="observations" value="#{msg.observations}: "/>
-                    <p:inputTextarea id="observations" rows="5" cols="32" maxlength="400" value="#{roomBean.room.observations}"
+                    <p:inputTextarea id="observations" rows="5" cols="24" maxlength="400" value="#{roomBean.room.observations}"
                                      autoResize="false" counter="counterDescription2" counterTemplate="{0} #{msg.charactersLeft}"/>
                     <h:outputLabel/>
                     <h:outputLabel/>
@@ -79,16 +79,11 @@
                     <f:facet name="left">
                         <p:commandButton style="font-size: 13px;" value="#{roomBean.editing ? msg.change :msg.save}" action="#{roomBean.save}"  
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
-                        
+
                         <p:button style="font-size: 13px;" value="#{msg.cancel}" 
-                                  id="deleteButton" outcome="/Agendador/sala/listar-salas" icon="fa fa-times" rendered="#{roomBean.editing}">
+                                  id="deleteButton" outcome="/Agendador/sala/listar-salas" icon="ui-icon ui-icon-cancel">
                         </p:button>
                     </f:facet>    
-
-                    <f:facet name="right">
-                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/sala/listar-salas" 
-                                  icon="ui-icon ui-icon-pencil"/>
-                    </f:facet>
                 </p:toolbar> 
             </p:fieldset>
             <p:blockUI id="blockRoomForm" block="formCacastreRoom" trigger="saveButton">

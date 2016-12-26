@@ -16,12 +16,13 @@ public class Rooms extends Generic<Room> implements Serializable {
     public Rooms() {
         super(Room.class);
     }
-    
+
     /**
      * Método que retorna o número de todas as rooms cadastradas no sistema.
-     * @return 
+     *
+     * @return
      */
-     public List<String> roomNameOrNumber() {
+    public List<String> roomNameOrNumber() {
         Query createQuery;
 
         createQuery = getEntityManager().createNativeQuery("SELECT r.number FROM room as r");

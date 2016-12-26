@@ -42,17 +42,15 @@ public class RoomBean implements Serializable {
     private Room selectedRoom;
 
     @Getter
-    private final List<RoomsType> roomTypes;
+    private List<RoomsType> roomTypes;
 
     private List<Room> rooms;
 
-    public RoomBean() {
-        roomTypes = Arrays.asList(RoomsType.values());
-    }
 
     @PostConstruct
     public void init() {
         this.rooms = roomService.findAll();
+        this.roomTypes = Arrays.asList(RoomsType.values());
     }
 
     public void save() {
@@ -69,6 +67,7 @@ public class RoomBean implements Serializable {
     public void remove() {
         this.roomService.delete(selectedRoom);
         FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
+        FacesUtil.redirectTo("listar-salas.xhtml");
     }
 
     /*

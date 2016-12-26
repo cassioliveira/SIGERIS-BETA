@@ -33,33 +33,28 @@
                         </p:outputPanel>
                     </f:facet>
 
-                    <p:column headerText="#{msg.id}" style="text-align: center" width="0.8%" filterStyle="display:none"
-                              filterBy="#{room.id}" filterMatchMode="exact">
-                        <h:outputText value="#{room.id}"/>
-                    </p:column>
-
                     <p:column headerText="#{msg.roomType}" style="text-align: center" width="6" filterStyle="display:none"
-                              filterBy="#{room.type}" filterMatchMode="contains">
+                              filterBy="#{room.type}" filterMatchMode="contains" priority="2">
                         <h:outputText value="#{room.type.description}"/>
                     </p:column>
 
                     <p:column headerText="#{msg.nameOrNumber}" style="text-align: center" width="15" filterStyle="display:none"
-                              filterBy="#{room.number}" filterMatchMode="contains">
+                              filterBy="#{room.number}" filterMatchMode="contains" priority="1">
                         <h:outputText value="#{room.number}" style="text-transform: uppercase"/>
                     </p:column>
 
                     <p:column headerText="#{msg.capacity}" style="text-align: center" filterMatchMode="contains" filterStyle="display:none"
-                              filterBy="#{room.capacity}" width="7">
+                              filterBy="#{room.capacity}" width="8" priority="1">
                         <h:outputText value="#{room.capacity}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.description}" width="120" filterStyle="display:none"
+                    <p:column headerText="#{msg.description}" width="120" filterStyle="display:none" priority="6"
                               filterBy="#{room.description}" filterMatchMode="contains">
                         <h:outputText value="#{room.description}"/>
                     </p:column>
 
                     <p:column id="tv" headerText="#{msg.tv}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.tv}" filterMatchMode="contains">
+                              filterBy="#{room.tv}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="tv.png" style="width: 20px; height: 20px" title="#{msg.tv}"/>
                         </f:facet>
@@ -67,7 +62,7 @@
                     </p:column>
 
                     <p:column headerText="#{msg.dvd}" style="text-align: center" width="1.6%" filterStyle="display:none"
-                              filterBy="#{room.dvd}" filterMatchMode="contains" >
+                              filterBy="#{room.dvd}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="dvd.png" style="width: 30px; height: 10px" title="#{msg.dvd}"/>
                         </f:facet>
@@ -75,7 +70,7 @@
                     </p:column>
 
                     <p:column id="datashow" headerText="#{msg.datashow}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.datashow}" filterMatchMode="contains">
+                              filterBy="#{room.datashow}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="datashow.png" style="width: 25px; height: 15px" title="#{msg.datashow}"/>
                         </f:facet>
@@ -83,7 +78,7 @@
                     </p:column>
 
                     <p:column id="board" headerText="#{msg.board}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.board}" filterMatchMode="contains">
+                              filterBy="#{room.board}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="board.png" style="width: 25px; height: 20px" title="#{msg.board}"/>
                         </f:facet>
@@ -91,7 +86,7 @@
                     </p:column>
 
                     <p:column id="microphone" headerText="#{msg.microphone}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.microphone}" filterMatchMode="contains">
+                              filterBy="#{room.microphone}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="microphone.png" style="width: 20px; height: 20px" title="#{msg.microphone}"/>
                         </f:facet>
@@ -99,7 +94,7 @@
                     </p:column>
 
                     <p:column id="internet" headerText="#{msg.internet}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.internet}" filterMatchMode="contains">
+                              filterBy="#{room.internet}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="internet.png" style="width: 25px; height: 20px" title="#{msg.internet}"/>
                         </f:facet>
@@ -107,7 +102,7 @@
                     </p:column>
 
                     <p:column id="computer" headerText="#{msg.computer}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.computer}" filterMatchMode="contains">
+                              filterBy="#{room.computer}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="computer.png" style="width: 25px; height: 20px" title="#{msg.computer}"/>
                         </f:facet>
@@ -115,7 +110,7 @@
                     </p:column>
 
                     <p:column id="sound" headerText="#{msg.sound}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.sound}" filterMatchMode="contains">
+                              filterBy="#{room.sound}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="sound-apliance.svg" style="width: 25px; height: 20px" title="#{msg.soundApliance}"/>
                         </f:facet>
@@ -123,7 +118,7 @@
                     </p:column>
 
                     <p:column id="fan" headerText="#{msg.fan}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.fan}" filterMatchMode="contains">
+                              filterBy="#{room.fan}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="fan.svg" style="width: 25px; height: 20px" title="#{msg.fan}"/>
                         </f:facet>
@@ -131,14 +126,14 @@
                     </p:column>
 
                     <p:column headerText="#{msg.airConditioning}" style="text-align: center" width="1.5%" filterStyle="display:none"
-                              filterBy="#{room.airConditioning}" filterMatchMode="contains" >
+                              filterBy="#{room.airConditioning}" filterMatchMode="contains" priority="4">
                         <f:facet name="header">
                             <p:graphicImage library="images" name="air-conditioning.png" style="width: 25px; height: 20px" title="#{msg.airConditioning}"/>
                         </f:facet>
                         <h:outputText value="#{room.airConditioning ? msg.yes : msg.no}" styleClass="#{room.airConditioning ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.actions}" style="text-align: center" width="25">
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="25"  priority="2">
 
                         <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/sala/cadastro-sala">
                             <f:param  name="room" value="#{room.id}"/>

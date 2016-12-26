@@ -14,9 +14,9 @@ import org.apache.commons.logging.LogFactory;
  * @author elisangela
  */
 public class TransportService implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private static final Log LOGGER = LogFactory.getLog(TransportService.class);
 
     @Inject

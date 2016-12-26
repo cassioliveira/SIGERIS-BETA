@@ -37,7 +37,7 @@
                 <p:column headerText="#{msg.description}" width="2%" style="text-align: center">
                     <!--<h:outputText id="destinationCity" value="#{scheduling.travel.destinationCity} - #{scheduling.travel.uf}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <h:outputText id="destinationRoom" value="#{scheduling.room.number}" rendered="#{scheduling.type eq msg.room}"/>
-                    <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.description}" rendered="#{scheduling.type eq msg.equipment}"/>
+                    <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.name}" rendered="#{scheduling.type eq msg.equipment}"/>
                     <!--<p:tooltip for="destinationCity" value="#{msg.msgDestinationCity}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <p:tooltip for="destinationRoom" value="#{msg.msgScheduledRoom}" rendered="#{scheduling.type eq msg.room}"/>
                     <p:tooltip for="scheduledEquipment" value="#{msg.msgScheduledEquipment}" rendered="#{scheduling.type eq msg.equipment}"/>

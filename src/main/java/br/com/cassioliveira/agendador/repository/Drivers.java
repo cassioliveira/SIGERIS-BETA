@@ -14,7 +14,7 @@ public class Drivers extends Generic<Driver> implements Serializable {
     public Drivers() {
         super(Driver.class);
     }
-    
+
 //    public List<String> getCities(int ufCode) {
 //        Query createQuery;
 //        createQuery = getEntityManager().createNativeQuery("SELECT c.nome FROM cidades c where c.estado = " + ufCode);

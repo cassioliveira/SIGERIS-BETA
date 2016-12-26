@@ -16,14 +16,14 @@ import org.apache.commons.logging.LogFactory;
  * @author elisangela
  */
 public class ResponsibleService implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private static final Log LOGGER = LogFactory.getLog(ResponsibleService.class);
 
     @Inject
     private Responsibles responsibles;
-    
+
     @Inject
     @Getter
     private GlobalQueries globalQueries;
@@ -45,7 +45,7 @@ public class ResponsibleService implements Serializable {
     public List<Responsible> findAll() {
         return responsibles.findAll();
     }
-    
+
     public List<String> getCities(int ufCode) {
         return globalQueries.returnCities(ufCode);
     }

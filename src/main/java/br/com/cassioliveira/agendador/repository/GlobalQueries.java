@@ -15,7 +15,7 @@ public class GlobalQueries extends Generic<GlobalQueries> implements Serializabl
     public GlobalQueries() {
         super(GlobalQueries.class);
     }
-    
+
     public List<String> returnCities(int ufCode) {
         Query createQuery;
         createQuery = getEntityManager().createNativeQuery("SELECT c.nome FROM cidades c where c.estado = " + ufCode);

@@ -33,22 +33,22 @@
                         </p:outputPanel>
                     </f:facet>
 
-                    <p:column headerText="#{msg.id}" style="text-align: center" width="0.8%" filterStyle="display:none"
+                    <p:column headerText="#{msg.id}" style="text-align: center" width="5%" filterStyle="display:none"
                               filterBy="#{responsible.id}" filterMatchMode="exact">
                         <h:outputText value="#{responsible.id}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.name}" style="text-align: center" width="6" filterStyle="display:none"
+                    <p:column headerText="#{msg.name}" width="50%" filterStyle="display:none"
                               filterBy="#{responsible.name}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.name}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.registration}" style="text-align: center" width="15" filterStyle="display:none"
+                    <p:column headerText="#{msg.registration}" style="text-align: center" width="25%" filterStyle="display:none"
                               filterBy="#{responsible.registration}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.registration}" style="text-transform: uppercase"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.actions}" style="text-align: center" width="25">
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="10%">
 
                         <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/responsavel/cadastro-responsavel">
                             <f:param  name="responsible" value="#{responsible.id}"/>

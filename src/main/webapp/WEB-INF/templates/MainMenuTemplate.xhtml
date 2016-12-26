@@ -19,7 +19,10 @@
             <p:menuitem value="#{msg.room}" icon="/resources/images/classroom.png" title="#{msg.room}" id="room" outcome="/Agendador/sala/listar-salas.xhtml">
                 <p:ajax update="@form"/>
             </p:menuitem>
-
+            
+            <p:menuitem value="#{msg.equipment}" icon="/resources/images/datashow.png" title="#{msg.equipment}" id="equipment" outcome="/Agendador/equipamento/listar-equipamentos.xhtml" style="margin-bottom: 7px !important">
+                <p:ajax update="@form"/>
+            </p:menuitem>
 
             <p:menuitem value="#{msg.requestor}" icon="/resources/images/user.png" title="#{msg.requestor}" id="responsible" outcome="/Agendador/responsavel/listar-responsaveis.xhtml">
                 <p:ajax update="@form"/>

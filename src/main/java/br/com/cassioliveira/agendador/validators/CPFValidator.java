@@ -31,10 +31,10 @@ public class CPFValidator implements Validator {
 //            return;
 //        }
         String cpf = (String) value;
-            if (cpf.length() != 11 || !calcularDigitoVerificador(cpf.substring(0, 9)).equals(cpf.substring(9, 11))) {
-                throw new ValidatorException(
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF inválido.", "Favor informar um CPF válido."));
-            }
+        if (cpf.length() != 11 || !calcularDigitoVerificador(cpf.substring(0, 9)).equals(cpf.substring(9, 11))) {
+            throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF inválido.", "Favor informar um CPF válido."));
+        }
     }
 
     @SuppressWarnings({"UnnecessaryBoxing", "UnnecessaryUnboxing"})

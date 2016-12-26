@@ -1,7 +1,6 @@
 package br.com.cassioliveira.agendador.model;
 
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

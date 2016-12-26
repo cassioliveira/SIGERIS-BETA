@@ -79,7 +79,7 @@
                                 <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                                 <f:selectItems value="#{driverBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
                             </p:selectOneMenu>
-                            
+
                             <p:outputLabel for="street" value="#{msg.street}: "/>
                             <p:inputText id="street" value="#{driverBean.driver.street}" size="30" maxlength="20"/>
 

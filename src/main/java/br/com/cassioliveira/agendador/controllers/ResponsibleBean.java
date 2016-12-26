@@ -71,6 +71,7 @@ public class ResponsibleBean implements Serializable {
     public void remove() {
         this.responsibleService.delete(selectedResponsible);
         FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
+        FacesUtil.redirectTo("listar-responsaveis.xhtml");
     }
 
     /*

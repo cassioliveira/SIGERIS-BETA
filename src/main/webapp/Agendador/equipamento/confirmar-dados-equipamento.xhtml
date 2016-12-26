@@ -14,17 +14,17 @@
         <p:outputLabel id="outPutDate" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" style="font-weight: bold;">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:outputLabel>
-        
+
         <p:outputLabel for="outDateReturn" value="#{msg.devolution}: "/>
         <p:outputLabel id="outDateReturn" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:outputLabel>
-        
-        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px"/>
-        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;"/>
-        
-        <p:outputLabel for="outDescription" value="#{msg.description}: " style="margin-right: 20px"/>
-        <p:outputLabel id="outDescription" value="#{schedulingBean.scheduling.equipment.description}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px" rendered="#{schedulingBean.scheduling.equipment.patrimony ne null}"/>
+        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;" rendered="#{schedulingBean.scheduling.equipment.patrimony ne null}"/>
+
+        <p:outputLabel for="outDescription" value="#{msg.name}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outDescription" value="#{schedulingBean.scheduling.equipment.name}" style="font-weight: bold;"/>
 
         <p:outputLabel for="outResponsible" value="#{msg.requestor}: " style="margin-right: 20px"/>
         <p:outputLabel id="outResponsible" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
