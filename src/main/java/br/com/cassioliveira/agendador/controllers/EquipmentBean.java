@@ -80,4 +80,8 @@ public class EquipmentBean implements Serializable {
     public boolean getEditing() {
         return this.equipment.getId() != null;
     }
+    
+    public List<Equipment> getEquipmentsWithStoq(){
+        return equipmentService.allEquipmentsWithStoq();
+    }
 }

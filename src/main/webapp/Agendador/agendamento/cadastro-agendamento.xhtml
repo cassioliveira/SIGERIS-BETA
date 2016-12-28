@@ -19,8 +19,8 @@
 
                 <p:wizard id="schedulingWizard" backLabel="#{msg.back}" nextLabel="#{msg.next}">
 
-                    <h:inputHidden id="dateTime" value="#{schedulingBean.scheduling.registerDate}">
-                        <f:convertDateTime type="both" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                    <h:inputHidden id="dateTime" value="#{schedulingBean.scheduling.registerDate}" rendered="#{schedulingBean.editing eq false}" >
+                        <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
                     </h:inputHidden>
 
                     <p:tab title="#{msg.scheduling}">

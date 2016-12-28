@@ -1,9 +1,14 @@
 package br.com.cassioliveira.agendador.model;
 
+import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
+import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,7 +68,12 @@ public class Scheduling implements Serializable {
     @Column(name = "file")
     private byte[] craft;
     
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private SchedulingStatus status;
+    
     @OneToOne
+    @JoinColumn(name = "equipmentFK_id")
     private Equipment equipment;
 
     @OneToOne
@@ -74,4 +84,8 @@ public class Scheduling implements Serializable {
     @JoinColumn(name = "responsibleFK_id")
     private Responsible responsible;
 
+//   @PostConstruct
+//   public void init(){
+//       setStatus(SchedulingStatus.OPEN);
+//   }
 }

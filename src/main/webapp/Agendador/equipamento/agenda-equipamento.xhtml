@@ -16,17 +16,10 @@
 
         <p:outputLabel for="equipmentSelection" value="Item: "/>
         <p:selectOneMenu id="equipmentSelection" value="#{schedulingBean.scheduling.equipment}" filter="true" 
-                         filterMatchMode="contains" style="width: 135px; margin-left: 17px" label="Digite ou selecione">
-            <f:selectItems id="equipments" value="#{equipmentBean.equipments}" var="equipment" itemLabel="#{equipment.name}" 
+                         filterMatchMode="contains" style="width: 135px" label="Digite ou selecione">
+            <f:selectItems id="equipments" value="#{equipmentBean.equipmentsWithStoq}" var="equipment" itemLabel="#{equipment.name}" 
                            itemValue="#{equipment}"/>
         </p:selectOneMenu>
-
-<!--            <p:outputLabel for="equipmentPatrimony" value="#{msg.patrimony}:" style="margin-left: 5px; margin-right: 5px"/>
-            <p:inputText id="equipmentPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" size="12"/>
-        </h:panelGroup>
-
-        <p:outputLabel for="equipmentDescription" value="#{msg.description}:" />
-        <p:inputText id="equipmentDescription" value="#{schedulingBean.scheduling.equipment.description}" size="50"/>-->
 
         <p:outputLabel for="equipmentReason" value="#{msg.reason}:" />
         <p:inputText id="equipmentReason" value="#{schedulingBean.scheduling.schedulingReason}" size="50"/>

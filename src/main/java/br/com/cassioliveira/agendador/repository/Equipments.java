@@ -37,4 +37,8 @@ public class Equipments extends Generic<Equipment> implements Serializable {
         return getEntityManager().createNamedQuery("Equipment.byPatrimony").getResultList();
     }
 
+    public List<Equipment> equipmentsWithStoq() {
+        return getEntityManager().createNamedQuery("Equipment.isStoq").getResultList();
+    }
+
 }

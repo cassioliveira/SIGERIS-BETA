@@ -1,5 +1,6 @@
 package br.com.cassioliveira.agendador.controllers;
 
+import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
 import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import br.com.cassioliveira.agendador.enumerations.TravelReasons;
 import br.com.cassioliveira.agendador.model.Scheduling;
@@ -7,7 +8,9 @@ import br.com.cassioliveira.agendador.services.SchedulingService;
 import br.com.cassioliveira.agendador.services.TravelService;
 import br.com.cassioliveira.agendador.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -49,10 +52,14 @@ public class SchedulingBean implements Serializable {
     @Inject
     private DateTimeUtilBean dateTimeUtilBean;
 
+    @Getter
     private List<Scheduling> schedulings;
 
     @Getter
     List<SchedulingTypes> schedulingTypes;
+
+    @Getter
+    DateTimeUtilBean dateTime;
 
 //    @Getter
 //    List<String> originCities = new ArrayList<>();
@@ -95,14 +102,11 @@ public class SchedulingBean implements Serializable {
 //        }
 //    }
     public void save() {
-//        this.scheduling.setStatus(SchedulingStatus.OPEN);
-//        scheduling.setRegisterDate(dateTimeUtilBean.getDateToday());
+        this.scheduling.setStatus(SchedulingStatus.OPEN);
         this.schedulingService.save(scheduling);
         if (getEditing()) {
-            FacesUtil.sucessMessage("Agendamentoj"
-                    + " de " + scheduling.getType() + " atualizado com sucesso!");
+            FacesUtil.sucessMessage("Agendamento de " + scheduling.getType() + " atualizado com sucesso!");
         } else {
-            scheduling.setRegisterDate(dateTimeUtilBean.getDateToday());
             FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
         }
         FacesUtil.redirectTo("/SIGERIS/home.xhtml");
@@ -115,18 +119,53 @@ public class SchedulingBean implements Serializable {
         FacesUtil.redirectTo("/SIGERIS/home.xhtml");
     }
 
-    /*
-     * Metodo que verifica se o objeto esta nulo quando for recuperado.
-     * Se sim, refere-se a um novo cadastro, senao refere-se a um produto a ser editado
+    /**
+     * Verifica se o objeto esta nulo quando for recuperado. Se sim, refere-se a
+     * um novo cadastro, senao refere-se a um produto a ser editado
+     *
+     * @param scheduling
+     * @return
      */
     public boolean getEditing() {
-        return this.scheduling.getId() != null;
+        return scheduling.getId() != null;
     }
 
-    public List<Scheduling> getSchedulings() {
+//    public List<Scheduling> getSchedulings() {
 //        if(scheduling.getDateTime().after(DateTimeUtilBean.getDateToday())){
 //            scheduling.setStatus(SchedulingStatus.CLOSE);
 //        }
-        return this.schedulings;
+//        return this.schedulings;
+//    }
+    /**
+     * Retorna todos os agendamentos nos quais o status está como livre.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
+     *
+     * @return
+     */
+    public List<Scheduling> getOpenedSchedulings() {
+        List<Scheduling> openedSchedulings = new ArrayList<>();
+
+        for (Scheduling openedSchedule : schedulings) {
+            if (openedSchedule.getStatus() == SchedulingStatus.OPEN) {
+                openedSchedulings.add(openedSchedule);
+            }
+        }
+
+        return openedSchedulings;
+    }
+
+    /**
+     * Fecha um agendamento aberto, definindo a data do fechamento com a hora
+     * atual. ********AQUI TEM QUE FAZER UM STRATEGY ENTRE O FECHAMENTO DE
+     * AGENDAMENTO DE SALA E EQUIPAMENTO JÁ QUE O EQUIPAMENTO TEM QUE RETORNAR
+     * AO ESTOQUE*********
+     */
+    public void closeSchedule() {
+        scheduling.setStatus(SchedulingStatus.CLOSE);
+        scheduling.setEndingSchedulingDateTime(new Date());
+        schedulingService.save(scheduling);
+        FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/home.xhtml");
     }
 }

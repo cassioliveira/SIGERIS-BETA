@@ -1,5 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
+import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
@@ -26,9 +27,7 @@ public class SchedulingService implements Serializable {
 
     @Transactional
     public void save(Scheduling scheduling) {
-        if (scheduling != null) {
-            this.schedulings.save(scheduling);
-        }
+        this.schedulings.save(scheduling);
     }
 
     @Transactional
@@ -45,8 +44,7 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Método responsável por gerar o codido do agendamento baseado nas regras
-     * definidas pelo desenvolvedor.
+     * Gera um código para identificar o agendamento
      *
      * @param scheduling
      * @param room

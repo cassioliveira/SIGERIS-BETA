@@ -44,6 +44,10 @@ public class EquipmentService implements Serializable {
     public List<Equipment> findAll() {
         return equipments.findAll();
     }
+    
+    public List<Equipment> allEquipmentsWithStoq(){
+        return equipments.equipmentsWithStoq();
+    }
 
 //    /**
 //     * Metodo que verifica se o equipamento que está sendo informado já existe
@@ -58,6 +62,7 @@ public class EquipmentService implements Serializable {
     public List<EquipmentType> getEquipmentTypes() {
         return equipments.getEquipmentTypes();
     }
+
 }
 
 ///**

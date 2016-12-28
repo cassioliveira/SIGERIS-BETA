@@ -16,7 +16,7 @@
                 </f:facet>
             </p:toolbar>    
 
-            <p:dataTable id="datatableScheduling" var="scheduling" value="#{schedulingBean.schedulings}"
+            <p:dataTable id="datatableScheduling" var="scheduling" value="#{schedulingBean.openedSchedulings}"
                          paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="10" widgetVar="schedulings"
                          emptyMessage="#{msg.noRegistersFound}" paginator="true" paginatorPosition="bottom"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
@@ -29,12 +29,12 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="#{msg.roomType}" width="1%" filterMatchMode="startsWith" style="text-align: center"
+                <p:column headerText="#{msg.roomType}" width="2" filterMatchMode="startsWith" style="text-align: center"
                           filterStyle="display:none" filterBy="#{scheduling.type}">
                     <h:outputText value="#{scheduling.type}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.description}" width="2%" style="text-align: center">
+                <p:column headerText="#{msg.description}" width="40" style="text-align: center">
                     <!--<h:outputText id="destinationCity" value="#{scheduling.travel.destinationCity} - #{scheduling.travel.uf}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <h:outputText id="destinationRoom" value="#{scheduling.room.number}" rendered="#{scheduling.type eq msg.room}"/>
                     <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.name}" rendered="#{scheduling.type eq msg.equipment}"/>
@@ -44,16 +44,16 @@
 
                 </p:column>
 
-                <p:column headerText="#{msg.schedulingReason}" width="3.5%">
+                <p:column headerText="#{msg.schedulingReason}" width="40">
                     <!--<h:outputText id="reasonTravel" value="#{scheduling.travel.reason.description}" rendered="#{scheduling.type eq msg.travel}"/>-->
+                    <!--<p:tooltip for="reasonTravel" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <h:outputText id="reasonSchedulingRoom" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
                     <h:outputText id="reasonSchedulingEquipment" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.equipment}"/>
-                    <p:tooltip for="reasonTravel" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.travel}"/>
                     <p:tooltip for="reasonSchedulingRoom" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
-                    <p:tooltip for="reasonSchedulingEquipment" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
+                    <p:tooltip for="reasonSchedulingEquipment" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.request}" filterMatchMode="contains" width="1" filterStyle="display:none"
+                <p:column headerText="#{msg.request}" filterMatchMode="contains" width="15" filterStyle="display:none"
                           filterBy="#{scheduling.registerDate}"  style="text-align: center">
                     <h:outputText id="schedulingDate" value="#{scheduling.registerDate}">
                         <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
@@ -62,12 +62,12 @@
                     <p:tooltip for="schedulingDate" value="Data de solicitação do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.responsible}" width="4%" >
+                <p:column headerText="#{msg.responsible}" width="30" >
                     <h:outputText id="responsible" value="#{scheduling.responsible.name}"/>
                     <p:tooltip for="responsible" value="Solicitante do agendamento"/>
                 </p:column>
 
-                <p:column headerText="#{msg.beginingDate}" filterMatchMode="contains" width="3" filterStyle="display:none"
+                <p:column headerText="#{msg.beginingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
                           filterBy="#{scheduling.beginingSchedulingDateTime}"  style="text-align: center">
                     <h:outputText id="beginingValue" value="#{scheduling.beginingSchedulingDateTime}">
                         <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
@@ -76,7 +76,7 @@
                     <p:tooltip for="beginingValue" value="Data de inicio do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.endingDate}" filterMatchMode="contains" width="2" filterStyle="display:none"
+                <p:column headerText="#{msg.endingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
                           filterBy="#{scheduling.endingSchedulingDateTime}"  style="text-align: center">
                     <h:outputText id="endingValue" value="#{scheduling.endingSchedulingDateTime}">
                         <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
@@ -85,12 +85,12 @@
                     <p:tooltip for="endingValue" value="Data de término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.craft}" style="text-align: center" width="2%">
+                <p:column headerText="#{msg.craft}" style="text-align: center" width="7">
                     <p:outputLabel id="isFile" value="#{scheduling.craft ne null ? '' : '-'}"/>
                     <p:commandLink value="Ver" action="#{reportBean.generate}" rendered="#{scheduling.craft eq ''}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.actions}" style="text-align: center" width="2%">
+                <p:column headerText="#{msg.actions}" style="text-align: center" width="20">
                     <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento">
                         <f:param  name="scheduling" value="#{scheduling.id}"/>
                         <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
@@ -102,6 +102,18 @@
                         <p:tooltip for="deleteButton" value="#{msg.deleteSelectedRow}"/>
                         <p:confirm icon="ui-icon-alert" header="#{msg.exclusionCadastre} #{msg.scheduling}" message="#{msg.realyExclude}?"/>
                     </p:commandButton>
+
+                    <p:button id="downScheduleEquipment" title="Dar baixa no agendamento" icon="fa fa-download" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-equipamento.xhtml"
+                              rendered="#{scheduling.type eq msg.equipment}">
+                        <f:param  name="scheduling" value="#{scheduling.id}"/>
+                        <p:tooltip for="downScheduleEquipment" value="Baixar agendamento"/>
+                    </p:button>
+                    
+                    <p:button id="downScheduleRoom" title="Dar baixa no agendamento" icon="fa fa-download" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-sala.xhtml"
+                              rendered="#{scheduling.type eq msg.room}">
+                        <f:param  name="scheduling" value="#{scheduling.id}"/>
+                        <p:tooltip for="downScheduleRoom" value="Baixar agendamento"/>
+                    </p:button>
                 </p:column>
             </p:dataTable>
         </p:fieldset>

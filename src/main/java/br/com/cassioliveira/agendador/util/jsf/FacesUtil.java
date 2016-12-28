@@ -23,30 +23,30 @@ public class FacesUtil {
      * Método que adiciona uma mensagem com nível de severidade de
      * <b>INFORMAÇÃO/SUCESSO</b>
      *
-     * @param mensagem
+     * @param message
      */
-    public static void sucessMessage(String mensagem) {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, mensagem);
+    public static void sucessMessage(String message) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
         FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
     }
 
     /**
      * Método que adiciona uma mensagem com nível de severidade de <b>AVISO</b>
      *
-     * @param mensagem
+     * @param message
      */
-    public static void warningMessage(String mensagem) {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, mensagem, mensagem);
+    public static void warningMessage(String message) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, message, message);
         FacesContext.getCurrentInstance().addMessage("warningInfo", facesMsg);
     }
 
     /**
      * Método que retorna uma mensagem com nível de severidade de <b>ERRO</b>
      *
-     * @param mensagem
+     * @param message
      */
-    public static void errorMessage(String mensagem) {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, mensagem);
+    public static void errorMessage(String message) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
     }
 
@@ -55,14 +55,14 @@ public class FacesUtil {
      * também a causa da exceção
      *
      * @param ex
-     * @param mensagemPadrao
+     * @param defaultMessage
      */
-    public static void errorMessage(Exception ex, String mensagemPadrao) {
+    public static void errorMessage(Exception ex, String defaultMessage) {
         String msg = ex.getLocalizedMessage();
         if (msg != null && msg.length() > 0) {
             errorMessage(msg);
         } else {
-            errorMessage(mensagemPadrao);
+            errorMessage(defaultMessage);
         }
     }
 
@@ -75,15 +75,20 @@ public class FacesUtil {
      * especificos). Para resolver isso, é usado o, não tão conhecido, escopo
      * 'Flash' que mantém a mensagem mesmo após o redirecionamto de página.
      *
-     * @param pagina
+     * @param page
      */
-    public static void redirectTo(String pagina) {
+    public static void redirectTo(String page) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(page);
         } catch (IOException ex) {
             LOGGER.error(FacesUtil.class.getName() + ex);
         }
+    }
+    
+    public static void sucessAndRedirect(String message, String page){
+        sucessMessage(message);
+        redirectTo(page);
     }
 
 }

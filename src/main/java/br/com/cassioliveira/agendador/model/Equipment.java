@@ -29,6 +29,8 @@ import lombok.Data;
 @Data
 @Entity
 @NamedQueries({
+    @NamedQuery(name = "Equipment.isStoq",
+            query = "SELECT e FROM Equipment AS e WHERE e.quantity > 0"),
     @NamedQuery(name = "Equipment.byPatrimony",
             query = "SELECT e.patrimony FROM Equipment AS e WHERE e.patrimony IS NOT NULL")})
 public class Equipment implements Serializable {

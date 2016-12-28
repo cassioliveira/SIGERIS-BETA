@@ -29,23 +29,23 @@
 
                     <f:facet name="header">
                         <p:outputPanel>
-                            <p:inputText id="globalFilter" onkeyup="PF('responsibleSearch').filter()" style="width:300px" placeholder="#{msg.searchAnyField}"/>
+                            <p:inputText id="globalFilter" onkeyup="PF('responsibleSearch').filter()" style="width:300px" placeholder="Pesquisa..."/>
                         </p:outputPanel>
                     </f:facet>
-
-                    <p:column headerText="#{msg.id}" style="text-align: center" width="5%" filterStyle="display:none"
-                              filterBy="#{responsible.id}" filterMatchMode="exact">
-                        <h:outputText value="#{responsible.id}"/>
-                    </p:column>
 
                     <p:column headerText="#{msg.name}" width="50%" filterStyle="display:none"
                               filterBy="#{responsible.name}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.name}"/>
                     </p:column>
-
-                    <p:column headerText="#{msg.registration}" style="text-align: center" width="25%" filterStyle="display:none"
-                              filterBy="#{responsible.registration}" filterMatchMode="contains">
-                        <h:outputText value="#{responsible.registration}" style="text-transform: uppercase"/>
+                    
+                    <p:column headerText="#{msg.phone1}" width="10%" filterStyle="display:none"
+                              filterBy="#{responsible.phone1}" filterMatchMode="contains">
+                        <h:outputText value="#{responsible.phone1}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{msg.email}" width="20%" filterStyle="display:none"
+                              filterBy="#{responsible.email}" filterMatchMode="contains">
+                        <h:outputText value="#{responsible.email}"/>
                     </p:column>
 
                     <p:column headerText="#{msg.actions}" style="text-align: center" width="10%">
