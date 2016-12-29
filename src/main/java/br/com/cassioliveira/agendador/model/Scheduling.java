@@ -5,6 +5,7 @@ import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -72,7 +73,7 @@ public class Scheduling implements Serializable {
     @Column(name = "status")
     private SchedulingStatus status;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipmentFK_id")
     private Equipment equipment;
 
@@ -84,8 +85,10 @@ public class Scheduling implements Serializable {
     @JoinColumn(name = "responsibleFK_id")
     private Responsible responsible;
 
-//   @PostConstruct
-//   public void init(){
-//       setStatus(SchedulingStatus.OPEN);
-//   }
+   @PostConstruct
+   public void init(){
+       if(id == null){
+           setRegisterDate(new Date());
+       }
+   }
 }

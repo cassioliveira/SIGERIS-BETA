@@ -29,24 +29,20 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="#{msg.roomType}" width="2" filterMatchMode="startsWith" style="text-align: center"
+                <p:column headerText="#{msg.roomType}" width="1" filterMatchMode="startsWith" style="text-align: center"
                           filterStyle="display:none" filterBy="#{scheduling.type}">
                     <h:outputText value="#{scheduling.type}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.description}" width="40" style="text-align: center">
-                    <!--<h:outputText id="destinationCity" value="#{scheduling.travel.destinationCity} - #{scheduling.travel.uf}" rendered="#{scheduling.type eq msg.travel}"/>-->
+                <p:column headerText="#{msg.description}" width="40">
                     <h:outputText id="destinationRoom" value="#{scheduling.room.number}" rendered="#{scheduling.type eq msg.room}"/>
                     <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.name}" rendered="#{scheduling.type eq msg.equipment}"/>
-                    <!--<p:tooltip for="destinationCity" value="#{msg.msgDestinationCity}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <p:tooltip for="destinationRoom" value="#{msg.msgScheduledRoom}" rendered="#{scheduling.type eq msg.room}"/>
                     <p:tooltip for="scheduledEquipment" value="#{msg.msgScheduledEquipment}" rendered="#{scheduling.type eq msg.equipment}"/>
 
                 </p:column>
 
                 <p:column headerText="#{msg.schedulingReason}" width="40">
-                    <!--<h:outputText id="reasonTravel" value="#{scheduling.travel.reason.description}" rendered="#{scheduling.type eq msg.travel}"/>-->
-                    <!--<p:tooltip for="reasonTravel" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.travel}"/>-->
                     <h:outputText id="reasonSchedulingRoom" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
                     <h:outputText id="reasonSchedulingEquipment" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.equipment}"/>
                     <p:tooltip for="reasonSchedulingRoom" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
@@ -85,7 +81,7 @@
                     <p:tooltip for="endingValue" value="Data de término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.craft}" style="text-align: center" width="7">
+                <p:column headerText="#{msg.craft}" style="text-align: center" width="1">
                     <p:outputLabel id="isFile" value="#{scheduling.craft ne null ? '' : '-'}"/>
                     <p:commandLink value="Ver" action="#{reportBean.generate}" rendered="#{scheduling.craft eq ''}"/>
                 </p:column>

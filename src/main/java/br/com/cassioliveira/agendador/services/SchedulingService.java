@@ -1,6 +1,5 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
@@ -8,6 +7,7 @@ import br.com.cassioliveira.agendador.util.jpa.Transactional;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,21 +44,40 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Gera um código para identificar o agendamento
+     * Gera um código para identificar o agendamento.
      *
      * @param scheduling
      * @param room
      * @return
      */
-    public String schedulingCode(Scheduling scheduling, Room room) {
+    public String schedulingCode(Scheduling scheduling) {
         LocalDate dateToday = null;
         String code = null;
         if (scheduling.getType().equals("Sala")) {
-            code = "AS" + dateToday.getMonthValue() + "0" + room.getId();
+            code = "AS" + dateToday.getMonthValue() + "0" + scheduling.getRoom().getId();
         } else if (scheduling.getType().equals("Equipamento")) {
-            code = "AE" + dateToday.getMonthValue() + "0" + scheduling.getId();
+            code = "AE" + dateToday.getMonthValue() + "0" + scheduling.getEquipment().getId();
         }
 
         return code;
+    }
+
+    /**
+     * Verifica a se a tela de atual é a de cadastro ou baixa do agendamento e
+     * retira uma unidade da quantidade do estoque do item agendado ou adiciona
+     * uma unidade na quantidade do estoque do item agendado, respectivamente.
+     *
+     * @param scheduling
+     * @param registerPage
+     * @param downPage
+     */
+    public void stockMovement(Scheduling scheduling, String registerPage, String downPage) {
+        int quantityStock = scheduling.getEquipment().getQuantity();
+        String path = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        if (path.equals(registerPage)) {
+            scheduling.getEquipment().setQuantity(quantityStock - 1);
+        } else if (path.equals(downPage)) {
+            scheduling.getEquipment().setQuantity(quantityStock + 1);
+        }
     }
 }

@@ -61,17 +61,6 @@ public class SchedulingBean implements Serializable {
     @Getter
     DateTimeUtilBean dateTime;
 
-//    @Getter
-//    List<String> originCities = new ArrayList<>();
-//
-//    @Getter
-//    List<String> destinationCities = new ArrayList<>();
-//
-//    @Getter
-//    List<States> originStates;
-//
-//    @Getter
-//    List<States> destinationStates;
     @Getter
     List<TravelReasons> travelReasons;
 
@@ -79,29 +68,10 @@ public class SchedulingBean implements Serializable {
     public void init() {
         this.schedulings = schedulingService.findAll();
         this.schedulingTypes = Arrays.asList(SchedulingTypes.values());
-//        this.originStates = Arrays.asList(States.values());
-//        this.destinationStates = Arrays.asList(States.values());
-//        this.travelReasons = Arrays.asList(TravelReasons.values());
     }
 
-//    public void loadOriginCities() {
-//        this.originCities.clear();
-//        if (scheduling.getTravel().getOriginUf() != null) {
-//            for (String filteredCities : travelService.returnCities(scheduling.getTravel().getOriginUf().getCode())) {
-//                this.originCities.add(filteredCities);
-//            }
-//        }
-//    }
-//
-//    public void loadDestinationCities() {
-//        this.destinationCities.clear();
-//        if (scheduling.getTravel().getUf() != null) {
-//            for (String filteredCities : travelService.returnCities(scheduling.getTravel().getUf().getCode())) {
-//                this.destinationCities.add(filteredCities);
-//            }
-//        }
-//    }
     public void save() {
+        stockMovement();
         this.scheduling.setStatus(SchedulingStatus.OPEN);
         this.schedulingService.save(scheduling);
         if (getEditing()) {
@@ -123,7 +93,6 @@ public class SchedulingBean implements Serializable {
      * Verifica se o objeto esta nulo quando for recuperado. Se sim, refere-se a
      * um novo cadastro, senao refere-se a um produto a ser editado
      *
-     * @param scheduling
      * @return
      */
     public boolean getEditing() {
@@ -165,7 +134,12 @@ public class SchedulingBean implements Serializable {
     public void closeSchedule() {
         scheduling.setStatus(SchedulingStatus.CLOSE);
         scheduling.setEndingSchedulingDateTime(new Date());
+        stockMovement();
         schedulingService.save(scheduling);
         FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/home.xhtml");
+    }
+
+    public void stockMovement() {
+        schedulingService.stockMovement(scheduling, "/Agendador/agendamento/cadastro-agendamento.xhtml", "/Agendador/agendamento/baixa-equipamento.xhtml");
     }
 }

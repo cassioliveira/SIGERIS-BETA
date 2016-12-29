@@ -19,7 +19,7 @@
 
                 <p:wizard id="schedulingWizard" backLabel="#{msg.back}" nextLabel="#{msg.next}">
 
-                    <h:inputHidden id="dateTime" value="#{schedulingBean.scheduling.registerDate}" rendered="#{schedulingBean.editing eq false}" >
+                    <h:inputHidden id="dateTime" value="#{schedulingBean.scheduling.registerDate}">
                         <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
                     </h:inputHidden>
 
@@ -74,9 +74,6 @@
                         <ui:include src="/Agendador/equipamento/agenda-equipamento.xhtml" />
                     </p:tab>
 
-<!--                    <p:tab  title="#{msg.dataOfThe} #{schedulingBean.scheduling.type}" rendered="#{schedulingBean.scheduling.type eq msg.travel}">
-    <ui:include src="/viagem/agenda-viagem.xhtml" />
-</p:tab>-->
 
                     <p:tab title="#{msg.confirmation}">
 
@@ -84,9 +81,6 @@
                             <ui:include src="/Agendador/sala/confirmar-dados-sala.xhtml" />
                         </h:panelGroup>
 
-<!--                        <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.travel}">
-                            <ui:include src="/viagem/confirmar-dados-viagem.xhtml"/>
-                        </h:panelGroup>-->
 
                         <h:panelGroup rendered="#{schedulingBean.scheduling.type eq msg.equipment}">
                             <ui:include src="/Agendador/equipamento/confirmar-dados-equipamento.xhtml"/>
@@ -94,8 +88,8 @@
 
                         <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
                             <f:facet name="left">
-                                <p:commandButton style="font-size: 13px;" value="#{msg.save}" action="#{schedulingBean.save}"  
-                                                 id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
+                                <p:commandButton id="saveButton" style="font-size: 13px;" value="#{msg.save}" action="#{schedulingBean.save}"  
+                                                  update="@form" icon="ui-icon ui-icon-disk"/>
                             </f:facet>
 
                             <f:facet name="left">
