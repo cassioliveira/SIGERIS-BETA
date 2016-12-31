@@ -79,6 +79,6 @@ public class RoomBean implements Serializable {
     }
 
     public List<Room> getRooms() {
-        return this.rooms;
+        return roomService.getFreeRooms();
     }
 }

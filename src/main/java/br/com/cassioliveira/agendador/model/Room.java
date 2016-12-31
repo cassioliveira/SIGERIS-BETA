@@ -1,6 +1,7 @@
 package br.com.cassioliveira.agendador.model;
 
 import br.com.cassioliveira.agendador.enumerations.RoomsType;
+import br.com.cassioliveira.agendador.enumerations.StatusType;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import lombok.Data;
 
 /**
  *
  * @author cassio
  */
-@Entity
 @Data
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "Room.freeRooms", query = "SELECT r FROM Room AS r WHERE r.status = br.com.cassioliveira.agendador.enumerations.StatusType.FREE"),
+    @NamedQuery(name = "Room.roomsNumber", query = "SELECT r.number FROM Room as r")})
 public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +41,10 @@ public class Room implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private RoomsType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusType status;
 
     @Column(name = "is_air_conditioning")
     private boolean airConditioning;

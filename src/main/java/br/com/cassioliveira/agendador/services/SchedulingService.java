@@ -1,6 +1,5 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
@@ -47,7 +46,6 @@ public class SchedulingService implements Serializable {
      * Gera um código para identificar o agendamento.
      *
      * @param scheduling
-     * @param room
      * @return
      */
     public String schedulingCode(Scheduling scheduling) {
@@ -58,7 +56,7 @@ public class SchedulingService implements Serializable {
         } else if (scheduling.getType().equals("Equipamento")) {
             code = "AE" + dateToday.getMonthValue() + "0" + scheduling.getEquipment().getId();
         }
-
+        System.out.println(code);
         return code;
     }
 

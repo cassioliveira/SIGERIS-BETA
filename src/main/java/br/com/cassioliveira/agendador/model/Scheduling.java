@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.model;
 
-import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
+import br.com.cassioliveira.agendador.enumerations.StatusType;
 import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import java.io.Serializable;
 import java.util.Date;
@@ -45,14 +45,21 @@ public class Scheduling implements Serializable {
     private String observations;
 
     /**
-     * Data para determinar o início do scheduling
+     * Data para início do scheduling
      */
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "begining_date")
     private Date beginingSchedulingDateTime;
 
+    /*
+     * Data prevista para finalizar o agendamento
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "forecast_date")
+    private Date forecastSchedulingDateTime;
+
     /**
-     * Data para determinar o final do scheduling
+     * Data em que o agendamento foi finalizado
      */
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ending_date")
@@ -68,16 +75,16 @@ public class Scheduling implements Serializable {
     @Lob
     @Column(name = "file")
     private byte[] craft;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private SchedulingStatus status;
-    
+    private StatusType status;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipmentFK_id")
     private Equipment equipment;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roomFK_id")
     private Room room;
 
@@ -85,10 +92,10 @@ public class Scheduling implements Serializable {
     @JoinColumn(name = "responsibleFK_id")
     private Responsible responsible;
 
-   @PostConstruct
-   public void init(){
-       if(id == null){
-           setRegisterDate(new Date());
-       }
-   }
+    @PostConstruct
+    public void init() {
+        if (id == null) {
+            setRegisterDate(new Date());
+        }
+    }
 }

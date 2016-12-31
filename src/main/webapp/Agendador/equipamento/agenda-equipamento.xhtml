@@ -9,7 +9,7 @@
 
         <p:outputLabel for="dateBack" value="#{msg.devolution}: "/>
         <p:calendar id="dateBack" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
-                    size="13" locale="pt" required="true" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" mask="true" 
+                    size="13" locale="pt" required="true" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" mask="true" 
                     requiredMessage="Informe a data de devolução">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:calendar>

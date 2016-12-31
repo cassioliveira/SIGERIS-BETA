@@ -15,9 +15,8 @@
 
         <p:outputLabel for="endingDate" value="#{msg.scheduledAt}: "/>
         <p:calendar id="endingDate" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
-                    size="15" locale="pt" required="true" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" mask="true"
-                    mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}" requiredMessage="#{msg.mandatorySchedulingDate}"
-                    converterMessage="Deve informar a data e hora">
+                    size="15" locale="pt" required="true" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" mask="true" 
+                    requiredMessage="#{msg.mandatorySchedulingDate}" converterMessage="Deve informar a data e hora">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:calendar>
 

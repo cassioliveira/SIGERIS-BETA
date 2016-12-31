@@ -13,8 +13,22 @@
 
     <ui:define name="content">
         <h:form id="roomDownForm">
-            <p:fieldset id="fieldSetDownRoom" legend="Liberar sala ocupada" >
+            <p:fieldset id="fieldSetDownRoom" legend="Liberação de  sala" >
                 <ui:include src="/Agendador/sala/confirmar-dados-sala.xhtml"/>
+                
+                <p:toolbar id="toolbarScheduleDown" style="margin-top: 20px">
+                    <f:facet name="left">
+                        <p:commandButton style="font-size: 13px;" value="Liberar sala" action="#{schedulingBean.closeSchedule}" 
+                                         icon="ui-icon ui-icon-disk" id="closeScheduling">
+                        </p:commandButton>
+
+                        <p:button style="font-size: 13px;" value="Cancelar"
+                                  id="cancelButtonDown" outcome="/Agendador/agendamento/listar-agendamentos-abertos.xhtml"
+                                  icon="fa fa-times" rendered="#{pendenciaBean.editando}" 
+                                  disabled="#{botaoEditar}">
+                        </p:button>
+                    </f:facet>
+                </p:toolbar>
             </p:fieldset>
         </h:form>
     </ui:define>

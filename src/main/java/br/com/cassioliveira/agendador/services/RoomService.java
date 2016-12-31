@@ -1,5 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
+import br.com.cassioliveira.agendador.enumerations.StatusType;
 import br.com.cassioliveira.agendador.exceptions.BusinessException;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.repository.Rooms;
@@ -26,8 +27,9 @@ public class RoomService implements Serializable {
     @Transactional
     public void save(Room room) {
         if (room.getId() == null && isRoomDuplicated(room.getNumber())) {
-            throw new BusinessException("Room com esse nome/número já existe. Por favor informe outro");
+            throw new BusinessException("Uma sala com esse nome/número já existe");
         } else {
+            room.setStatus(StatusType.FREE);
             this.rooms.save(room);
         }
     }
@@ -44,6 +46,10 @@ public class RoomService implements Serializable {
     public List<Room> findAll() {
         return rooms.findAll();
     }
+    
+    public List<Room> getFreeRooms(){
+        return rooms.getFreeRooms();
+    }
 
     /**
      * Metodo que verifica se a room que está sendo informada já existe no
@@ -53,7 +59,7 @@ public class RoomService implements Serializable {
      * @return
      */
     public boolean isRoomDuplicated(String room) {
-        for (String selectedRoom : rooms.roomNameOrNumber()) {
+        for (String selectedRoom : rooms.getRoomsNumber()) {
             if (selectedRoom.equals(room)) {
                 return true;
             }

@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.controllers;
 
-import br.com.cassioliveira.agendador.enumerations.SchedulingStatus;
+import br.com.cassioliveira.agendador.enumerations.StatusType;
 import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import br.com.cassioliveira.agendador.enumerations.TravelReasons;
 import br.com.cassioliveira.agendador.model.Scheduling;
@@ -71,8 +71,12 @@ public class SchedulingBean implements Serializable {
     }
 
     public void save() {
-        stockMovement();
-        this.scheduling.setStatus(SchedulingStatus.OPEN);
+        if (scheduling.getType().equals("Equipamento")) {
+            stockMovement();
+        } else {
+            this.scheduling.getRoom().setStatus(StatusType.BUSY);
+        }
+        this.scheduling.setStatus(StatusType.OPEN);
         this.schedulingService.save(scheduling);
         if (getEditing()) {
             FacesUtil.sucessMessage("Agendamento de " + scheduling.getType() + " atualizado com sucesso!");
@@ -115,13 +119,11 @@ public class SchedulingBean implements Serializable {
      */
     public List<Scheduling> getOpenedSchedulings() {
         List<Scheduling> openedSchedulings = new ArrayList<>();
-
         for (Scheduling openedSchedule : schedulings) {
-            if (openedSchedule.getStatus() == SchedulingStatus.OPEN) {
+            if (openedSchedule.getStatus() == StatusType.OPEN) {
                 openedSchedulings.add(openedSchedule);
             }
         }
-
         return openedSchedulings;
     }
 
@@ -132,9 +134,13 @@ public class SchedulingBean implements Serializable {
      * AO ESTOQUE*********
      */
     public void closeSchedule() {
-        scheduling.setStatus(SchedulingStatus.CLOSE);
+        scheduling.setStatus(StatusType.CLOSE);
         scheduling.setEndingSchedulingDateTime(new Date());
-        stockMovement();
+        if (scheduling.getType().equals("Equipamento")) {
+            stockMovement();
+        } else{
+            this.scheduling.getRoom().setStatus(StatusType.FREE);
+        }
         schedulingService.save(scheduling);
         FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/home.xhtml");
     }

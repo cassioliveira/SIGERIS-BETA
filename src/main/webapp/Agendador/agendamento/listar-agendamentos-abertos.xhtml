@@ -34,7 +34,8 @@
                     <h:outputText value="#{scheduling.type}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.description}" width="40">
+                <p:column headerText="#{msg.description}" width="40" filterMatchMode="contains" filterStyle="display:none"
+                          filterBy="#{scheduling.equipment.name or scheduling.room.number}">
                     <h:outputText id="destinationRoom" value="#{scheduling.room.number}" rendered="#{scheduling.type eq msg.room}"/>
                     <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.name}" rendered="#{scheduling.type eq msg.equipment}"/>
                     <p:tooltip for="destinationRoom" value="#{msg.msgScheduledRoom}" rendered="#{scheduling.type eq msg.room}"/>
@@ -72,13 +73,13 @@
                     <p:tooltip for="beginingValue" value="Data de inicio do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
-                <p:column headerText="#{msg.endingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
-                          filterBy="#{scheduling.endingSchedulingDateTime}"  style="text-align: center">
-                    <h:outputText id="endingValue" value="#{scheduling.endingSchedulingDateTime}">
+                <p:column headerText="Previsão" filterMatchMode="contains" width="15" filterStyle="display:none"
+                          filterBy="#{scheduling.forecastSchedulingDateTime}"  style="text-align: center">
+                    <h:outputText id="endingValue" value="#{scheduling.forecastSchedulingDateTime}">
                         <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
                     </h:outputText>
-                    <p:tooltip for="endingValue" value="Data de término do agendamento da Sala" rendered="#{scheduling.type eq msg.room}"/>
-                    <p:tooltip for="endingValue" value="Data de término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
+                    <p:tooltip for="endingValue" value="Previsão do término do agendamento da Sala" rendered="#{scheduling.type eq msg.room}"/>
+                    <p:tooltip for="endingValue" value="Previsão do término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
                 </p:column>
 
                 <p:column headerText="#{msg.craft}" style="text-align: center" width="1">

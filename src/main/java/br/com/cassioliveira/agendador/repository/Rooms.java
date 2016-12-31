@@ -3,7 +3,6 @@ package br.com.cassioliveira.agendador.repository;
 import br.com.cassioliveira.agendador.model.Room;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Query;
 
 /**
  *
@@ -18,14 +17,20 @@ public class Rooms extends Generic<Room> implements Serializable {
     }
 
     /**
-     * Método que retorna o número de todas as rooms cadastradas no sistema.
+     * Retorna os números de todas as salas cadastradas no sistema.
      *
      * @return
      */
-    public List<String> roomNameOrNumber() {
-        Query createQuery;
+    public List<String> getRoomsNumber() {
+        return getEntityManager().createNamedQuery("Room.roomsNumber").getResultList();
+    }
 
-        createQuery = getEntityManager().createNativeQuery("SELECT r.number FROM room as r");
-        return createQuery.getResultList();
+    /**
+     * Retorna apenas as salas que estão com status livre.
+     *
+     * @return
+     */
+    public List<Room> getFreeRooms() {
+        return getEntityManager().createNamedQuery("Room.freeRooms").getResultList();
     }
 }
