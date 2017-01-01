@@ -110,7 +110,7 @@ public class SchedulingBean implements Serializable {
 //        return this.schedulings;
 //    }
     /**
-     * Retorna todos os agendamentos nos quais o status está como livre.
+     * Retorna todos os agendamentos nos quais o status está como ABERTO.
      * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
      * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
      * ALTERANDO O STATUS PARA RETORNO.
@@ -125,6 +125,24 @@ public class SchedulingBean implements Serializable {
             }
         }
         return openedSchedulings;
+    }
+    
+    /**
+     * Retorna todos os agendamentos nos quais o status está como FECHADO.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
+     *
+     * @return
+     */
+    public List<Scheduling> getClosedSchedulings() {
+        List<Scheduling> closedSchedulings = new ArrayList<>();
+        for (Scheduling closedSchedule : schedulings) {
+            if (closedSchedule.getStatus() == StatusType.CLOSE) {
+                closedSchedulings.add(closedSchedule);
+            }
+        }
+        return closedSchedulings;
     }
 
     /**
