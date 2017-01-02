@@ -46,22 +46,25 @@
                             </p:selectOneRadio>
 
                             <p:outputLabel for="date" value="#{msg.schedulingTo}: " style="margin-right: 1px"/>
-                            <p:calendar id="date" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="16" 
-                                        mask="true" size="18" locale="pt" required="true" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" 
-                                        requiredMessage="#{msg.mandatorySchedulingDate}" >
-                                <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
-                            </p:calendar>
+                            <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <p:calendar id="date" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="16" 
+                                                mask="true" size="8" locale="pt" required="true" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" 
+                                                requiredMessage="#{msg.mandatorySchedulingDate}">
+                                        <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                                    </p:calendar>
+                                    <p:fileUpload id="craftUpload" cancelLabel="#{msg.cancel}" dragDropSupport="true" fileLimit="1" label="Ofício..." style="padding-bottom: -5px !important"
+                                                  mode="simple" uploadLabel="Enviar..." skinSimple="true" value="#{schedulingBean.scheduling.craft}"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
 
                             <p:outputLabel for="requestor" value="#{msg.requestor}: " style="margin-right: 20px"/>
-                            <p:selectOneMenu id="requestor" value="#{schedulingBean.scheduling.responsible}" required="true" style="width: 178px"
+                            <p:selectOneMenu id="requestor" value="#{schedulingBean.scheduling.responsible}" required="true" style="width: 250px"
                                              requiredMessage="#{msg.mandatorySchedulingRequestor}">
                                 <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                                 <f:selectItems value="#{responsibleBean.responsibles}" itemLabel="#{requestorRoom.name}" itemValue="#{requestorRoom}" var="requestorRoom"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel for="craftUpload" value="#{msg.attachCraft}: " style="margin-right: 20px"/>
-                            <p:fileUpload id="craftUpload" cancelLabel="#{msg.cancel}" dragDropSupport="true" fileLimit="1" label="#{msg.selectFile}....." 
-                                          mode="simple" uploadLabel="Enviar..." skinSimple="true" value="#{schedulingBean.scheduling.craft}"/>
                         </h:panelGrid>
 
                     </p:tab>
@@ -89,7 +92,7 @@
                         <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
                             <f:facet name="left">
                                 <p:commandButton id="saveButton" style="font-size: 13px;" value="#{msg.save}" action="#{schedulingBean.save}"  
-                                                  update="@form" icon="ui-icon ui-icon-disk"/>
+                                                 update="@form" icon="ui-icon ui-icon-disk"/>
                             </f:facet>
 
                             <f:facet name="left">

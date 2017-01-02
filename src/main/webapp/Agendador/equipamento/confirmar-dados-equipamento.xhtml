@@ -20,7 +20,7 @@
         devolução do item ou, caso entregue antes da data final estipulada, seja definida a data e hora de hoje.-->
         <c:if test="#{view.viewId == '/Agendador/agendamento/cadastro-agendamento.xhtml'}">
             <p:outputLabel for="outDateReturnConfirmation" value="#{msg.devolution}: "/>
-            <p:outputLabel id="outDateReturnConfirmation" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">
+            <p:outputLabel id="outDateReturnConfirmation" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" style="font-weight: bold;">
                 <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
             </p:outputLabel>
         </c:if>
@@ -32,8 +32,8 @@
             </p:outputLabel>
         </c:if>
 
-        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px" rendered="#{schedulingBean.scheduling.equipment.patrimony ne null}"/>
-        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;" rendered="#{schedulingBean.scheduling.equipment.patrimony ne null}"/>
+        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px" rendered="#{schedulingBean.scheduling.equipment.patrimony ne ''}"/>
+        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;" rendered="#{schedulingBean.scheduling.equipment.patrimony ne ''}"/>
 
         <p:outputLabel for="outDescription" value="#{msg.name}: " style="margin-right: 20px"/>
         <p:outputLabel id="outDescription" value="#{schedulingBean.scheduling.equipment.name}" style="font-weight: bold;"/>

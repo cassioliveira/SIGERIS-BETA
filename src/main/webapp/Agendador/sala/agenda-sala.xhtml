@@ -7,26 +7,27 @@
 
     <h:panelGrid columns="2">
         <p:outputLabel for="roomNumber" value="#{msg.roomNumber}: " />
-        <p:selectOneMenu id="roomNumber" value="#{schedulingBean.scheduling.room}" required="true" style="width: 160px"
+        <p:selectOneMenu id="roomNumber" value="#{schedulingBean.scheduling.room}" required="true" style="width: 173px"
                          requiredMessage="#{msg.mandatoryRoomType}">
             <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
             <f:selectItems value="#{roomBean.rooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
         </p:selectOneMenu>
 
         <p:outputLabel for="endingDate" value="#{msg.scheduledAt}: "/>
-        <p:calendar id="endingDate" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
-                    size="15" locale="pt" required="true" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" mask="true" 
-                    requiredMessage="#{msg.mandatorySchedulingDate}" converterMessage="Deve informar a data e hora">
+        <p:calendar id="endingDate" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10" size="13" 
+                    locale="pt" required="true" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" mask="true" 
+                    requiredMessage="#{msg.mandatorySchedulingDate}" converterMessage="Deve informar a data e hora" 
+                    mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:calendar>
 
         <p:outputLabel for="reasonRoom" value="#{msg.reason}: " style="margin-right: 20px"/>
         <p:inputText id="reasonRoom" value="#{schedulingBean.scheduling.schedulingReason}" maxlength="50" 
-                     style="width: 273px"/>
+                     style="width: 260px"/>
 
         <p:outputLabel for="observationsRoom" value="#{msg.observations}: "/>
         <p:inputTextarea id="observationsRoom" value="#{schedulingBean.scheduling.observations}"
-                         cols="43" rows="3" autoResize="false"/>
+                         rows="3" autoResize="false" style="width: 260px"/>
     </h:panelGrid>
 
 </html>

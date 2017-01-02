@@ -20,7 +20,7 @@
                     </f:facet>
                 </p:toolbar>    
 
-                <p:dataTable id="datatableEquipment" var="equipment" value="#{equipmentBean.equipments}" reflow="true"
+                <p:dataTable id="datatableEquipment" var="equipment" value="#{equipmentBean.equipments}" 
                              paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="10" widgetVar="equipments"
                              emptyMessage="#{msg.noRegistersFound}" paginator="true" paginatorPosition="bottom"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
@@ -33,33 +33,33 @@
                         </p:outputPanel>
                     </f:facet>
                     
-                    <p:column headerText="Patrimônio" width="10" filterMatchMode="startsWith" style="text-align: center"
+                    <p:column headerText="Patrimônio" width="10" filterMatchMode="startsWith" style="text-align: center" priority="2" 
                               filterStyle="display:none" filterBy="#{equipment.patrimony}">
                         <p:outputLabel value="#{equipment.patrimony}" />
                     </p:column>
 
-                    <p:column headerText="Tipo" width="30" filterMatchMode="startsWith" priority="1" 
+                    <p:column headerText="Tipo" width="30" filterMatchMode="startsWith" priority="2" 
                               filterStyle="display:none" filterBy="#{equipment.type}">
                         <p:outputLabel value="#{equipment.type.description}" rendered="#{equipment.type ne 'OTHER'}"/>
                         <p:outputLabel value="#{equipment.otherType}" rendered="#{equipment.type eq 'OTHER'}"/>
                     </p:column>
 
-                    <p:column headerText="Descrição" width="100" filterMatchMode="startsWith" priority="2"
+                    <p:column headerText="Descrição" width="100" filterMatchMode="startsWith" priority="1"
                               filterStyle="display:none" filterBy="#{equipment.name}">
                         <p:outputLabel value="#{equipment.name}"/>
                     </p:column>
 
                     <p:column headerText="Quantidade" width="20" filterMatchMode="startsWith" style="text-align: center"
-                              filterStyle="display:none" filterBy="#{equipment.quantity}">
+                              filterStyle="display:none" filterBy="#{equipment.quantity}" priority="1">
                         <p:outputLabel value="#{equipment.quantity}"/>
                     </p:column>
 
-                    <p:column headerText="Localização" width="100" filterMatchMode="startsWith" 
+                    <p:column headerText="Localização" width="100" filterMatchMode="startsWith"  priority="2" 
                               filterStyle="display:none" filterBy="#{equipment.sector}">
                         <p:outputLabel value="#{equipment.sector}"/>
                     </p:column>
 
-                    <p:column headerText="Ações" style="text-align: center" width="25">
+                    <p:column headerText="Ações" style="text-align: center" width="25" priority="1" >
                         <p:button id="editButton" title="Editar" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/equipamento/cadastro-equipamento">
                             <f:param  name="equipment" value="#{equipment.id}"/>
                             <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>

@@ -128,7 +128,7 @@
                         <h:outputText value="#{room.airConditioning ? msg.yes : msg.no}" styleClass="#{room.airConditioning ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.actions}" style="text-align: center" width="20"  priority="2">
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="20"  priority="1">
 
                         <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/sala/cadastro-sala">
                             <f:param  name="room" value="#{room.id}"/>

@@ -25,7 +25,7 @@
         </p:outputLabel>
 
         <p:outputLabel for="outEndingDate" value="#{msg.to}: "/>
-        <p:outputLabel id="outEndingDate" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">
+        <p:outputLabel id="outEndingDate" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" style="font-weight: bold;">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:outputLabel>
 

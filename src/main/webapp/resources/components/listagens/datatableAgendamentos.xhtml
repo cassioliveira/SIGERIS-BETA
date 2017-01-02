@@ -17,7 +17,7 @@
         <p:growl id="messages" autoUpdate="true"/>
 
         <p:dataTable id="datatableScheduling" var="scheduling" value="#{cc.attrs.schedulingList}"
-                     paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="10" widgetVar="schedulings"
+                     paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="7" widgetVar="schedulings"
                      emptyMessage="#{msg.noRegistersFound}" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
                      {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50,100"
@@ -29,13 +29,13 @@
                 </p:outputPanel>
             </f:facet>
 
-            <p:column headerText="#{msg.roomType}" width="1" filterMatchMode="startsWith" style="text-align: center"
+            <p:column headerText="#{msg.roomType}" width="1" filterMatchMode="startsWith" style="text-align: center" priority="2"
                       filterStyle="display:none" filterBy="#{scheduling.type}">
                 <h:outputText value="#{scheduling.type}"/>
             </p:column>
 
             <p:column headerText="#{msg.description}" width="40" filterMatchMode="contains" filterStyle="display:none"
-                      filterBy="#{scheduling.equipment.name or scheduling.room.number}">
+                      filterBy="#{scheduling.equipment.name or scheduling.room.number}" priority="1">
                 <h:outputText id="destinationRoom" value="#{scheduling.room.number}" rendered="#{scheduling.type eq msg.room}"/>
                 <h:outputText id="scheduledEquipment" value="#{scheduling.equipment.name}" rendered="#{scheduling.type eq msg.equipment}"/>
                 <p:tooltip for="destinationRoom" value="#{msg.msgScheduledRoom}" rendered="#{scheduling.type eq msg.room}"/>
@@ -43,14 +43,14 @@
 
             </p:column>
 
-            <p:column headerText="#{msg.schedulingReason}" width="40">
+            <p:column headerText="#{msg.schedulingReason}" width="40" priority="1">
                 <h:outputText id="reasonSchedulingRoom" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
                 <h:outputText id="reasonSchedulingEquipment" value="#{scheduling.schedulingReason}" rendered="#{scheduling.type eq msg.equipment}"/>
                 <p:tooltip for="reasonSchedulingRoom" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.room}"/>
                 <p:tooltip for="reasonSchedulingEquipment" value="#{msg.schedulingReason}" rendered="#{scheduling.type eq msg.equipment}"/>
             </p:column>
 
-            <p:column headerText="#{msg.request}" filterMatchMode="contains" width="15" filterStyle="display:none"
+            <p:column headerText="#{msg.request}" filterMatchMode="contains" width="15" filterStyle="display:none" priority="2"
                       filterBy="#{scheduling.registerDate}"  style="text-align: center">
                 <h:outputText id="schedulingDate" value="#{scheduling.registerDate}">
                     <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
@@ -59,12 +59,12 @@
                 <p:tooltip for="schedulingDate" value="Data de solicitação do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
             </p:column>
 
-            <p:column headerText="Solicitante" width="30" >
+            <p:column headerText="Solicitante" width="30" priority="2">
                 <h:outputText id="responsible" value="#{scheduling.responsible.name}"/>
                 <p:tooltip for="responsible" value="Solicitante do agendamento"/>
             </p:column>
 
-            <p:column headerText="#{msg.beginingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
+            <p:column headerText="#{msg.beginingDate}" filterMatchMode="contains" width="15" filterStyle="display:none" priority="2"
                       filterBy="#{scheduling.beginingSchedulingDateTime}"  style="text-align: center">
                 <h:outputText id="beginingValue" value="#{scheduling.beginingSchedulingDateTime}">
                     <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
@@ -74,7 +74,7 @@
             </p:column>
 
             <p:column headerText="#{cc.attrs.datatableHeaderEndingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
-                      filterBy="#{cc.attrs.endingDate}"  style="text-align: center">
+                      filterBy="#{cc.attrs.endingDate}"  style="text-align: center" priority="2">
                 <h:outputText id="endingValue" value="#{cc.attrs.endingDate}">
                     <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
                 </h:outputText>
@@ -82,12 +82,12 @@
                 <p:tooltip for="endingValue" value="Previsão do término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
             </p:column>
 
-            <p:column headerText="#{msg.craft}" style="text-align: center" width="1">
+            <p:column headerText="#{msg.craft}" style="text-align: center" width="1" priority="2">
                 <p:outputLabel id="isFile" value="#{scheduling.craft ne null ? '' : '-'}"/>
                 <p:commandLink value="Ver" action="#{reportBean.generate}" rendered="#{scheduling.craft eq ''}"/>
             </p:column>
 
-            <p:column headerText="#{msg.actions}" style="text-align: center" width="20" rendered="#{view.viewId == '/home.xhtml'}">
+            <p:column headerText="#{msg.actions}" style="text-align: center" width="20" rendered="#{view.viewId == '/home.xhtml'}" priority="1">
                 <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>

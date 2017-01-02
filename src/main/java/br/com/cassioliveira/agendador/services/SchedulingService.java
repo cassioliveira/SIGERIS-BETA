@@ -1,5 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
+import br.com.cassioliveira.agendador.exceptions.BusinessException;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
@@ -78,4 +79,12 @@ public class SchedulingService implements Serializable {
             scheduling.getEquipment().setQuantity(quantityStock + 1);
         }
     }
+
+//    public boolean isEndingDateUpperInitialDate(Scheduling scheduling) {
+//        if (scheduling.getBeginingSchedulingDateTime()
+//                .before(scheduling.getForecastSchedulingDateTime())) {
+//            throw new BusinessException("A data inicial deve ser menor que a ");
+//        }
+//            return true;
+//    }
 }

@@ -33,22 +33,22 @@
                         </p:outputPanel>
                     </f:facet>
 
-                    <p:column headerText="#{msg.name}" width="50%" filterStyle="display:none"
+                    <p:column headerText="#{msg.name}" width="50%" filterStyle="display:none" priority="1"
                               filterBy="#{responsible.name}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.name}"/>
                     </p:column>
                     
-                    <p:column headerText="#{msg.phone1}" width="10%" filterStyle="display:none"
+                    <p:column headerText="#{msg.phone1}" width="10%" filterStyle="display:none" priority="2"
                               filterBy="#{responsible.phone1}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.phone1}"/>
                     </p:column>
                     
-                    <p:column headerText="#{msg.email}" width="20%" filterStyle="display:none"
+                    <p:column headerText="#{msg.email}" width="20%" filterStyle="display:none" priority="2"
                               filterBy="#{responsible.email}" filterMatchMode="contains">
                         <h:outputText value="#{responsible.email}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.actions}" style="text-align: center" width="10%">
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="10%" priority="1">
 
                         <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/responsavel/cadastro-responsavel">
                             <f:param  name="responsible" value="#{responsible.id}"/>
