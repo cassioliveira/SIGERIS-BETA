@@ -32,7 +32,7 @@
                             <p:inputText id="globalFilter" onkeyup="PF('equipments').filter()" style="width:300px" placeholder="Pesquisa..."/>
                         </p:outputPanel>
                     </f:facet>
-                    
+
                     <p:column headerText="Patrimônio" width="10" filterMatchMode="startsWith" style="text-align: center" priority="2" 
                               filterStyle="display:none" filterBy="#{equipment.patrimony}">
                         <p:outputLabel value="#{equipment.patrimony}" />

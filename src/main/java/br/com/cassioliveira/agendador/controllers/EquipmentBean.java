@@ -73,15 +73,17 @@ public class EquipmentBean implements Serializable {
         FacesUtil.redirectTo("listar-equipamentos.xhtml");
     }
 
-    /*
-     * Metodo que verifica se o objeto esta nulo quando for recuperado.
-     * Se sim, refere-se a um novo cadastro, senao refere-se a um produto a ser editado
+    /**
+     * Verifica se o objeto esta nulo quando for recuperado. Se sim, refere-se a
+     * um novo cadastro, senao refere-se a um item a ser editado
+     *
+     * @return
      */
     public boolean getEditing() {
         return this.equipment.getId() != null;
     }
-    
-    public List<Equipment> getEquipmentsWithStoq(){
+
+    public List<Equipment> getEquipmentsWithStoq() {
         return equipmentService.allEquipmentsWithStoq();
     }
 }

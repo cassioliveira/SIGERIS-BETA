@@ -80,8 +80,8 @@
                         <p:commandButton style="font-size: 13px;" value="#{roomBean.editing ? msg.change :msg.save}" action="#{roomBean.save}"  
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
 
-                        <p:button style="font-size: 13px;" value="#{msg.cancel}" 
-                                  id="deleteButton" outcome="/Agendador/sala/listar-salas" icon="ui-icon ui-icon-cancel">
+                        <p:button style="font-size: 13px;" value="#{msg.cancel}" outcome="/Agendador/sala/listar-salas"
+                                  id="cancelRoomButton" icon="ui-icon ui-icon-cancel">
                         </p:button>
                     </f:facet>    
                 </p:toolbar> 

@@ -22,10 +22,8 @@
                                          icon="ui-icon ui-icon-disk" id="closeScheduling">
                         </p:commandButton>
 
-                        <p:button style="font-size: 13px;" value="Cancelar"
-                                  id="cancelButtonDown" outcome="/Agendador/agendamento/listar-agendamentos-abertos.xhtml"
-                                  icon="fa fa-times" rendered="#{pendenciaBean.editando}" 
-                                  disabled="#{botaoEditar}">
+                        <p:button style="font-size: 13px;" value="Cancelar" outcome="/home" id="cancelButtonDown" 
+                                  icon="fa fa-times" disabled="#{botaoEditar}">
                         </p:button>
                     </f:facet>
                 </p:toolbar>

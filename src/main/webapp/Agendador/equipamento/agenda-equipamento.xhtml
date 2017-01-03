@@ -15,7 +15,7 @@
         </p:calendar>
 
         <p:outputLabel for="equipmentSelection" value="Item: "/>
-        <p:selectOneMenu id="equipmentSelection" value="#{schedulingBean.scheduling.equipment}" filter="true" 
+        <p:selectOneMenu id="equipmentSelection" value="#{schedulingBean.scheduling.equipment}" filter="true"
                          filterMatchMode="contains" autoWidth="false" style="width: 260px" label="Digite ou selecione">
             <f:selectItems id="equipments" value="#{equipmentBean.equipmentsWithStoq}" var="equipment" itemLabel="#{equipment.name}" 
                            itemValue="#{equipment}"/>

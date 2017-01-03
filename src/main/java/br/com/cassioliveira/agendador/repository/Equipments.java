@@ -28,8 +28,7 @@ public class Equipments extends Generic<Equipment> implements Serializable {
     }
 
     /**
-     * Método que retorna o apenas os equipamentos cadastrados que tẽm
-     * patrimônio
+     * Retorna o apenas os equipamentos cadastrados que tẽm patrimônio
      *
      * @return
      */
@@ -37,8 +36,22 @@ public class Equipments extends Generic<Equipment> implements Serializable {
         return getEntityManager().createNamedQuery("Equipment.byPatrimony").getResultList();
     }
 
+    /**
+     * Verifica a quantidade disponível de um item e só retorna a lista com os
+     * que tiverem uma quantidade maior que 0 (zero)
+     *
+     * @return
+     */
     public List<Equipment> equipmentsWithStoq() {
         return getEntityManager().createNamedQuery("Equipment.isStoq").getResultList();
     }
 
+    /**
+     * Verifica se há equipamentos associadas a agendamentos ativos.
+     *
+     * @return
+     */
+//    public List<Equipment> scheduledEquipments() {
+//        return getEntityManager().createNamedQuery("Equipment.isScheduled").getResultList();
+//    }
 }

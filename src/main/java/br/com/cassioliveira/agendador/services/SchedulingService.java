@@ -1,6 +1,5 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.exceptions.BusinessException;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;

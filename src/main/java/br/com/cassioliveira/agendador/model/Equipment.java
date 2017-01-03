@@ -10,27 +10,29 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
-
-
 /**
  *
  * @author cassio
  */
-//@NamedQuery(name = "Equipment.types",
-//            query = "SELECT DISTINCT e.otherType FROM Equipment AS e"),
 @Data
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Equipment.isStoq",
-            query = "SELECT e FROM Equipment AS e WHERE e.quantity > 0"),
+            query = "SELECT e FROM Equipment AS e WHERE e.quantity > 0")
+    ,
+//    @NamedQuery(name = "Equipment.isScheduled",
+//            query = "SELECT e FROM Equipment AS e WHERE e.id = (SELECT s.equipment.id FROM Scheduling AS s)")
+//    ,
     @NamedQuery(name = "Equipment.byPatrimony",
             query = "SELECT e.patrimony FROM Equipment AS e WHERE e.patrimony IS NOT NULL")})
 public class Equipment implements Serializable {
@@ -46,7 +48,7 @@ public class Equipment implements Serializable {
 
     @Column(name = "name", length = 200, nullable = false)
     private String name;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     @NotNull(message = "Deve informar o tipo do item a ser cadastrado")
@@ -68,5 +70,9 @@ public class Equipment implements Serializable {
     @Lob
     @Column(name = "observations")
     private String observations;
+
+    @OneToOne
+    @JoinColumn(name = "schedulingfk_id")
+    private Scheduling scheduling;
 
 }

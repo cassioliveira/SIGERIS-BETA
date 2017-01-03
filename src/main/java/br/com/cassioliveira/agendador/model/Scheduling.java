@@ -1,7 +1,6 @@
 package br.com.cassioliveira.agendador.model;
 
 import br.com.cassioliveira.agendador.enumerations.StatusType;
-import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
@@ -80,16 +79,16 @@ public class Scheduling implements Serializable {
     @Column(name = "status")
     private StatusType status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipmentFK_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "equipmentfk_id")
     private Equipment equipment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "roomFK_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "roomfk_id")
     private Room room;
 
     @OneToOne
-    @JoinColumn(name = "responsibleFK_id")
+    @JoinColumn(name = "responsiblefk_id")
     private Responsible responsible;
 
     @PostConstruct

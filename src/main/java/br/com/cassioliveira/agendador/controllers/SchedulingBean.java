@@ -103,12 +103,6 @@ public class SchedulingBean implements Serializable {
         return scheduling.getId() != null;
     }
 
-//    public List<Scheduling> getSchedulings() {
-//        if(scheduling.getDateTime().after(DateTimeUtilBean.getDateToday())){
-//            scheduling.setStatus(SchedulingStatus.CLOSE);
-//        }
-//        return this.schedulings;
-//    }
     /**
      * Retorna todos os agendamentos nos quais o status está como ABERTO.
      * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
@@ -126,7 +120,7 @@ public class SchedulingBean implements Serializable {
         }
         return openedSchedulings;
     }
-    
+
     /**
      * Retorna todos os agendamentos nos quais o status está como FECHADO.
      * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
@@ -156,7 +150,7 @@ public class SchedulingBean implements Serializable {
         scheduling.setEndingSchedulingDateTime(new Date());
         if (scheduling.getType().equals("Equipamento")) {
             stockMovement();
-        } else{
+        } else {
             this.scheduling.getRoom().setStatus(StatusType.FREE);
         }
         schedulingService.save(scheduling);

@@ -44,8 +44,8 @@ public class EquipmentService implements Serializable {
     public List<Equipment> findAll() {
         return equipments.findAll();
     }
-    
-    public List<Equipment> allEquipmentsWithStoq(){
+
+    public List<Equipment> allEquipmentsWithStoq() {
         return equipments.equipmentsWithStoq();
     }
 
