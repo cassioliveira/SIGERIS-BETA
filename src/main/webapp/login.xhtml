@@ -23,11 +23,10 @@
             <p:graphicImage library="images" name="logo-uepb.png" height="100" width="150"/>
         </div>
 
-        <p:dialog closable="false" visible="true" resizable="false" 
-                  draggable="false" id="loginDialog">
-            <h:form id="loginForm">
-                <p:messages id="loginMessages" autoUpdate="true" closable="true"/>
+        <p:dialog closable="false" visible="true" resizable="false" draggable="false" id="loginDialog">
 
+            <h:form id="loginForm" prependId="false">
+                <p:messages id="loginMessages" autoUpdate="true" closable="true"/>
 
                 <h:panelGrid columns="2" cellpadding="4" id="loginPanelGrid">
                     <h:panelGroup>
@@ -43,25 +42,19 @@
 
                             <p:outputLabel for="j_username" value="#{msg.user}: "/>
                             <p:inputText id="j_username" required="true" requiredMessage="#{msg.mandatoryUserName}" 
-                                         size="20"/>
+                                         size="20" value="#{loginBean.userName}"/>
 
                             <p:outputLabel for="j_password" value="#{msg.password}: "/>
-                            <p:password id="j_password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"
-                                        />
+                            <p:password id="j_password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"/>
 
                             <p:commandButton value="#{msg.enter}" id="loginEnterButton" icon="fa fa-key"
                                              action="#{loginBean.login}" update="@form" ajax="false"/>
-                            <p:commandButton id="lostPasswordLink" onclick="PF('loginPasswordRecover').show();
-                                    return false;" icon="fa fa-question" style="float: right;"/>
-
-                            <p:tooltip for="lostPasswordLink" value="#{msg.helpToRecoverPassword}" showEffect="fade"/>
                         </h:panelGrid>
                     </h:panelGroup>
 
                 </h:panelGrid>
-
-                <p:button icon="fa fa-unlock-alt" style="float: right" outcome="home"/>
             </h:form>
+
         </p:dialog>
 
         <div id="credits" style="float: right; right: 0px; bottom: 0px; padding: 10px; position: absolute; font-size: 8px">

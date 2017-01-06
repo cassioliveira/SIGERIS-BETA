@@ -152,3 +152,43 @@
         -ms-background-size: cover;
         -o-background-size: cover;*/
 }
+
+.box-acesso-negado{
+    background-color: #F2DEDE;
+    width: 400px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;/* Aqui ele pega 50% da altura tela e sobe metade do valor da altura, no caso 100 */
+    border-radius: 10px;
+    left:50%;
+    margin-left:-250px; /* Aqui ele pega 50% da largura tela e diminui  metade do valor da largura, no caso 250 */
+    box-shadow: 3px 3px 5px #ccc;
+    padding: 5px;
+}
+
+#logo-acesso-negado{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#titulo-acesso-negado{
+    color: #A94442; 
+    text-align: center; 
+    font-size: 33px;
+    margin-top: 7px;
+}
+
+#mensagem-acesso-negado{
+    color: #A94442; 
+    text-align: center; 
+    font-size: 16px;
+    margin-top: -10px;
+}
+
+.ui-button.botaoOK{
+    background: #F2A1A1 !important;
+    text-align: center !important;
+    margin-top: 10%;
+    margin-left: 44%;
+}

@@ -18,8 +18,8 @@ import lombok.Data;
  *
  * @author cassio
  */
-@Entity
 @Data
+@Entity
 public class Subject implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,5 +38,4 @@ public class Subject implements Serializable {
     @JoinTable(name = "subject_group", joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
     private List<GroupType> groups = new ArrayList<>();
-
 }

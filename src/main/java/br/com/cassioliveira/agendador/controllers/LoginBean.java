@@ -11,6 +11,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -31,6 +33,10 @@ public class LoginBean implements Serializable {
     @Inject
     private transient HttpServletResponse response;
 
+    @Getter
+    @Setter
+    private String userName;
+
     /**
      * Método que é chamado antes da pagína ser renderizada e verifica se há um
      * parametro "invalid" na URL, indicando que o usuário digitou os dados
@@ -38,7 +44,7 @@ public class LoginBean implements Serializable {
      */
     public void preRender() {
         if ("true".equals(request.getParameter("invalid"))) {
-            FacesUtil.errorMessage("Usuário ou senha inválidos!");
+            FacesUtil.errorMessage("Usuário e/ou senha inválidos!");
         }
     }
 
@@ -49,7 +55,7 @@ public class LoginBean implements Serializable {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/j_spring_security_check");
         dispatcher.forward(request, response);
 
-        facesContext.responseComplete(); //Interrompe o ciclo de vida do JSF
+        facesContext.responseComplete(); //Interrompe o ciclo de vida do JSF, pois o Spring Security que recebe as requisições dessa sessão
     }
 
 }
