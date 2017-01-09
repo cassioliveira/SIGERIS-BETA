@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import lombok.Data;
 
 /**
@@ -20,6 +21,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@NamedQuery(name = "Subject.byUser", query = "FROM Subject AS s WHERE s.userName = :userName")
 public class Subject implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,14 +30,14 @@ public class Subject implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "subject_name", length = 200, nullable = false)
-    private String user;
+    @Column(name = "username", length = 200, nullable = false)
+    private String userName;
 
-    @Column(name = "subject_password", length = 20, nullable = false)
+    @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "subject_group", joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private List<GroupType> groups = new ArrayList<>();
+    private List<Grupo> groups = new ArrayList<>();
 }

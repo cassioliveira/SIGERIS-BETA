@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.security;
 
-import br.com.cassioliveira.agendador.model.GroupType;
+import br.com.cassioliveira.agendador.model.Grupo;
 import br.com.cassioliveira.agendador.model.Subject;
 import br.com.cassioliveira.agendador.services.SubjectService;
 import br.com.cassioliveira.agendador.util.cdi.CDIServiceLocator;
@@ -24,19 +24,22 @@ public class SystemUserDetailsService implements UserDetailsService {
         SubjectService subjectService;
         subjectService = CDIServiceLocator.getBean(SubjectService.class);
         Subject subject = subjectService.byUser(userName);
+        
         SystemUser systemUser = null;
 
         if (subject != null) {
             systemUser = new SystemUser(subject, getGroups(subject));
+        } else{
+            throw new UsernameNotFoundException("Usuário não encontrado.");
         }
-
+        
         return systemUser;
     }
 
     private Collection<? extends GrantedAuthority> getGroups(Subject subject) {
         List<SimpleGrantedAuthority> groups = new ArrayList<>();
-        for (GroupType group : subject.getGroups()) {
-            groups.add(new SimpleGrantedAuthority(group.getName().toUpperCase()));
+        for (Grupo group : subject.getGroups()) {
+            groups.add(new SimpleGrantedAuthority("ROLE_" + group.getName().toUpperCase()));
         }
         return groups;
     }

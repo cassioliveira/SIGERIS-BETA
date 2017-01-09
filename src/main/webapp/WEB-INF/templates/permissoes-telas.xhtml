@@ -19,16 +19,16 @@
         <ui:insert name="menu">
             <h:form>
                 
-                <!--Permissões do diretor que tem acesso total e irrestrito-->
-                <c:set var="godMode" value="#{request.isUserInRole('Administradores')}" scope="request"/> 
+                <c:set var="godMode" value="#{request.isUserInRole('ADMINISTRADORES')}" scope="request"/> 
 
-                <!--Permissões onde apenas as roles definidas abaixo podem acessar APENAS a página de pesquisa de Paciente (PesquisaPaciente.xhtml)-->
-                <c:set var="podeVerPaciente" value="#{request.isUserInRole('Recepcionistas') or 
-                                                      request.isUserInRole('TecnicosEnfermagem') or 
-                                                      request.isUserInRole('Medicos') or 
-                                                      request.isUserInRole('Odontologos') or 
-                                                      request.isUserInRole('Enfermeiros') or 
-                                                      request.isUserInRole('Administradores')}" scope="request"/> 
+                <c:set var="schedulerChanger" value="#{request.isUserInRole('ADMINISTRADORES') or 
+                                                      request.isUserInRole('SECRETARIAS') or 
+                                                      request.isUserInRole('COORDENADORES') or 
+                                                      request.isUserInRole('DIRECAO')}" scope="request"/> 
+                
+                <c:set var="scheduleViewer" value="#{request.isUserInRole('VIGILANTES') or 
+                                                      request.isUserInRole('TERCEIRIZADOS') or 
+                                                      request.isUserInRole('BIBLIOTECA')}" scope="request"/>
             </h:form>
         </ui:insert>
     </div>

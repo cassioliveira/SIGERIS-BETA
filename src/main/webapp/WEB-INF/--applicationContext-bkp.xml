@@ -1,4 +1,4 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
+<!--<beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -6,9 +6,13 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
            
+    <http pattern="/login.xhtml" security="none"/>
+    <http pattern="/error.xhtml" security="none"/>
+    <http pattern="/javax.faces.resource/**" security="none"/>   
+
     <beans:bean id="systemUserDetailsService" class="br.com.cassioliveira.agendador.security.SystemUserDetailsService"/>
     
-    <!--Resolve problema de redirect de requisiçẽos AJAX-->
+    Resolve problema de redirect de requisiçẽos AJAX
     <beans:bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
         <beans:property name="accessDeniedHandler" ref="jsfAccessDeniedHandler"/>
         <beans:property name="authenticationEntryPoint" ref="authenticationEntryPoint"/>
@@ -25,23 +29,19 @@
     </beans:bean>
 	
     <beans:bean id="jsfRedirectStrategy" class="br.com.cassioliveira.agendador.security.JsfRedirectStrategy"/>
-    <!---->
-
-    <http pattern="/login.xhtml" security="none"/>
-    <http pattern="/error.xhtml" security="none"/>
-    <http pattern="/javax.faces.resource/**" security="none"/>
     
+
     <http auto-config="false" use-expressions="true">
         <custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
         
         <intercept-url pattern="/home.xhtml" access="isAuthenticated()" />
         <intercept-url pattern="/acesso-negado.xhtml" access="isAuthenticated()" />
-        <intercept-url pattern="/**" access="hasAnyRole('ADMINISTRADORES')" />
-        <intercept-url pattern="/Agendador/sala/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO')" />
-        <intercept-url pattern="/Agendador/equipamento/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO')" />
-        <intercept-url pattern="/Agendador/responsavel/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO')" />
-        <intercept-url pattern="/Agendador/agendamento/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO')" />
-        <intercept-url pattern="/Agendador/agendamento/listar-agendamentos.xhtml" access="hasAnyRole('VIGILANTES', 'TERCEIRIZADOS', 'PROFESSORES', 'BIBLIOTECA')" />
+        <intercept-url pattern="/Agendador/agendamento/listar-agendamentos-abertos.xhtml" access="isAuthenticated()" />
+        <intercept-url pattern="/Agendador/usuario/**" access="hasRole('ADMINISTRADORES')" />
+        <intercept-url pattern="/Agendador/sala/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO', 'ADMINISTRADORES')" />
+        <intercept-url pattern="/Agendador/equipamento/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO', 'ADMINISTRADORES')" />
+        <intercept-url pattern="/Agendador/responsavel/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO', 'ADMINISTRADORES')" />
+        <intercept-url pattern="/Agendador/agendamento/**" access="hasAnyRole('SECRETARIAS', 'COORDENACOES', 'DIRECAO', 'ADMINISTRADORES')" />
         <intercept-url pattern="/**" access="denyAll" />
         
         <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" default-target-url="/" always-use-default-target="true"/>
@@ -52,4 +52,4 @@
         <authentication-provider user-service-ref="systemUserDetailsService" />
     </authentication-manager>
            
-</beans:beans>
+</beans:beans>-->

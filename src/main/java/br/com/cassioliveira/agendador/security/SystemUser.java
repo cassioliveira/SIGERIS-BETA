@@ -17,7 +17,7 @@ public class SystemUser extends User {
     private final Subject subject;
 
     public SystemUser(Subject subject, Collection<? extends GrantedAuthority> authorities) {
-        super(subject.getUser(), subject.getPassword(), authorities);
+        super(subject.getUserName(), subject.getPassword(), authorities);
         this.subject = subject;
     }
 }

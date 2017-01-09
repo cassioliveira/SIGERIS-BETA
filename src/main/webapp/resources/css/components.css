@@ -73,7 +73,7 @@
 
 /*Dialog login*/
 .transparent-dialog-login{
-    background: rgba(10,10,10,0.6) !important;
+    background: rgba(10,10,10,0.7) !important;
     color: black !important;
     border: 0px !important;
     border-radius: 30px !important;
@@ -131,7 +131,7 @@
 
 .backgroundLoginImage{
 
-    background-image: url('../images/cdsa-bg-1366w.png');
+    background-image: url('../images/bg_uepb.jpg');
     background-repeat: no-repeat;
     background-size:100%;
     bottom: 0;

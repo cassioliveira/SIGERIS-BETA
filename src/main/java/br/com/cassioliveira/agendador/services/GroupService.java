@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.model.GroupType;
+import br.com.cassioliveira.agendador.model.Grupo;
 import br.com.cassioliveira.agendador.repository.Groups;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
 import java.io.Serializable;
@@ -23,20 +23,20 @@ public class GroupService implements Serializable {
     private Groups groups;
 
     @Transactional
-    public void save(GroupType group) {
+    public void save(Grupo group) {
         this.groups.save(group);
     }
 
     @Transactional
-    public void delete(GroupType group) {
+    public void delete(Grupo group) {
         groups.delete(findById(group.getId()));
     }
 
-    public GroupType findById(Long id) {
+    public Grupo findById(Long id) {
         return groups.findById(id);
     }
 
-    public List<GroupType> findAll() {
+    public List<Grupo> findAll() {
         return groups.findAll();
     }
 }

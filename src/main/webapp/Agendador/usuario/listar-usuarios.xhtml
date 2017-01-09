@@ -14,7 +14,7 @@
             <p:fieldset legend="#{(msg.searchCadastre).concat(msg.user)}" >
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:button outcome="/subject/CadastreSubject" value="#{msg.newRegistering}" style="text-align: right"/>
+                        <p:button outcome="/Agendador/usuario/cadastro-usuario" value="#{msg.newRegistering}" style="text-align: right"/>
                     </f:facet>
                 </p:toolbar>    
 
@@ -37,21 +37,17 @@
                     </p:column>
 
                     <p:column headerText="#{msg.user}" style="text-align: center" width="30%" filterStyle="display:none"
-                              filterBy="#{subject.user}" filterMatchMode="exact">
-                        <h:outputText value="#{subject.user}"/>
+                              filterBy="#{subject.userName}" filterMatchMode="exact">
+                        <h:outputText value="#{subject.userName}"/>
                     </p:column>
 
-                    <p:column headerText="#{msg.group}" style="text-align: center" width="40%" filterStyle="display:none"
+<!--                    <p:column headerText="#{msg.group}" style="text-align: center" width="40%" filterStyle="display:none"
                               filterBy="#{subject.groups}" filterMatchMode="exact">
                         <h:outputText value="#{subject.groups}"/>
-                    </p:column>
+                    </p:column>-->
 
                     <p:column headerText="#{msg.actions}" style="text-align: center" width="100">
-<!--                        <p:button id="viewButton" title="#{msg.view}" icon="ui-icon ui-icon-extlink" style="font-size: 10px">
-                            <p:tooltip for="viewButton" value="Visualiza detalhes da linha selecionada"/>
-                        </p:button>   -->
-
-                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/subject/CadastreSubject">
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/usuario/cadastro-usuario">
                             <f:param  name="subject" value="#{subject.id}"/>
                             <p:tooltip for="editButton" value="Edita dados da linha selecionada"/>
                         </p:button>

@@ -6,17 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 
 /**
  *
  * @author cassio
  */
-@Entity
 @Data
-@Table(name = "group_type")
-public class GroupType implements Serializable {
+@Entity
+public class Grupo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,5 +27,4 @@ public class GroupType implements Serializable {
 
     @Column(name = "group_description", length = 20)
     private String description;
-
 }

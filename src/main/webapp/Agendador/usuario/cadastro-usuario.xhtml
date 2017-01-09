@@ -28,12 +28,11 @@
                     <p:password id="password" value="#{subjectBean.subject.password}" size="15"
                                 required="true" maxlength="30" requiredMessage="A senha deve ser informada"/>
 
-                    <p:outputLabel for="group" value="#{msg.group}: "/>
-                    <p:selectOneMenu id="group" value="#{subjectBean.subject.groups}" required="true" style="width: 130px"
-                                     requiredMessage="#{msg.mandatorySchedulingRequestor}">
+<!--                    <p:outputLabel for="group" value="#{msg.group}: "/>
+                    <p:selectOneMenu id="group" value="#{subjectBean.subject.groups}" style="width: 130px">
                         <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                         <f:selectItems value="#{groupBean.groups}" itemLabel="#{group.name}" itemValue="#{group}" var="group"/>
-                    </p:selectOneMenu>
+                    </p:selectOneMenu>-->
 
                 </h:panelGrid>
 
@@ -44,7 +43,7 @@
                     </f:facet>    
 
                     <f:facet name="right">
-                        <p:button value="#{msg.search}" id="newRegister" outcome="/subject/SearchSubject" 
+                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/usuario/listar-usuarios" 
                                   icon="ui-icon ui-icon-pencil"/>
                     </f:facet>
                 </p:toolbar> 
