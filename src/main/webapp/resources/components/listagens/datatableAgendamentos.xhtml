@@ -89,26 +89,26 @@
 
             <p:column headerText="#{msg.actions}" style="text-align: center" width="20" priority="1">
                 <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento"
-                          rendered="#{view.viewId == '/home.xhtml'}">
+                          rendered="#{schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
                 </p:button>
 
-                <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-finalizados.xhtml'}" 
+                <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-finalizados.xhtml' and schedulerChanger}" 
                                  action="#{schedulingBean.remove}" process="@this">
                     <f:setPropertyActionListener target="#{schedulingBean.selectedScheduling}" value="#{scheduling}"/>
                     <p:tooltip for="deleteButton" value="#{msg.deleteSelectedRow}"/>
                     <p:confirm icon="ui-icon-alert" header="#{msg.exclusionCadastre} #{msg.scheduling}" message="#{msg.realyExclude}?"/>
                 </p:commandButton>
 
-                <p:button id="downScheduleEquipment" title="Dar baixa no agendamento" icon="fa fa-cloud-download" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-equipamento.xhtml"
-                          rendered="#{scheduling.type eq msg.equipment and view.viewId == '/home.xhtml'}">
+                <p:button id="downScheduleEquipment" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-equipamento.xhtml"
+                          rendered="#{scheduling.type eq msg.equipment and view.viewId == '/home.xhtml' and schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="downScheduleEquipment" value="Baixar agendamento"/>
                 </p:button>
 
-                <p:button id="downScheduleRoom" title="Dar baixa no agendamento" icon="fa fa-download" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-sala.xhtml"
-                          rendered="#{scheduling.type eq msg.room and view.viewId == '/home.xhtml'}">
+                <p:button id="downScheduleRoom" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-sala.xhtml"
+                          rendered="#{scheduling.type eq msg.room and view.viewId == '/home.xhtml' and schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="downScheduleRoom" value="Baixar agendamento"/>
                 </p:button>

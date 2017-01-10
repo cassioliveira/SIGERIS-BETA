@@ -21,7 +21,7 @@
 
                 <h:panelGrid columns="2">
                     <p:outputLabel for="user" value="#{msg.user}: "/>
-                    <p:inputText id="user" value="#{subjectBean.subject.user}" size="15"
+                    <p:inputText id="user" value="#{subjectBean.subject.userName}" size="15"
                                  required="true" maxlength="20" requiredMessage="Um nome de usuário deve ser informado"/>
 
                     <p:outputLabel for="password" value="#{msg.password}: "/>
@@ -38,14 +38,12 @@
 
                 <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
                     <f:facet name="left">
-                        <p:commandButton style="font-size: 13px;" value="#{msg.save}" action="#{subjectBean.save}"  
+                        <p:commandButton value="#{msg.save}" action="#{subjectBean.save}"  
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
+                        
+                        <p:button value="#{msg.cancel}" id="cancelButton" outcome="/Agendador/usuario/listar-usuarios" 
+                                  icon="ui-icon ui-icon-cancel"/>
                     </f:facet>    
-
-                    <f:facet name="right">
-                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/usuario/listar-usuarios" 
-                                  icon="ui-icon ui-icon-pencil"/>
-                    </f:facet>
                 </p:toolbar> 
             </p:fieldset>
             <p:blockUI block="subjectForm" trigger="saveButton">

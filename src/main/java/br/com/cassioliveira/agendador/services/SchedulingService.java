@@ -78,12 +78,4 @@ public class SchedulingService implements Serializable {
             scheduling.getEquipment().setQuantity(quantityStock + 1);
         }
     }
-
-//    public boolean isEndingDateUpperInitialDate(Scheduling scheduling) {
-//        if (scheduling.getBeginingSchedulingDateTime()
-//                .before(scheduling.getForecastSchedulingDateTime())) {
-//            throw new BusinessException("A data inicial deve ser menor que a ");
-//        }
-//            return true;
-//    }
 }

@@ -91,13 +91,9 @@
 
                         <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
                             <f:facet name="left">
-                                <p:commandButton id="saveButton" style="font-size: 13px;" value="#{msg.save}" action="#{schedulingBean.save}"  
+                                <p:commandButton id="saveButton" value="#{msg.save}" action="#{schedulingBean.save}"  
                                                  update="@form" icon="ui-icon ui-icon-disk"/>
-                            </f:facet>
-
-                            <f:facet name="left">
-                                <p:button style="font-size: 13px;" value="#{msg.cancel}" id="cancelButton"  
-                                          icon="fa fa-close" outcome="/home" rendered="#{schedulingBean.editing}"/>
+                                <p:button value="#{msg.cancel}" id="cancelButton" icon="ui-icon ui-icon-cancel" outcome="/home"/>
                             </f:facet>
                         </p:toolbar> 
                     </p:tab>
