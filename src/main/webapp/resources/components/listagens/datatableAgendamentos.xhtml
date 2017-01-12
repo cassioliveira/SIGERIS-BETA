@@ -16,7 +16,7 @@
 
         <p:growl id="messages" autoUpdate="true"/>
 
-        <p:dataTable id="datatableScheduling" var="scheduling" value="#{cc.attrs.schedulingList}"
+        <p:dataTable var="scheduling" value="#{cc.attrs.schedulingList}"
                      paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="7" widgetVar="schedulings"
                      emptyMessage="#{msg.noRegistersFound}" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
@@ -88,11 +88,11 @@
             </p:column>
 
             <p:column headerText="#{msg.actions}" style="text-align: center" width="20" priority="1">
-                <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento"
+<!--                <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/agendamento/cadastro-agendamento"
                           rendered="#{schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
-                </p:button>
+                </p:button>-->
 
                 <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-finalizados.xhtml' and schedulerChanger}" 
                                  action="#{schedulingBean.remove}" process="@this">

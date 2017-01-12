@@ -1,10 +1,12 @@
 package br.com.cassioliveira.agendador.services;
 
+import br.com.cassioliveira.agendador.enumerations.StatusType;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -61,6 +63,42 @@ public class SchedulingService implements Serializable {
     }
 
     /**
+     * Retorna todos os agendamentos nos quais o status está como ABERTO.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
+     *
+     * @return
+     */
+    public List<Scheduling> openedSchedulings() {
+        List<Scheduling> openedSchedulings = new ArrayList<>();
+        for (Scheduling openedSchedule : findAll()) {
+            if (openedSchedule.getStatus() == StatusType.OPEN) {
+                openedSchedulings.add(openedSchedule);
+            }
+        }
+        return openedSchedulings;
+    }
+
+    /**
+     * Retorna todos os agendamentos nos quais o status está como FECHADO.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
+     *
+     * @return
+     */
+    public List<Scheduling> closedSchedulings() {
+        List<Scheduling> closedSchedulings = new ArrayList<>();
+        for (Scheduling closedSchedule : findAll()) {
+            if (closedSchedule.getStatus() == StatusType.CLOSE) {
+                closedSchedulings.add(closedSchedule);
+            }
+        }
+        return closedSchedulings;
+    }
+
+    /**
      * Verifica a se a tela de atual é a de cadastro ou baixa do agendamento e
      * retira uma unidade da quantidade do estoque do item agendado ou adiciona
      * uma unidade na quantidade do estoque do item agendado, respectivamente.
@@ -78,4 +116,5 @@ public class SchedulingService implements Serializable {
             scheduling.getEquipment().setQuantity(quantityStock + 1);
         }
     }
+
 }

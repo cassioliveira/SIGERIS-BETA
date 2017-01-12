@@ -8,7 +8,6 @@ import br.com.cassioliveira.agendador.services.SchedulingService;
 import br.com.cassioliveira.agendador.services.TravelService;
 import br.com.cassioliveira.agendador.util.jsf.FacesUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -103,40 +102,33 @@ public class SchedulingBean implements Serializable {
         return scheduling.getId() != null;
     }
 
-    /**
-     * Retorna todos os agendamentos nos quais o status está como ABERTO.
-     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
-     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
-     * ALTERANDO O STATUS PARA RETORNO.
-     *
-     * @return
-     */
     public List<Scheduling> getOpenedSchedulings() {
-        List<Scheduling> openedSchedulings = new ArrayList<>();
-        for (Scheduling openedSchedule : schedulings) {
-            if (openedSchedule.getStatus() == StatusType.OPEN) {
-                openedSchedulings.add(openedSchedule);
-            }
-        }
-        return openedSchedulings;
+        return schedulingService.openedSchedulings();
+    }
+
+    public List<Scheduling> getClosedSchedulings() {
+        return schedulingService.closedSchedulings();
     }
 
     /**
-     * Retorna todos os agendamentos nos quais o status está como FECHADO.
-     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
-     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
-     * ALTERANDO O STATUS PARA RETORNO.
-     *
-     * @return
+     * Verifica se há agendamentos onde a data de previsão de finalização do
+     * mesmo é anterior à data e hora atual. Caso seja, o agendamento é
+     * finalizado e a sala é liberada.
      */
-    public List<Scheduling> getClosedSchedulings() {
-        List<Scheduling> closedSchedulings = new ArrayList<>();
-        for (Scheduling closedSchedule : schedulings) {
-            if (closedSchedule.getStatus() == StatusType.CLOSE) {
-                closedSchedulings.add(closedSchedule);
+    public void checkDateScheduledRoomNow() {
+        Date now = new Date();
+        for (Scheduling openedScheduling : getOpenedSchedulings()) {
+            scheduling = openedScheduling;
+            if (scheduling.getId() != null
+                    && scheduling.getType().equals("Sala")
+                    && now.after(scheduling.getForecastSchedulingDateTime())) {
+
+                scheduling.setStatus(StatusType.CLOSE);
+                scheduling.setEndingSchedulingDateTime(new Date());
+                scheduling.getRoom().setStatus(StatusType.FREE);
+                schedulingService.save(scheduling);
             }
         }
-        return closedSchedulings;
     }
 
     /**

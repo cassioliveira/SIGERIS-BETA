@@ -28,7 +28,7 @@
             </f:facet>
 
             <h:form id="loginForm" prependId="false">
-                <p:messages id="loginMessages" autoUpdate="true" closable="true"/>
+                <p:growl id="loginMessages" autoUpdate="true"/>
 
                 <h:panelGrid columns="2" cellpadding="4" id="loginPanelGrid">
                     <h:panelGroup>
@@ -40,7 +40,9 @@
                             <p:outputLabel for="password" value="#{msg.password}: "/>
                             <p:password id="password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"/>
 
-                            <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" update="@form" ajax="false"/>
+                            <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" 
+                                             actionListener="#{schedulingBean.checkDateScheduledRoomNow}" update="@form" 
+                                             ajax="false"/>
                         </h:panelGrid>
                     </h:panelGroup>
 
