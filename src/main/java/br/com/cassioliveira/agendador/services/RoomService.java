@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.enumerations.StatusType;
+import br.com.cassioliveira.agendador.enumerations.Status;
 import br.com.cassioliveira.agendador.exceptions.BusinessException;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.repository.Rooms;
@@ -26,12 +26,12 @@ public class RoomService implements Serializable {
 
     @Transactional
     public void save(Room room) {
-        if (room.getId() == null && isRoomDuplicated(room.getNumber())) {
-            throw new BusinessException("Uma sala com esse nome/número já existe");
-        } else {
-            room.setStatus(StatusType.FREE);
+            room.setStatus(Status.FREE);
             this.rooms.save(room);
-        }
+//        if (isRoomDuplicated(room.getNumber()) && room.getId() == null) {
+//            throw new BusinessException("Uma sala com esse nome/número já existe");
+//        } else {
+//        }
     }
 
     @Transactional
@@ -52,18 +52,18 @@ public class RoomService implements Serializable {
     }
 
     /**
-     * Metodo que verifica se a room que está sendo informada já existe no
+     * Metodo que verifica se a sala que está sendo informada já existe no
      * sistema baseada no nome da mesma, que não pode ser repetida.
      *
      * @param room
      * @return
      */
-    public boolean isRoomDuplicated(String room) {
-        for (String selectedRoom : rooms.getRoomsNumber()) {
-            if (selectedRoom.equals(room)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean isRoomDuplicated(String room) {
+//        for (String selectedRoom : rooms.getRoomsNumber()) {
+//            if (selectedRoom.equals(room)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }

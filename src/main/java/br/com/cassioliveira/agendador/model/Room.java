@@ -1,7 +1,8 @@
 package br.com.cassioliveira.agendador.model;
 
+import br.com.cassioliveira.agendador.enumerations.Courses;
 import br.com.cassioliveira.agendador.enumerations.RoomsType;
-import br.com.cassioliveira.agendador.enumerations.StatusType;
+import br.com.cassioliveira.agendador.enumerations.Status;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import lombok.Data;
 @Data
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Room.freeRooms", query = "SELECT r FROM Room AS r WHERE r.status = br.com.cassioliveira.agendador.enumerations.StatusType.FREE"),
+    @NamedQuery(name = "Room.freeRooms", query = "SELECT r FROM Room AS r WHERE r.status = br.com.cassioliveira.agendador.enumerations.Status.FREE"),
     @NamedQuery(name = "Room.roomsNumber", query = "SELECT r.number FROM Room as r")})
 public class Room implements Serializable {
 
@@ -44,7 +45,11 @@ public class Room implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private StatusType status;
+    private Status status;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "associated_course")
+    private Courses associatedCourse;
 
     @Column(name = "is_air_conditioning")
     private boolean airConditioning;

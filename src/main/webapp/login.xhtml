@@ -24,12 +24,12 @@
                   styleClass="transparent-dialog-login">
 
             <f:facet name="header" class="">
-                    <h:graphicImage library="images" name="logo-cche.png" width="70" height="35" style="margin-left: 95px; margin-bottom: -20px"/>
+                <h:graphicImage library="images" name="logo-cche.png" width="70" height="35" style="margin-left: 95px; margin-bottom: -20px"/>
             </f:facet>
 
             <h:form id="loginForm" prependId="false">
                 <p:growl id="loginMessages" autoUpdate="true"/>
-
+                <p:focus id="focoUser" for="username"/>
                 <h:panelGrid columns="2" cellpadding="4" id="loginPanelGrid">
                     <h:panelGroup>
                         <h:panelGrid columns="2" cellpadding="4">
@@ -42,13 +42,18 @@
 
                             <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" 
                                              actionListener="#{schedulingBean.checkDateScheduledRoomNow}" update="@form" 
-                                             ajax="false"/>
+                                             ajax="false" onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
                         </h:panelGrid>
                     </h:panelGroup>
-
                 </h:panelGrid>
             </h:form>
+        </p:dialog>
 
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" style="text-align: center !important">
+            <p:outputLabel id="progressLabel" value="Aguarde..." style="font-weight: bold !important"/>
+            <br/>
+            <br/>
+            <p:graphicImage library="images" name="progressbar.gif"/>
         </p:dialog>
 
         <div id="credits" style="float: right; right: 0px; bottom: 0px; padding: 10px; position: absolute; font-size: 8px">
@@ -60,4 +65,5 @@
 
 
     </h:body>
+
 </html>

@@ -1,5 +1,6 @@
 package br.com.cassioliveira.agendador.controllers;
 
+import br.com.cassioliveira.agendador.enumerations.Courses;
 import br.com.cassioliveira.agendador.enumerations.RoomsType;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.services.RoomService;
@@ -40,17 +41,26 @@ public class RoomBean implements Serializable {
     @Getter
     @Setter
     private Room selectedRoom;
+    
+    @Getter
+    @Setter
+    private boolean linkedCourseSelection;
 
+    @Getter
+    private List<Courses> associatedCourses;
+    
     @Getter
     private List<RoomsType> roomTypes;
 
-    private List<Room> rooms;
+    @Getter
+    private List<Room> allRooms;
 
 
     @PostConstruct
     public void init() {
-        this.rooms = roomService.findAll();
+        this.allRooms = roomService.findAll();
         this.roomTypes = Arrays.asList(RoomsType.values());
+        this.associatedCourses = Arrays.asList(Courses.values());
     }
 
     public void save() {
@@ -78,7 +88,7 @@ public class RoomBean implements Serializable {
         return this.room.getId() != null;
     }
 
-    public List<Room> getRooms() {
+    public List<Room> getFreeRooms() {
         return roomService.getFreeRooms();
     }
 }

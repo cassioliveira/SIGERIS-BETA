@@ -38,9 +38,8 @@ public class LoginBean implements Serializable {
     private String userName;
 
     /**
-     * Método que é chamado antes da pagína ser renderizada e verifica se há um
-     * parametro "invalid" na URL, indicando que o usuário digitou os dados
-     * inválidos para o login
+     * Método que é chamado antes da pagína ser renderizada e verifica se há um parametro "invalid" na URL,
+     * indicando que o usuário digitou os dados inválidos para o login
      */
     public void preRender() {
         if ("true".equals(request.getParameter("invalid"))) {

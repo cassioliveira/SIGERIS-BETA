@@ -1,9 +1,11 @@
 package br.com.cassioliveira.agendador.controllers;
 
+import br.com.cassioliveira.agendador.enumerations.SubjectGroups;
 import br.com.cassioliveira.agendador.model.Subject;
 import br.com.cassioliveira.agendador.services.SubjectService;
 import br.com.cassioliveira.agendador.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -41,12 +43,16 @@ public class SubjectBean implements Serializable {
 
     @Getter
     private List<Subject> subjects;
+    
+    @Getter
+    private List<SubjectGroups> subjectGroups;
 
     public SubjectBean() {
     }
 
     @PostConstruct
     public void init() {
+        subjectGroups = Arrays.asList(SubjectGroups.values());
         this.subjects = subjectService.findAll();
     }
 

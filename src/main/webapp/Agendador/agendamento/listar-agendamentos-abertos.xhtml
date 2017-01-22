@@ -13,51 +13,40 @@
         <p:fieldset legend="#{msg.scheduling}s ativos" styleClass="centerFieldsetLegend">
             <p:toolbar>
                 <f:facet name="left">
-                    <p:commandButton icon="ui-icon ui-icon-refresh" value="Atualizar" style="text-align: right" class="buttonNewRegister" action="#{schedulingBean.checkDateScheduledRoomNow}"
+                    <p:commandButton icon="ui-icon ui-icon-refresh" 
+                                     value="Atualizar" 
+                                     style="text-align: right" 
+                                     class="buttonNewRegister" 
+                                     action="#{schedulingBean.checkDateScheduledRoomNow}"
                                      update="@form" id="refreshButton"/>
                 </f:facet>
+
                 <f:facet name="right">
-                    <p:button outcome="/Agendador/agendamento/cadastro-agendamento" value="#{msg.newScheduling}" style="text-align: right" class="buttonNewRegister"/>
-                    <p:button outcome="/Agendador/agendamento/listar-agendamentos-finalizados" value="Agendamentos finalizados" style="text-align: right" class="buttonClosedSchedulings"/>
+                    <p:button value="#{msg.newScheduling}" 
+                              style="text-align: right" 
+                              class="buttonNewRegister" 
+                              rendered="#{schedulerChanger}"
+                              outcome="/Agendador/agendamento/cadastro-agendamento"/>
+
+                    <p:button value="Agendamentos finalizados" 
+                              style="text-align: right" 
+                              class="buttonClosedSchedulings"
+                              rendered="#{schedulerChanger}"
+                              outcome="/Agendador/agendamento/listar-agendamentos-finalizados"/>
                 </f:facet>
             </p:toolbar>    
 
-            <agendador:datatableAgendamentos id="datatableOpenedScheduling" schedulingList="#{schedulingBean.openedSchedulings}" endingDate="#{scheduling.forecastSchedulingDateTime}"
+            <agendador:datatableAgendamentos id="datatableOpenedScheduling" 
+                                             schedulingList="#{schedulingBean.openedSchedulings}" 
+                                             endingDate="#{scheduling.forecastSchedulingDateTime}"
                                              datatableHeaderEndingDate="Previsão fim"/>
         </p:fieldset>
 
         <p:poll listener="#{schedulingBean.checkDateScheduledRoomNow}" update="@form" interval="3600"/>
 
         <p:blockUI id="blockSchedulingForm" block="datatableOpenedScheduling" trigger="refreshButton">
-            <p:progressBar id="progressBarRefresh" widgetVar="pbClient" style="width: 500px;"/>
-            <!--<p:graphicImage library="images" name="loading.gif"/>-->
+            <p:graphicImage library="images" name="loading.gif"/>
         </p:blockUI>
 
     </h:form>
-
-    <script type="text/javascript">
-        function start() {
-            PF('startButton1').disable();
-
-            window['progress'] = setInterval(function () {
-                var pbClient = PF('pbClient'),
-                        oldValue = pbClient.getValue(),
-                        newValue = oldValue + 10;
-
-                pbClient.setValue(pbClient.getValue() + 10);
-
-                if (newValue === 100) {
-                    clearInterval(window['progress']);
-                }
-
-
-            }, 1000);
-        }
-
-        function cancel() {
-            clearInterval(window['progress']);
-            PF('pbClient').setValue(0);
-            PF('startButton1').enable();
-        }
-    </script>
 </html>

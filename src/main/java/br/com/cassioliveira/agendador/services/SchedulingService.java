@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
-import br.com.cassioliveira.agendador.enumerations.StatusType;
+import br.com.cassioliveira.agendador.enumerations.Status;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
@@ -73,7 +73,7 @@ public class SchedulingService implements Serializable {
     public List<Scheduling> openedSchedulings() {
         List<Scheduling> openedSchedulings = new ArrayList<>();
         for (Scheduling openedSchedule : findAll()) {
-            if (openedSchedule.getStatus() == StatusType.OPEN) {
+            if (openedSchedule.getStatus() == Status.OPEN) {
                 openedSchedulings.add(openedSchedule);
             }
         }
@@ -91,7 +91,7 @@ public class SchedulingService implements Serializable {
     public List<Scheduling> closedSchedulings() {
         List<Scheduling> closedSchedulings = new ArrayList<>();
         for (Scheduling closedSchedule : findAll()) {
-            if (closedSchedule.getStatus() == StatusType.CLOSE) {
+            if (closedSchedule.getStatus() == Status.CLOSE) {
                 closedSchedulings.add(closedSchedule);
             }
         }

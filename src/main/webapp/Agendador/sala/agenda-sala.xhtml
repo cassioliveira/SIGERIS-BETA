@@ -10,7 +10,7 @@
         <p:selectOneMenu id="roomNumber" value="#{schedulingBean.scheduling.room}" required="true" style="width: 173px"
                          requiredMessage="#{msg.mandatoryRoomType}">
             <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-            <f:selectItems value="#{roomBean.rooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
+            <f:selectItems value="#{roomBean.freeRooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
         </p:selectOneMenu>
 
         <p:outputLabel for="endingDate" value="#{msg.scheduledAt}: "/>

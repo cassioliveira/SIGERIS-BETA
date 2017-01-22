@@ -1,6 +1,6 @@
 package br.com.cassioliveira.agendador.controllers;
 
-import br.com.cassioliveira.agendador.enumerations.StatusType;
+import br.com.cassioliveira.agendador.enumerations.Status;
 import br.com.cassioliveira.agendador.enumerations.SchedulingTypes;
 import br.com.cassioliveira.agendador.enumerations.TravelReasons;
 import br.com.cassioliveira.agendador.model.Scheduling;
@@ -73,9 +73,9 @@ public class SchedulingBean implements Serializable {
         if (scheduling.getType().equals("Equipamento")) {
             stockMovement();
         } else {
-            this.scheduling.getRoom().setStatus(StatusType.BUSY);
+            this.scheduling.getRoom().setStatus(Status.BUSY);
         }
-        this.scheduling.setStatus(StatusType.OPEN);
+        this.scheduling.setStatus(Status.OPEN);
         this.schedulingService.save(scheduling);
         if (getEditing()) {
             FacesUtil.sucessMessage("Agendamento de " + scheduling.getType() + " atualizado com sucesso!");
@@ -123,9 +123,9 @@ public class SchedulingBean implements Serializable {
                     && scheduling.getType().equals("Sala")
                     && now.after(scheduling.getForecastSchedulingDateTime())) {
 
-                scheduling.setStatus(StatusType.CLOSE);
+                scheduling.setStatus(Status.CLOSE);
                 scheduling.setEndingSchedulingDateTime(new Date());
-                scheduling.getRoom().setStatus(StatusType.FREE);
+                scheduling.getRoom().setStatus(Status.FREE);
                 schedulingService.save(scheduling);
             }
         }
@@ -138,12 +138,12 @@ public class SchedulingBean implements Serializable {
      * AO ESTOQUE*********
      */
     public void closeSchedule() {
-        scheduling.setStatus(StatusType.CLOSE);
+        scheduling.setStatus(Status.CLOSE);
         scheduling.setEndingSchedulingDateTime(new Date());
         if (scheduling.getType().equals("Equipamento")) {
             stockMovement();
         } else {
-            this.scheduling.getRoom().setStatus(StatusType.FREE);
+            this.scheduling.getRoom().setStatus(Status.FREE);
         }
         schedulingService.save(scheduling);
         FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/home.xhtml");

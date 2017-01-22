@@ -33,6 +33,15 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="2">
+                    <p:outputLabel for="linkedCourse" value="Curso:" style="margin-right: 48px"/>
+                    <p:selectOneMenu id="linkedCourse" value="#{roomBean.room.associatedCourse}" style="width: 208px">
+                        <f:selectItem noSelectionOption="true" itemLabel="Selecione..."/>
+                        <f:selectItems id="coursesOptions" var="courses" value="#{roomBean.associatedCourses}"
+                                       itemLabel="#{courses.description}" itemValue="#{courses}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2">
                     <h:panelGroup>
                         <p:outputLabel for="roomType" value="#{msg.roomType}: " style="margin-right: 45px"/>
                         <p:selectOneMenu id="roomType" value="#{roomBean.room.type}" required="true" requiredMessage="#{msg.mandatoryRoomType}">
@@ -48,9 +57,8 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="4">
-
                     <p:outputLabel for="number" value="#{msg.nameOrNumber}: " style="margin-right: 9px"/>
-                    <p:inputText id="number" value="#{roomBean.room.number}" maxlength="20" required="true" disabled="#{roomBean.editing}"
+                    <p:inputText id="number" value="#{roomBean.room.number}" maxlength="20" required="true"
                                  requiredMessage="#{msg.mandatoryRoomNumber}" style="margin-bottom: 3px; width: 230px"/>
                     <p:outputLabel/>
                     <p:outputLabel/>

@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * @author cassio
  */
-public enum StatusType {
+public enum Status {
     FREE("Livre"),
     BUSY("Ocupado"),
     OPEN("Aberto"),
@@ -14,7 +14,7 @@ public enum StatusType {
     @Getter
     private final String description;
 
-    StatusType(String description) {
+    Status(String description) {
         this.description = description;
     }
 }

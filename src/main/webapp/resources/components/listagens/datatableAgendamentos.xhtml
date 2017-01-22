@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite"> 
 
     <composite:interface>
@@ -104,7 +105,7 @@
                 <p:button id="downScheduleEquipment" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-equipamento.xhtml"
                           rendered="#{scheduling.type eq msg.equipment and view.viewId == '/home.xhtml' and schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
-                    <p:tooltip for="downScheduleEquipment" value="Baixar agendamento"/>
+                    <p:tooltip for="downScheduleEquipment" value="Baixar agendamento"/> 
                 </p:button>
 
                 <p:button id="downScheduleRoom" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-sala.xhtml"
@@ -113,6 +114,13 @@
                     <p:tooltip for="downScheduleRoom" value="Baixar agendamento"/>
                 </p:button>
             </p:column>
+
+            <f:facet name="footer">
+                <p:outputLabel value="Há #{fn:length(schedulingBean.openedSchedulings)} agendamentos ativos" 
+                               rendered="#{view.viewId == '/home.xhtml'}" />
+                <p:outputLabel value="Há #{fn:length(schedulingBean.closedSchedulings)} agendamentos finalizados" 
+                               rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-finalizados.xhtml'}" />
+            </f:facet>
 
         </p:dataTable>
 

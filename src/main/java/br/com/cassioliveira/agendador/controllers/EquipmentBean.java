@@ -42,7 +42,7 @@ public class EquipmentBean implements Serializable {
     @Getter
     @Setter
     private Equipment selectedEquipment;
-
+    
     @Getter
     private List<Equipment> equipments;
 
