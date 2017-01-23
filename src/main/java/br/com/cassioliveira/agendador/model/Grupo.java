@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import lombok.Data;
 
 /**
@@ -19,12 +20,13 @@ public class Grupo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "seq_group", sequenceName = "seq_group", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_group")
     private Long id;
 
-    @Column(name = "group_name", length = 200, nullable = false)
+    @Column(name = "group_name", length = 30, nullable = false)
     private String name;
 
-    @Column(name = "group_description", length = 20)
+    @Column(name = "group_description", length = 70)
     private String description;
 }
