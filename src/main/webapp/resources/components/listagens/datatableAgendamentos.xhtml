@@ -29,6 +29,11 @@
                     <p:inputText id="globalFilter" onkeyup="PF('schedulings').filter()" style="width:300px" placeholder="Digite o que deseja pesquisar"/>
                 </p:outputPanel>
             </f:facet>
+            
+            <p:column headerText="#{msg.code}" width="1" filterMatchMode="startsWith" style="text-align: center" priority="2"
+                      filterStyle="display:none" filterBy="#{scheduling.code}">
+                <h:outputText value="#{scheduling.code}"/>
+            </p:column>
 
             <p:column headerText="#{msg.roomType}" width="1" filterMatchMode="startsWith" style="text-align: center" priority="2"
                       filterStyle="display:none" filterBy="#{scheduling.type}">

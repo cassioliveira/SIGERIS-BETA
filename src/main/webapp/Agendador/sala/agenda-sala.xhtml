@@ -10,7 +10,7 @@
         <p:selectOneMenu id="roomNumber" value="#{schedulingBean.scheduling.room}" required="true" style="width: 173px"
                          requiredMessage="#{msg.mandatoryRoomType}">
             <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-            <f:selectItems value="#{roomBean.freeRooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
+            <f:selectItems value="#{roomBean.allRooms}" var="room" itemLabel="#{room.number}" itemValue="#{room}"/>
         </p:selectOneMenu>
 
         <p:outputLabel for="endingDate" value="#{msg.scheduledAt}: "/>
@@ -19,6 +19,7 @@
                     requiredMessage="#{msg.mandatorySchedulingDate}" converterMessage="Deve informar a data e hora" 
                     mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}">
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+            <p:ajax listener="#{schedulingBean.isScheduledRoom}" event="change" process="@this"/>
         </p:calendar>
 
         <p:outputLabel for="reasonRoom" value="#{msg.reason}: " style="margin-right: 20px"/>

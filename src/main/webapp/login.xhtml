@@ -40,8 +40,7 @@
                             <p:outputLabel for="password" value="#{msg.password}: "/>
                             <p:password id="password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"/>
 
-                            <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" 
-                                             actionListener="#{schedulingBean.checkDateScheduledRoomNow}" update="@form" 
+                            <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" update="@form" 
                                              ajax="false" onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
                         </h:panelGrid>
                     </h:panelGroup>

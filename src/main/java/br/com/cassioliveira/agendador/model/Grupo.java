@@ -26,7 +26,4 @@ public class Grupo implements Serializable {
 
     @Column(name = "group_name", length = 30, nullable = false)
     private String name;
-
-    @Column(name = "group_description", length = 70)
-    private String description;
 }

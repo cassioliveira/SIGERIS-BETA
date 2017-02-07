@@ -45,12 +45,16 @@
             <!--<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>-->
         </header>
 
+
         <aside>
             <!--This code calling the menu, coded inside 'MainMenuTemplate.xhtml' file-->
             <ui:include src="/WEB-INF/templates/MainMenuTemplate.xhtml"/>
         </aside>
 
         <section class="aw-content  js-content">
+            <div style="text-align: right; margin-top: -15px">
+                <p:clock mode="server" pattern="dd/MM/yyyy  HH:mm"/>
+            </div>
             <ui:insert name="content" />
         </section>
 
@@ -62,6 +66,14 @@
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
                                  icon="ui-icon-check"/>
             </p:confirmDialog>
+
+            <p:idleMonitor onidle="PF('idleDialog').show()" timeout="1800000"/>
+            <p:dialog header="Sessão expirada" resizable="false" widgetVar="idleDialog" modal="true" 
+                      width="200" closable="false" styleClass="box-sessao-expirada">
+                <h:outputText value="Faça login novamente!"  style="text-align: center !important"/>
+                <br/>
+                <p:button value="OK" outcome="/home.xhtml" styleClass="botao-ok-sessao-expirada"/>
+            </p:dialog>
         </h:form>
 
         <!--This script changes the mask of money format-->

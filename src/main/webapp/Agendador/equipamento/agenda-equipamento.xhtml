@@ -14,7 +14,7 @@
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:calendar>
 
-        <p:outputLabel for="equipmentSelection" value="Item: "/>
+        <p:outputLabel for="equipmentSelection" value="Equipamento: "/>
         <p:selectOneMenu id="equipmentSelection" value="#{schedulingBean.scheduling.equipment}" filter="true"
                          filterMatchMode="contains" autoWidth="false" style="width: 260px" label="Digite ou selecione">
             <f:selectItems id="equipments" value="#{equipmentBean.equipmentsWithStoq}" var="equipment" itemLabel="#{equipment.name}" 

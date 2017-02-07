@@ -28,7 +28,7 @@ public class Subject implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "seq_subject", sequenceName = "seq_subject", allocationSize = 1)
+    @SequenceGenerator(name = "seq_subject", sequenceName = "seq_subject", allocationSize = 1, initialValue = 2)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_subject")
     private Long id;
 

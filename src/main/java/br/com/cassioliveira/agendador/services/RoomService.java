@@ -1,7 +1,6 @@
 package br.com.cassioliveira.agendador.services;
 
 import br.com.cassioliveira.agendador.enumerations.Status;
-import br.com.cassioliveira.agendador.exceptions.BusinessException;
 import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.repository.Rooms;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
@@ -50,7 +49,7 @@ public class RoomService implements Serializable {
     public List<Room> getFreeRooms(){
         return rooms.getFreeRooms();
     }
-
+    
     /**
      * Metodo que verifica se a sala que está sendo informada já existe no
      * sistema baseada no nome da mesma, que não pode ser repetida.

@@ -7,4 +7,4 @@ INSERT INTO grupo VALUES (5,'Grupo dos vigilantes','VIGILANTES');
 INSERT INTO grupo VALUES (6,'Grupo dos terceirizados','TERCEIRIZADOS');
 INSERT INTO grupo VALUES (7,'Grupo de usuários da biblioteca','BIBLIOTECA');
 INSERT INTO subject_group VALUES (1,1)
-select setval('seq_subject', 1);
+-- select setval('seq_subject', 1);

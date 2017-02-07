@@ -17,11 +17,11 @@
             <p:fieldset legend="Salas cadastradas" >
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:button outcome="/Agendador/sala/cadastro-sala" value="#{msg.newRegistering}" style="text-align: right"/>
+                        <p:button outcome="/Agendador/sala/cadastro-sala" value="Nova sala" style="text-align: right"/>
                     </f:facet>
                 </p:toolbar>    
 
-                <p:dataTable id="datatableRoom" var="room" value="#{roomBean.freeRooms}" widgetVar="roomSearch"
+                <p:dataTable id="datatableRoom" var="room" value="#{roomBean.allRooms}" widgetVar="roomSearch"
                              paginatorAlwaysVisible="false" style="margin-top: 1px; " paginator="true"
                              rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}"  
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 

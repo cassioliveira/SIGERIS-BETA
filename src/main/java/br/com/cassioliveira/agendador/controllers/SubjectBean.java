@@ -1,6 +1,7 @@
 package br.com.cassioliveira.agendador.controllers;
 
 import br.com.cassioliveira.agendador.enumerations.SubjectGroups;
+import br.com.cassioliveira.agendador.model.Grupo;
 import br.com.cassioliveira.agendador.model.Subject;
 import br.com.cassioliveira.agendador.services.SubjectService;
 import br.com.cassioliveira.agendador.util.jsf.FacesUtil;
@@ -46,7 +47,11 @@ public class SubjectBean implements Serializable {
     
     @Getter
     private List<SubjectGroups> subjectGroups;
-
+    
+    @Getter
+    @Setter
+    private Grupo group;
+    
     public SubjectBean() {
     }
 
@@ -57,6 +62,7 @@ public class SubjectBean implements Serializable {
     }
 
     public void save() {
+        
         this.subjectService.save(subject);
         if (getEditing()) {
             FacesUtil.sucessMessage("Cadastro do usuário " + subject.getUserName()+ " atualizado com sucesso!");

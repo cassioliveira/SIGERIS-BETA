@@ -1,7 +1,9 @@
 package br.com.cassioliveira.agendador.repository;
 
+import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -13,5 +15,9 @@ public class Schedulings extends Generic<Scheduling> implements Serializable {
 
     public Schedulings() {
         super(Scheduling.class);
+    }
+    
+    public List<Scheduling> scheduledRoom(){
+        return getEntityManager().createNamedQuery("Scheduling.isRoomScheduled").getResultList();
     }
 }

@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,10 +23,15 @@ import lombok.Data;
 
 /**
  *
+ * WHERE s.forecastSchedulingDateTime > CURRENT_TIMESTAMP
+ * 
  * @author cassio
  */
 @Entity
 @Data
+@NamedQueries({
+    @NamedQuery(name = "Scheduling.isRoomScheduled",
+            query = "SELECT s FROM Scheduling s WHERE s.forecastSchedulingDateTime > CURRENT_TIMESTAMP")})
 public class Scheduling implements Serializable {
 
     private static final long serialVersionUID = 1L;
