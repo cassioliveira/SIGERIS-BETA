@@ -24,7 +24,7 @@ import lombok.Data;
 /**
  *
  * WHERE s.forecastSchedulingDateTime > CURRENT_TIMESTAMP
- * 
+ *
  * @author cassio
  */
 @Entity
@@ -65,7 +65,7 @@ public class Scheduling implements Serializable {
     private Date forecastSchedulingDateTime;
 
     /**
-     * Data em que o agendamento foi finalizado
+     * Data em que o agendamento foi finalizado de fato
      */
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ending_date")

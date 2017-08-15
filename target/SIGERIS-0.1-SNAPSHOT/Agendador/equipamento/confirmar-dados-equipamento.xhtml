@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
+
+    <h:panelGrid columns="2" cellpadding="1">
+
+        <p:outputLabel for="outType" value="#{msg.schedulingOf}: "/>
+        <p:outputLabel id="outType" value="#{schedulingBean.scheduling.type}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outPutDate" value="Pegou em: " style="margin-right: 1px"/>
+        <p:outputLabel id="outPutDate" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+
+<!--        Condição que verifica se a página atual e de acordo com a mesma, exibe uma informação ou outra, no caso, a definição da data de 
+        devolução do item ou, caso entregue antes da data final estipulada, seja definida a data e hora de hoje.-->
+        <c:if test="#{view.viewId == '/Agendador/agendamento/cadastro-agendamento.xhtml'}">
+            <p:outputLabel for="outDateReturnConfirmation" value="#{msg.devolution}: "/>
+            <p:outputLabel id="outDateReturnConfirmation" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" style="font-weight: bold;">
+                <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+            </p:outputLabel>
+        </c:if>
+
+        <c:if test="#{view.viewId == '/Agendador/agendamento/baixa-equipamento.xhtml'}">
+            <p:outputLabel for="outDateReturnDown" value="#{msg.devolution}: "/>
+            <p:outputLabel id="outDateReturnDown" value="#{dateTimeUtilBean.dateToday}" style="font-weight: bold;">
+                <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+            </p:outputLabel>
+        </c:if>
+
+        <p:outputLabel for="outPatrimony" value="#{msg.patrimony}: " style="margin-right: 20px" rendered="#{schedulingBean.scheduling.equipment.patrimony ne ''}"/>
+        <p:outputLabel id="outPatrimony" value="#{schedulingBean.scheduling.equipment.patrimony}" style="font-weight: bold;" rendered="#{schedulingBean.scheduling.equipment.patrimony ne ''}"/>
+
+        <p:outputLabel for="outDescription" value="#{msg.name}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outDescription" value="#{schedulingBean.scheduling.equipment.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outResponsible" value="#{msg.requestor}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outResponsible" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outEquipmentReason" value="#{msg.reason}: " />
+        <p:outputLabel id="outEquipmentReason" value="#{schedulingBean.scheduling.schedulingReason}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="equipmentObservations" value="#{msg.observations}: "/>
+        <p:outputLabel id="equipmentObservations" value="#{schedulingBean.scheduling.observations}" style="font-weight: bold;"/>
+    </h:panelGrid>
+
+</html>

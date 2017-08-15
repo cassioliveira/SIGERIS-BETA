@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:head>
+        <!--icon="ui-icon ui-icon-help"-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="components.css"/>
+        <title><ui:insert name="title">#{(msg.scheduler).concat(" - ").concat(msg.login)}</ui:insert></title>
+    </h:head>
+
+    <h:body styleClass="backgroundLoginImage">
+
+        <f:metadata>
+            <f:event listener="#{loginBean.preRender}" type="preRenderView"/>
+        </f:metadata>
+
+        <p:dialog closable="false" visible="true" resizable="false" draggable="false" id="loginDialog" responsive="true"
+                  styleClass="transparent-dialog-login">
+
+            <f:facet name="header" class="">
+                <h:graphicImage library="images" name="logo-cche.png" width="70" height="35" style="margin-left: 95px; margin-bottom: -20px"/>
+            </f:facet>
+
+            <h:form id="loginForm" prependId="false">
+                <p:growl id="loginMessages" autoUpdate="true"/>
+                <p:focus id="focoUser" for="username"/>
+                <h:panelGrid columns="2" cellpadding="4" id="loginPanelGrid">
+                    <h:panelGroup>
+                        <h:panelGrid columns="2" cellpadding="4">
+                            <p:outputLabel for="username" value="#{msg.user}: "/>
+                            <p:inputText id="username" required="true" requiredMessage="#{msg.mandatoryUserName}" 
+                                         size="20" value="#{loginBean.userName}"/>
+
+                            <p:outputLabel for="password" value="#{msg.password}: "/>
+                            <p:password id="password" size="20" required="true" requiredMessage="#{msg.mandatoryPassword}"/>
+
+                            <p:commandButton id="loginEnterButton" icon="fa fa-angle-right" action="#{loginBean.login}" update="@form" 
+                                             ajax="false" onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" style="text-align: center !important">
+            <p:outputLabel id="progressLabel" value="Aguarde..." style="font-weight: bold !important"/>
+            <br/>
+            <br/>
+            <p:graphicImage library="images" name="progressbar.gif"/>
+        </p:dialog>
+
+        <div id="credits" style="float: right; right: 0px; bottom: 0px; padding: 10px; position: absolute; font-size: 8px">
+            <p:outputLabel value="#{msg.developedBy}: "/>
+            <a href="http://www.cassioliveira.com.br" target="_blank">
+                <p:outputLabel value="Cássio Oliveira" style="color: white; font-weight: bold"/>
+            </a>
+        </div>
+
+
+    </h:body>
+
+</html>

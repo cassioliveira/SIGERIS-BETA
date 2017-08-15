@@ -1,6 +1,5 @@
 package br.com.cassioliveira.agendador.repository;
 
-import br.com.cassioliveira.agendador.model.Room;
 import br.com.cassioliveira.agendador.model.Scheduling;
 import java.io.Serializable;
 import java.util.List;

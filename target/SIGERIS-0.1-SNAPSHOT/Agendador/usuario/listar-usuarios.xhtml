@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/Layout.xhtml"> 
+
+    <ui:define name="content">
+
+        <h:form id="searchSubject">
+
+            <p:fieldset legend="#{(msg.searchCadastre).concat(msg.user)}" >
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:button outcome="/Agendador/usuario/cadastro-usuario" value="Novo usuário" style="text-align: right"
+                                  icon="ui-icon ui-icon-plus" styleClass="botao-novo-cadastro"/>
+                    </f:facet>
+                </p:toolbar>    
+
+                <p:dataTable id="datatableSubject" var="subject" value="#{subjectBean.subjects}"
+                             paginatorAlwaysVisible="false" style="margin-top: 1px; " lazy="true" 
+                             rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}" 
+                             paginator="true" widgetVar="subjectSearch" rowsPerPageTemplate="5,10,20,50,100"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <p:inputText id="globalFilter" onkeyup="PF('subjectSearch').filter()" style="width:300px" placeholder="#{msg.searchAnyField}"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="#{msg.id}" style="text-align: center" width="2.8%" filterStyle="display:none"
+                              filterBy="#{subject.id}" filterMatchMode="exact">
+                        <h:outputText value="#{subject.id}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.user}" style="text-align: center" width="30%" filterStyle="display:none"
+                              filterBy="#{subject.userName}" filterMatchMode="exact">
+                        <h:outputText value="#{subject.userName}"/>
+                    </p:column>
+
+<!--                    <p:column headerText="#{msg.group}" style="text-align: center" width="40%" filterStyle="display:none"
+                              filterBy="#{subject.groups}" filterMatchMode="exact">
+                        <h:outputText value="#{subject.groups}"/>
+                    </p:column>-->
+
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="100">
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/usuario/cadastro-usuario">
+                            <f:param  name="subject" value="#{subject.id}"/>
+                            <p:tooltip for="editButton" value="Edita dados da linha selecionada"/>
+                        </p:button>
+
+                        <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" 
+                                         action="#{subjectBean.remove}" process="@this" update="datatableSubject">
+                            <f:setPropertyActionListener target="#{subjectBean.selectedSubject}" value="#{subject}"/>
+                            <p:tooltip for="deleteButton" value="Excluir a linha selecionada"/>
+                            <p:confirm icon="ui-icon-alert" header="#{msg.exclusionConfirmHeader}" message="#{msg.realyExclude}?"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+            <p:blockUI block="datatableSubject" trigger="datatableSubject">
+                <p:graphicImage library="images" name="loading.gif"/>
+                <br/>
+                #{msg.wait}...
+            </p:blockUI>
+        </h:form>
+    </ui:define>
+</ui:composition>

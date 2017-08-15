@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/Layout.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="driver" value="#{driverBean.driver}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:form id="formCacastreDriver">
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <p:fieldset legend="#{driverBean.editing ? (msg.editCadastre).concat(msg.driver) : (msg.newRegister).concat(msg.driver)}" >
+
+                <h:panelGrid columns="2" style="margin-left: 20px; margin-bottom: 5px">
+
+                    <p:outputLabel for="registration" value="#{msg.registration}: "/>
+                    <p:inputText id="registration" value="#{driverBean.driver.registration}" size="13" maxlength="20"/>
+
+                    <p:outputLabel for="cpf" value="#{msg.cpf}: "/>
+                    <p:inputMask id="cpf" mask="999.999.999-99" value="#{driverBean.driver.cpf}" size="13" maxlength="14" required="true" 
+                                 requiredMessage="#{msg.mandatoryCPF}" validator="cpfValidator" converter="cpfConverter"/>
+
+                    <p:outputLabel for="phone1" value="#{msg.phone1}: "/>
+                    <p:inputText id="phone1" value="#{driverBean.driver.phone1}" size="13" maxlength="15" class="phone"
+                                 required="true" requiredMessage="#{msg.mandatoryPhone}"/>
+
+                    <p:outputLabel for="name" value="#{msg.name}: "/>
+                    <p:inputText id="name" value="#{driverBean.driver.name}" size="30" maxlength="200"
+                                 required="true" requiredMessage="#{msg.mandatoryName}"/>
+
+                </h:panelGrid>
+
+                <p:tabView>
+
+                    <p:tab title="#{msg.personal}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="gender" value="#{msg.gender}: " style="margin-right: 42px;"/>
+                            <p:selectOneMenu id="gender" value="#{driverBean.driver.gender}" style="width: 111px">
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{driverBean.genders}" var="gender" itemLabel="#{gender.description}" itemValue="#{gender}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="birthDate" value="#{msg.birthDate}: " style="margin-right: 1px"/>
+                            <p:calendar id="birthDate" navigator="true" pattern="dd/MM/yyyy" yearRange="c-100:c+100" showOn="button" maxlength="10" mask="true"
+                                        size="7" locale="pt" value="#{driverBean.driver.birthDate}" maxdate="#{dateTimeUtilBean.dateToday}" >
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                            </p:calendar>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="#{msg.contact}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="phone2" value="#{msg.phone2}: "/>
+                            <p:inputText id="phone2" value="#{driverBean.driver.phone2}" size="13" maxlength="20" class="phone"/>
+
+                            <p:outputLabel for="email" value="#{msg.email}: "/>
+                            <p:inputText id="email" value="#{driverBean.driver.email}" size="30" maxlength="15"/>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="#{msg.address}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="uf" value="#{msg.state}: "/>
+                            <p:selectOneMenu id="uf" value="#{driverBean.driver.uf}" style="width: 220px">
+                                <p:ajax process="@this" event="change" update="city" listener="#{driverBean.returnCities}"/>
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{driverBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="city" value="#{msg.city}: " style="margin-right: 23px"/>
+                            <p:selectOneMenu id="city" value="#{driverBean.driver.city}" style="width: 220px"
+                                             disabled="#{driverBean.driver.uf eq null}">
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{driverBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="street" value="#{msg.street}: "/>
+                            <p:inputText id="street" value="#{driverBean.driver.street}" size="30" maxlength="20"/>
+
+                            <p:outputLabel for="neighborhood" value="#{msg.neighborhood}: "/>
+                            <p:inputText id="neighborhood" value="#{driverBean.driver.neighborhood}" size="30" maxlength="20"/>
+
+                            <p:outputLabel for="postalCode" value="#{msg.postalCode}: "/>
+                            <p:inputMask id="postalCode" mask="99999-999" value="#{driverBean.driver.postalCode}" size="13" maxlength="9"/>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="#{msg.documentation}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="licence" value="#{msg.licence}: "/>
+                            <p:inputText id="licence" value="#{driverBean.driver.licence}" size="21" maxlength="20"/>
+
+                            <p:outputLabel for="rg" value="#{msg.rg}: "/>
+                            <p:inputText id="rg" value="#{driverBean.driver.rg}" size="21" maxlength="20"/>
+
+                            <p:outputLabel for="licenceCategory" value="#{msg.licenceCategory}: " style="margin-right: 42px"/>
+                            <p:selectOneMenu id="licenceCategory" value="#{driverBean.driver.licenceCategory}" style="width: 111px">
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{driverBean.licenceCategories}" var="licenceCategory" 
+                                               itemLabel="#{licenceCategory}" itemValue="#{licenceCategory}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="licenceExpiration" value="#{msg.licenceExpiration}: " style="margin-right: 1px"/>
+                            <p:calendar id="licenceExpiration" navigator="true" pattern="dd/MM/yyyy" yearRange="c-100:c+100" 
+                                        showOn="button" size="7" locale="pt" value="#{driverBean.driver.licenceExpiration}" 
+                                        mindate="#{dateTimeUtilBean.dateToday}" maxlength="10" mask="true">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                            </p:calendar>
+                        </h:panelGrid>
+                    </p:tab>
+
+                </p:tabView>
+
+                <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
+                    <f:facet name="left">
+                        <p:commandButton style="font-size: 13px;" value="#{driverBean.editing ? msg.change :msg.save}" action="#{driverBean.save}"  
+                                         id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
+
+                        <p:button style="font-size: 13px;" value="#{msg.cancel}" 
+                                  id="deleteButton" outcome="/Agendador/motorista/listar-motoristas" icon="fa fa-times" rendered="#{driverBean.editing}">
+                        </p:button>
+                    </f:facet>    
+
+                    <f:facet name="right">
+                        <p:button value="#{msg.search}" id="newRegister" outcome="/Agendador/motorista/listar-motoristas" 
+                                  icon="ui-icon ui-icon-pencil"/>
+                    </f:facet>
+                </p:toolbar> 
+            </p:fieldset>
+            <p:blockUI id="blockDriverForm" block="formCacastreDriver" trigger="saveButton">
+                <p:graphicImage library="images" name="loading.gif"/>
+            </p:blockUI>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

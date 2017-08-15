@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                template="/WEB-INF/templates/Layout.xhtml"> 
+
+    <ui:define name="content">
+
+        <h:form id="searchRoom">
+
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <p:fieldset legend="Salas cadastradas" >
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:button outcome="/Agendador/sala/cadastro-sala" value="Nova sala" style="text-align: right"
+                                  icon="ui-icon ui-icon-plus" styleClass="botao-novo-cadastro"/>
+                    </f:facet>
+                </p:toolbar>    
+
+                <p:dataTable id="datatableRoom" var="room" value="#{roomBean.allRooms}" widgetVar="roomSearch"
+                             paginatorAlwaysVisible="false" style="margin-top: 1px; " paginator="true"
+                             rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}"  
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50,100"
+                             scrollable="true" scrollRows="20" scrollHeight="250" >
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <p:inputText id="globalFilter" onkeyup="PF('roomSearch').filter()" style="width:300px" placeholder="#{msg.searchAnyField}"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="#{msg.roomType}" style="text-align: center" width="5" filterStyle="display:none"
+                              filterBy="#{room.type}" filterMatchMode="contains" priority="2">
+                        <h:outputText value="#{room.type.description}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.nameOrNumber}" style="text-align: center" width="25" filterStyle="display:none"
+                              filterBy="#{room.number}" filterMatchMode="contains" priority="1">
+                        <h:outputText value="#{room.number}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg.capacity}" style="text-align: center" filterMatchMode="contains" filterStyle="display:none"
+                              filterBy="#{room.capacity}" width="8" priority="1">
+                        <h:outputText value="#{room.capacity}"/>
+                    </p:column>
+
+                    <p:column id="tv" headerText="#{msg.tv}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.tv}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="tv.png" style="width: 20px; height: 20px" title="#{msg.tv}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.tv ? msg.yes : msg.no}" styleClass="#{room.tv ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.dvd}" style="text-align: center" width="1.6%" filterStyle="display:none"
+                              filterBy="#{room.dvd}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="dvd.png" style="width: 30px; height: 10px" title="#{msg.dvd}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.dvd ? msg.yes : msg.no}" styleClass="#{room.dvd ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="datashow" headerText="#{msg.datashow}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.datashow}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="datashow.png" style="width: 25px; height: 15px" title="#{msg.datashow}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.datashow ? msg.yes : msg.no}" styleClass="#{room.datashow ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="board" headerText="#{msg.board}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.board}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="board.png" style="width: 25px; height: 20px" title="#{msg.board}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.board ? msg.yes : msg.no}" styleClass="#{room.board ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="microphone" headerText="#{msg.microphone}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.microphone}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="microphone.png" style="width: 20px; height: 20px" title="#{msg.microphone}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.microphone ? msg.yes : msg.no}" styleClass="#{room.microphone ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="internet" headerText="#{msg.internet}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.internet}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="internet.png" style="width: 25px; height: 20px" title="#{msg.internet}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.internet ? msg.yes : msg.no}" styleClass="#{room.internet ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="computer" headerText="#{msg.computer}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.computer}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="computer.png" style="width: 25px; height: 20px" title="#{msg.computer}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.computer ? msg.yes : msg.no}" styleClass="#{room.computer ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="sound" headerText="#{msg.sound}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.sound}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="sound-apliance.svg" style="width: 25px; height: 20px" title="#{msg.soundApliance}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.sound ? msg.yes : msg.no}" styleClass="#{room.sound ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column id="fan" headerText="#{msg.fan}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.fan}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="fan.svg" style="width: 25px; height: 20px" title="#{msg.fan}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.fan ? msg.yes : msg.no}" styleClass="#{room.fan ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.airConditioning}" style="text-align: center" width="1.5%" filterStyle="display:none"
+                              filterBy="#{room.airConditioning}" filterMatchMode="contains" priority="4">
+                        <f:facet name="header">
+                            <p:graphicImage library="images" name="air-conditioning.png" style="width: 25px; height: 20px" title="#{msg.airConditioning}"/>
+                        </f:facet>
+                        <h:outputText value="#{room.airConditioning ? msg.yes : msg.no}" styleClass="#{room.airConditioning ? 'msg-isroom-yes' : 'msg-isroom-no'}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="20"  priority="1">
+
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/Agendador/sala/cadastro-sala">
+                            <f:param  name="room" value="#{room.id}"/>
+                            <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
+                        </p:button>
+
+                        <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" 
+                                         action="#{roomBean.remove}" process="@this" update="datatableRoom">
+                            <f:setPropertyActionListener target="#{roomBean.selectedRoom}" value="#{room}"/>
+                            <p:tooltip for="deleteButton" value="#{msg.deleteSelectedRow}"/>
+                            <p:confirm icon="ui-icon-alert" header="#{msg.exclusionCadastre}" message="#{msg.realyExclude}?"/>
+                        </p:commandButton>
+                    </p:column>
+                    
+                    <f:facet name="footer">
+                      #{fn:length(roomBean.freeRooms)}/#{fn:length(roomBean.allRooms)} salas disponíveis para agendamento
+                    </f:facet>
+                    
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

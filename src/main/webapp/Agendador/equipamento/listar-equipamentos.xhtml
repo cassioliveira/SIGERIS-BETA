@@ -17,7 +17,8 @@
             <p:fieldset legend="Equipamentos cadastrados" >
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:button outcome="/Agendador/equipamento/cadastro-equipamento" value="Novo equipamento" style="text-align: right"/>
+                        <p:button outcome="/Agendador/equipamento/cadastro-equipamento" value="Novo equipamento" style="text-align: right"
+                                  icon="ui-icon ui-icon-plus" styleClass="botao-novo-cadastro"/>
                     </f:facet>
                 </p:toolbar>    
 
@@ -73,11 +74,11 @@
                             <p:confirm icon="ui-icon-alert" header="Esclusão de cadastro" message="Deseja realmente excluir o cadastro?"/>
                         </p:commandButton>
                     </p:column>
-                    
+
                     <f:facet name="footer">
-                      #{fn:length(equipmentBean.equipments)} equipamentos cadastrados
+                        #{fn:length(equipmentBean.equipments)} equipamentos cadastrados
                     </f:facet>
-                    
+
                 </p:dataTable>
             </p:fieldset>
         </h:form>

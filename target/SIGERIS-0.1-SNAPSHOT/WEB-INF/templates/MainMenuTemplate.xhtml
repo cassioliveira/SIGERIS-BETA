@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:form id="formMainMenu"> 
+
+        <p:dock id="dock" proximity="100">
+
+            <p:menuitem value="#{msg.home}" icon="/resources/images/home.png" title="#{msg.homeScreen}" id="homeButton" outcome="/home.xhtml">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.scheduling}" icon="/resources/images/calendar.png" title="#{msg.scheduling}" id="scheduling" outcome="/Agendador/agendamento/cadastro-agendamento.xhtml" rendered="#{schedulerChanger}">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.room}" icon="/resources/images/classroom.png" title="#{msg.room}" id="room" outcome="/Agendador/sala/listar-salas.xhtml" rendered="#{schedulerChanger}">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+            
+            <p:menuitem value="#{msg.equipment}" icon="/resources/images/datashow.png" title="#{msg.equipment}" id="equipment" outcome="/Agendador/equipamento/listar-equipamentos.xhtml" rendered="#{schedulerChanger}"
+                        style="margin-bottom: 7px !important">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.requestor}" icon="/resources/images/user.png" title="#{msg.requestor}" id="responsible" outcome="/Agendador/responsavel/listar-responsaveis.xhtml" rendered="#{schedulerChanger}">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.user}" icon="/resources/images/passwd.png" title="#{msg.user}" id="user" outcome="/Agendador/usuario/listar-usuarios.xhtml" rendered="#{godMode}">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.exit}" icon="/resources/images/door.png" title="#{msg.toExit}" id="exitButton" url="/logout">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+        </p:dock>
+    </h:form>
+
+</html>
+<!--            <p:menuitem value="#{msg.driver}" icon="/resources/images/icon/driver.png" title="#{msg.driver}" id="driver" outcome="/Agendador/motorista/cadastro-motorista.xhtml">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+
+            <p:menuitem value="#{msg.transport}" icon="/resources/images/icon/car.svg" title="#{msg.transport}" id="transport" outcome="/veiculo/cadastro-veiculo.xhtml">
+                <p:ajax update="@form"/>
+            </p:menuitem>-->
+
+<!--            <p:menuitem value="#{msg.user}" icon="/resources/images/icon/user.png" title="#{msg.user}" id="user" outcome="/subject/CadastreSubject.xhtml">
+                <p:ajax update="@form"/>
+            </p:menuitem>
+            
+            <p:menuitem value="#{msg.group}" icon="/resources/images/icon/user.png" title="#{msg.group}" id="group" outcome="/group/CadastreGroup.xhtml">
+                <p:ajax update="@form"/>
+            </p:menuitem>-->
+
+<!--        <p:menubar autoDisplay="true" style="font-size: 13px; padding: 0px">
+
+            <p:menuitem icon="fa fa-home" title="Tela incicial" id="homeButton" outcome="/home.xhtml"/>
+
+            <p:menuitem value="Schedulings" icon="fa fa-clock-o" title="Scheduling" id="scheduling" outcome="/Agendador/agendamento/cadastro-agendamento.xhtml"/>
+
+            <p:menuitem value="Room" icon="fa fa-institution" title="Room" id="room" outcome="/room/CadastreRoom.xhtml"/>
+
+            <p:menuitem icon="fa fa-power-off" title="Clique para sair" value="Sair" id="exitButton" outcome="/login.xhtml"/>
+
+        </p:menubar>-->

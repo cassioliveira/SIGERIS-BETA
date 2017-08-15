@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/Layout.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="subject" value="#{subjectBean.subject}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+
+        <h:form id="subjectForm">
+
+            <p:growl autoUpdate="true"/>
+            
+            <p:focus for="user"/>
+
+            <p:fieldset legend="#{subjectBean.editing ? (msg.editCadastre).concat(msg.user) : (msg.newRegister).concat(msg.user)}" >
+
+                <h:panelGrid columns="2">
+                    
+                    <p:outputLabel for="user" value="#{msg.user}: "/>
+                    <p:inputText id="user" value="#{subjectBean.subject.userName}" size="15"
+                                 required="true" maxlength="20" requiredMessage="Um nome de usuário deve ser informado"/>
+
+                    <p:outputLabel for="password" value="#{msg.password}: "/>
+                    <p:password id="password" value="#{subjectBean.subject.password}" size="15"
+                                required="true" maxlength="30" requiredMessage="A senha deve ser informada"/>
+
+                    <p:outputLabel for="group" value="#{msg.group}: "/>
+                    <p:selectOneMenu id="group" value="#{subjectBean.group}" style="width: 130px">
+                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                        <f:selectItems value="#{subjectBean.subjectGroups}" itemLabel="#{group}" itemValue="#{group}" var="group"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
+                    <f:facet name="left">
+                        <p:commandButton value="#{msg.save}" action="#{subjectBean.save}"  
+                                         id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
+                        
+                        <p:button value="#{msg.cancel}" id="cancelButton" outcome="/Agendador/usuario/listar-usuarios" 
+                                  icon="ui-icon ui-icon-cancel"/>
+                    </f:facet>    
+                </p:toolbar> 
+            </p:fieldset>
+            <p:blockUI block="subjectForm" trigger="saveButton">
+                <p:graphicImage library="images" name="loading.gif"/>
+                <br/>
+                #{msg.wait}...
+            </p:blockUI>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

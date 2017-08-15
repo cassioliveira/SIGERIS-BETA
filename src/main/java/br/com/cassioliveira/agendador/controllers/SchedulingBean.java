@@ -70,6 +70,20 @@ public class SchedulingBean implements Serializable {
     }
 
     public void save() {
+        preSet();
+        if (getEditing()) {
+            FacesUtil.sucessMessage("Agendamento de " + scheduling.getType() + " atualizado com sucesso!");
+        } else {
+            FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
+        }
+        FacesUtil.redirectTo("/SIGERIS/home.xhtml");
+        scheduling = new Scheduling();
+    }
+
+    /**
+     * Pré-configurações para um novo agendamento.
+     */
+    public void preSet() {
         if (scheduling.getType().equals("Equipamento")) {
             stockMovement();
         } else {
@@ -78,13 +92,6 @@ public class SchedulingBean implements Serializable {
         this.scheduling.setStatus(Status.OPEN);
         this.scheduling.setCode(schedulingService.schedulingCode(scheduling));
         this.schedulingService.save(scheduling);
-        if (getEditing()) {
-            FacesUtil.sucessMessage("Agendamento de " + scheduling.getType() + " atualizado com sucesso!");
-        } else {
-            FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
-        }
-        FacesUtil.redirectTo("/SIGERIS/home.xhtml");
-        scheduling = new Scheduling();
     }
 
     public void remove() {
@@ -151,8 +158,18 @@ public class SchedulingBean implements Serializable {
     public void stockMovement() {
         schedulingService.stockMovement(scheduling, "/Agendador/agendamento/cadastro-agendamento.xhtml", "/Agendador/agendamento/baixa-equipamento.xhtml");
     }
-    
-    public void isScheduledRoom(){
-        schedulingService.isRoomScheduled(scheduling);
+
+    public void isScheduledRoom() {
+//        List<Scheduling> all = schedulingService.findAll();
+//        if (all != null) {
+//            for (Scheduling selectedScheduling : all) {
+//                if (scheduling.getRoom().getId().equals(selectedScheduling.getId())
+//                        && scheduling.getStatus().equals(Status.BUSY)) {
+//                    throw new BusinessException("Sala já agendada para este horário");
+//                } else {
+//                    throw new BusinessException("Sala livre para agendamento");
+//                }
+//            }
+//        }
     }
 }

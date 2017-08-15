@@ -6,11 +6,9 @@ import br.com.cassioliveira.agendador.model.Scheduling;
 import br.com.cassioliveira.agendador.repository.Schedulings;
 import br.com.cassioliveira.agendador.util.jpa.Transactional;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -60,18 +58,13 @@ public class SchedulingService implements Serializable {
                 }
             }
         }
-//        Long scheduledRoom = schedulings.scheduledRoom();
-//        Long roomToSchedule = scheduling.getRoom().getId();
-//        if (!Objects.equals(roomToSchedule, scheduledRoom)
-//                && roomToSchedule != null
-//                && scheduledRoom != null) {
-//        }
-
-//    && selectedScheduling.getForecastSchedulingDateTime().equals(new Date())
     }
 
     /**
-     * Gera um código para identificar o agendamento.
+     * Gera um código para identificar o agendamento. Esse código pega o id do responsável pelo agendamento, o
+     * id da sala ou equipamento a ser agendado e o minuto e segundo em que o agendamento está sendo feito.
+     * Esse código é antecedido de um prefixo que identifica o tipo do agendamento. Para sala, o prefixo
+     * inicia com AS (Agendamento de Sala) e AE (Agendamento de Equipamento) para equipamento.
      *
      * @param scheduling
      * @return
@@ -80,13 +73,13 @@ public class SchedulingService implements Serializable {
         LocalDateTime dateToday = LocalDateTime.now();
         String code = "";
         if (scheduling.getType().equals("Sala")) {
-            code = "AS" + scheduling.getResponsible().getId() + 
-                    scheduling.getRoom().getId() + 
-                    dateToday.format(DateTimeFormatter.ofPattern("MMss"));
+            code = "AS" + scheduling.getResponsible().getId()
+                    + scheduling.getRoom().getId()
+                    + dateToday.format(DateTimeFormatter.ofPattern("MMss"));
         } else if (scheduling.getType().equals("Equipamento")) {
-            code = "AE" + scheduling.getResponsible().getId() + 
-                    scheduling.getEquipment().getId() + 
-                    dateToday.format(DateTimeFormatter.ofPattern("MMss"));
+            code = "AE" + scheduling.getResponsible().getId()
+                    + scheduling.getEquipment().getId()
+                    + dateToday.format(DateTimeFormatter.ofPattern("MMss"));
         }
         System.out.println(code);
         return code;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:panelGrid columns="2" cellpadding="2">
+
+        <p:outputLabel for="roomType" value="#{msg.schedulingOf}: "/>
+        <p:outputLabel id="roomType" value="#{schedulingBean.scheduling.type}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outRoomNumber" value="#{msg.roomNumber}: " />
+        <p:outputLabel id="outRoomNumber" value="#{schedulingBean.scheduling.room.number}" style="font-weight: bold;" styleClass="upper"/>
+
+        <p:outputLabel for="roomRequestor" value="#{msg.responsible}: " style="margin-right: 20px"/>
+        <p:outputLabel id="roomRequestor" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="roomSchedulingReason" value="#{msg.reason}: " style="margin-right: 20px"/>
+        <p:outputLabel id="roomSchedulingReason" value="#{schedulingBean.scheduling.schedulingReason}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outBeginingDate" value="#{msg.from}: " style="margin-right: 1px"/>
+        <p:outputLabel id="outBeginingDate" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+
+        <p:outputLabel for="outEndingDate" value="#{msg.to}: "/>
+        <p:outputLabel id="outEndingDate" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+
+        <p:outputLabel for="roomObservations" value="#{msg.observations}: "/>
+        <p:outputLabel id="roomObservations" value="#{schedulingBean.scheduling.observations}" style="font-weight: bold;"/>
+    </h:panelGrid>
+
+</html>

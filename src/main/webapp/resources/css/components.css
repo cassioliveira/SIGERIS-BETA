@@ -191,6 +191,13 @@
     margin-left: 44%;
 }
 
+.ui-button.botao-novo-cadastro{
+    
+    background: #1E94D2 !important;
+    /*font-weight: bold;*/
+    /*color: #FFFFFF;*/
+}
+
 .box-sessao-expirada{
     background-color: #F2DEDE;
     width: 250px !important;
@@ -211,4 +218,18 @@
     text-align: center !important;
     margin-top: 10%;
     /*margin-left: 40%;*/
+}
+
+.box-home{
+    background-color: #1E94D2;
+    width: 184px; 
+    height: 100px; 
+    margin: 3px 3px 4px 3px;
+    padding: 1px; 
+    border-radius:10px; 
+    box-shadow: 0px 3px 3px slategray;
+    float: left; 
+    position: relative;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:panelGrid columns="2" cellpadding="1" border="0">
+
+        <p:outputLabel for="dateBack" value="#{msg.devolution}: "/>
+        <p:calendar id="dateBack" navigator="true" pattern="dd/MM/yyyy HH:mm" yearRange="c-0:c+35" showOn="button" maxlength="10"
+                    size="13" locale="pt" required="true" value="#{schedulingBean.scheduling.forecastSchedulingDateTime}" mask="true" 
+                    requiredMessage="Informe a data para devolução" mindate="#{schedulingBean.scheduling.beginingSchedulingDateTime}">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:calendar>
+
+        <p:outputLabel for="equipmentSelection" value="Equipamento: "/>
+        <p:selectOneMenu id="equipmentSelection" value="#{schedulingBean.scheduling.equipment}" filter="true"
+                         filterMatchMode="contains" autoWidth="false" style="width: 260px" label="Digite ou selecione">
+            <f:selectItems id="equipments" value="#{equipmentBean.equipmentsWithStoq}" var="equipment" itemLabel="#{equipment.name}" 
+                           itemValue="#{equipment}"/>
+        </p:selectOneMenu>
+
+        <p:outputLabel for="equipmentReason" value="#{msg.reason}:" />
+        <p:inputText id="equipmentReason" value="#{schedulingBean.scheduling.schedulingReason}" style="width: 280px"/>
+
+        <p:outputLabel for="observationsEquipment" value="#{msg.observations}: "/>
+        <p:inputTextarea id="observationsEquipment" value="#{schedulingBean.scheduling.observations}"
+                         rows="3" autoResize="false" style="width: 280px"/>
+    </h:panelGrid>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:panelGrid columns="2" cellpadding="1">
+
+        <p:outputLabel for="outSchedulingType" value="#{msg.schedulingOf}: "/>
+        <p:outputLabel id="outSchedulingType" value="#{schedulingBean.scheduling.type}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outDate" value="#{msg.schedulingTo}: " style="margin-right: 1px"/>
+        <p:outputLabel id="outDate" value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+
+        <p:outputLabel for="outRequestor" value="#{msg.responsible}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outRequestor" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outDateForecast" value="#{msg.forecastReturn}: "/>
+        <p:outputLabel id="outDateForecast" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">
+            <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+        </p:outputLabel>
+
+        <p:outputLabel for="outPassengersNumber" value="#{msg.passengersNumber}: "/>
+        <p:outputLabel id="outPassengersNumber" value="#{schedulingBean.scheduling.travel.numberOfPassengers}" style="font-weight: bold;">
+            <f:convertNumber integerOnly="true" type="number"/>
+        </p:outputLabel>
+
+        <p:outputLabel for="outDriver" value="#{msg.driver}: "/>
+        <p:outputLabel id="outDriver" value="#{schedulingBean.scheduling.travel.driver.name}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="travelReason" value="#{msg.travelReason}: " />
+        <p:outputLabel id="travelReason" value="#{schedulingBean.scheduling.travel.reason.description}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="reasonDetails" value="#{msg.reasonDetails}: "/>
+        <p:outputLabel id="reasonDetails" value="#{schedulingBean.scheduling.travel.reasonDetails}" style="font-weight: bold;"/>
+
+        <p:outputLabel for="outObservations" value="#{msg.observations}: "/>
+        <p:outputLabel id="outObservations" value="#{schedulingBean.scheduling.observations}" style="font-weight: bold;"/>
+    </h:panelGrid>
+
+    <h:panelGrid>
+        <p:fieldset legend="#{msg.origin}" style="width: 400px; padding: 5px 5px 5px 10px">
+            <h:panelGrid columns="2" cellpadding="1">
+                <p:outputLabel for="outOriginUf" value="#{msg.state}: " />
+                <p:outputLabel id="outOriginUf" value="#{schedulingBean.scheduling.travel.originUf.description}" style="font-weight: bold;"/>
+
+                <p:outputLabel for="outOriginCity" value="#{msg.city}: "/>
+                <p:outputLabel id="outOriginCity" value="#{schedulingBean.scheduling.travel.originCity}" style="font-weight: bold;"/>
+
+                <p:outputLabel for="outOriginStreet" value="#{msg.street}: "/>
+                <p:outputLabel id="outOriginStreet" value="#{schedulingBean.scheduling.travel.originStreet}, #{schedulingBean.scheduling.travel.originNumber}"  
+                               style="font-weight: bold;"/>
+
+                <p:outputLabel for="outOriginNeighborhood" value="#{msg.neighborhood}: " />
+                <p:outputLabel id="outOriginNeighborhood" value="#{schedulingBean.scheduling.travel.originNeighborhood}" style="font-weight: bold;"/>
+            </h:panelGrid>
+        </p:fieldset>
+
+        <p:fieldset legend="#{msg.destination}" style="width: 400px; padding: 5px 5px 5px 10px">
+            <h:panelGrid columns="2" cellpadding="1">
+                <p:outputLabel for="outUf" value="#{msg.state}: " />
+                <p:outputLabel id="outUf" value="#{schedulingBean.scheduling.travel.uf.description}" style="font-weight: bold;"/>
+
+                <p:outputLabel for="outCity" value="#{msg.city}: "/>
+                <p:outputLabel id="outCity" value="#{schedulingBean.scheduling.travel.destinationCity}" style="font-weight: bold;"/>
+
+                <p:outputLabel for="outStreet" value="#{msg.street}: "/>
+                <p:outputLabel id="outStreet" value="#{schedulingBean.scheduling.travel.destinationStreet}, #{schedulingBean.scheduling.travel.destinationNumber}"  
+                               style="font-weight: bold;"/>
+
+                <p:outputLabel for="outNeighborhood" value="#{msg.neighborhood}: " />
+                <p:outputLabel id="outNeighborhood" value="#{schedulingBean.scheduling.travel.destinationNeighborhood}" style="font-weight: bold;"/>
+            </h:panelGrid>
+        </p:fieldset>
+    </h:panelGrid>
+
+
+</html>

@@ -44,8 +44,8 @@ public class Transport implements Serializable {
     @Column(name = "maximum_capacity")
     private Integer maximumCapacity;
 
-    @Column(name = "year")
-    private Integer year;
+    @Column(name = "model_year")
+    private Integer modelYear;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_time")
