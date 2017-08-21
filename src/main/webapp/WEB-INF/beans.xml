@@ -5,6 +5,6 @@
        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
     
     <interceptors>
-        <class>br.com.cassioliveira.agendador.util.jpa.TransactionInterceptor</class>
+        <class>br.com.cassioliveira.sigeris.util.jpa.TransactionInterceptor</class>
     </interceptors>
 </beans>

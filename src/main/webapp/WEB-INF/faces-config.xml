@@ -8,7 +8,7 @@
         <!--Aponta para a fabrica de exceptionhandler gerenciado pelo JSF, que trata exceções lançadas-->
         <factory>
             <exception-handler-factory>
-                br.com.cassioliveira.agendador.util.jsf.JsfExceptionHandlerFactory
+                br.com.cassioliveira.sigeris.util.jsf.JsfExceptionHandlerFactory
             </exception-handler-factory>
         </factory>
     
