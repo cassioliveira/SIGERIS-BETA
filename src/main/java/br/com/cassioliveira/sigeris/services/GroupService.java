@@ -39,4 +39,8 @@ public class GroupService implements Serializable {
     public List<Grupo> findAll() {
         return groups.findAll();
     }
+    
+    public List<Grupo> gruposDeUsuarios(){
+        return groups.gruposDeUsuarios();
+    }
 }

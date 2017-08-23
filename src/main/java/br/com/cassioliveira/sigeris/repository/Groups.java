@@ -2,6 +2,7 @@ package br.com.cassioliveira.sigeris.repository;
 
 import br.com.cassioliveira.sigeris.model.Grupo;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,12 @@ public class Groups extends Generic<Grupo> implements Serializable {
         super(Grupo.class);
     }
 
+    /**
+     * Retorna todos os grupos cadastrados na tabela @see Grupo.
+     * @return 
+     */
+    public List<Grupo> gruposDeUsuarios(){
+        return getEntityManager().createNamedQuery("Grupo.todos").getResultList();
+    }
+    
 }

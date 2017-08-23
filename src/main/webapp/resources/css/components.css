@@ -57,7 +57,7 @@
 .welcome-message-home{
     margin-top: 5%;
     color: darkcyan;
-    text-shadow: #E0E0E0 2px -2px 3px, #E0E0E0 -2px 2px 3px;
+    /*text-shadow: #E0E0E0 2px -2px 3px, #E0E0E0 -2px 2px 3px;*/
     vertical-align: middle;
 }
 

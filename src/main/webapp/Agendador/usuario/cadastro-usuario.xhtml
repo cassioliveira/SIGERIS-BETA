@@ -16,13 +16,13 @@
         <h:form id="subjectForm">
 
             <p:growl autoUpdate="true"/>
-            
+
             <p:focus for="user"/>
 
             <p:fieldset legend="#{subjectBean.editing ? (msg.editCadastre).concat(msg.user) : (msg.newRegister).concat(msg.user)}" >
 
                 <h:panelGrid columns="2">
-                    
+
                     <p:outputLabel for="user" value="#{msg.user}: "/>
                     <p:inputText id="user" value="#{subjectBean.subject.userName}" size="15"
                                  required="true" maxlength="20" requiredMessage="Um nome de usuário deve ser informado"/>
@@ -34,7 +34,7 @@
                     <p:outputLabel for="group" value="#{msg.group}: "/>
                     <p:selectOneMenu id="group" value="#{subjectBean.group}" style="width: 130px">
                         <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                        <f:selectItems value="#{subjectBean.subjectGroups}" itemLabel="#{group}" itemValue="#{group}" var="group"/>
+                        <f:selectItems value="#{groupBean.groups}" itemLabel="#{group}" itemValue="#{group}" var="group"/>
                     </p:selectOneMenu>
 
                 </h:panelGrid>
@@ -43,7 +43,7 @@
                     <f:facet name="left">
                         <p:commandButton value="#{msg.save}" action="#{subjectBean.save}"  
                                          id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
-                        
+
                         <p:button value="#{msg.cancel}" id="cancelButton" outcome="/Agendador/usuario/listar-usuarios" 
                                   icon="ui-icon ui-icon-cancel"/>
                     </f:facet>    

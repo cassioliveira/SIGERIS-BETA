@@ -27,6 +27,7 @@ br/com/cassioliveira/sigeris/enumerations/States.class
 br/com/cassioliveira/sigeris/controllers/EmployeeBean.class
 br/com/cassioliveira/sigeris/security/Security.class
 br/com/cassioliveira/sigeris/services/ResponsibleService.class
+br/com/cassioliveira/sigeris/controllers/GroupBean.class
 br/com/cassioliveira/sigeris/model/Driver.class
 br/com/cassioliveira/sigeris/model/Scheduling.class
 br/com/cassioliveira/sigeris/enumerations/RoomsType.class
