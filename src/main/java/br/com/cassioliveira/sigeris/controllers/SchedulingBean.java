@@ -76,7 +76,7 @@ public class SchedulingBean implements Serializable {
         } else {
             FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
         }
-        FacesUtil.redirectTo("/SIGERIS/home.xhtml");
+        FacesUtil.redirectTo("/SIGERIS/Agendador/agendamento/listar-agendamentos-abertos.xhtml");
         scheduling = new Scheduling();
     }
 
@@ -97,7 +97,7 @@ public class SchedulingBean implements Serializable {
     public void remove() {
         this.schedulingService.delete(selectedScheduling);
         FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
-        FacesUtil.redirectTo("/SIGERIS/home.xhtml");
+        FacesUtil.redirectTo("/SIGERIS/Agendador/agendamento/listar-agendamentos-abertos.xhtml");
     }
 
     /**
@@ -152,7 +152,7 @@ public class SchedulingBean implements Serializable {
             this.scheduling.getRoom().setStatus(Status.FREE);
         }
         schedulingService.save(scheduling);
-        FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/home.xhtml");
+        FacesUtil.sucessAndRedirect("Baixa de agendamento realizada com sucesso!", "/SIGERIS/Agendador/agendamento/listar-agendamentos-abertos.xhtml");
     }
 
     public void stockMovement() {

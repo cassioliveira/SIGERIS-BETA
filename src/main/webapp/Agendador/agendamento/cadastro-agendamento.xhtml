@@ -64,7 +64,7 @@
                                                 value="#{schedulingBean.scheduling.beginingSchedulingDateTime}" >
                                         <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
                                     </p:calendar>
-                                    
+
                                     <p:fileUpload id="craftUpload" 
                                                   cancelLabel="#{msg.cancel}" 
                                                   dragDropSupport="true" 
@@ -125,8 +125,8 @@
                             <f:facet name="left">
                                 <p:commandButton id="saveButton" value="#{msg.save}" action="#{schedulingBean.save}"  
                                                  update="@form" icon="ui-icon ui-icon-disk"/>
-                                
-                                <p:button value="#{msg.cancel}" id="cancelButton" icon="ui-icon ui-icon-cancel" outcome="/home"/>
+
+                                <p:button value="#{msg.cancel}" id="cancelButton" icon="ui-icon ui-icon-cancel" outcome="/Agendador/agendamento/listar-agendamentos-abertos"/>
                             </f:facet>
                         </p:toolbar> 
                     </p:tab>

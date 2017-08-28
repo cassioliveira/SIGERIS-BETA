@@ -5,7 +5,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-      xmlns:composite="http://xmlns.jcp.org/jsf/composite"> 
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
 
     <composite:interface>
         <composite:attribute name="schedulingList"/>
@@ -76,7 +77,7 @@
                     <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
                 </h:outputText>
                 <p:tooltip for="beginingValue" value="Data de inicio do agendamento da Sala" rendered="#{scheduling.type eq msg.room}"/>
-                <p:tooltip for="beginingValue" value="Data de inicio do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
+                <p:tooltip for="beginingValue" value="Data de empréstimo do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
             </p:column>
 
             <p:column headerText="#{cc.attrs.datatableHeaderEndingDate}" filterMatchMode="contains" width="15" filterStyle="display:none"
@@ -85,7 +86,7 @@
                     <f:convertDateTime type="both" locale="pt_BR" pattern="dd/MM/yyyy HH:mm" timeZone="#{initParam.timezone}"/>
                 </h:outputText>
                 <p:tooltip for="endingValue" value="Previsão do término do agendamento da Sala" rendered="#{scheduling.type eq msg.room}"/>
-                <p:tooltip for="endingValue" value="Previsão do término do agendamento do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
+                <p:tooltip for="endingValue" value="Previsão para devolução do Equipamento" rendered="#{scheduling.type eq msg.equipment}"/>
             </p:column>
 
             <p:column headerText="#{msg.craft}" style="text-align: center" width="1" priority="2">
@@ -108,22 +109,26 @@
                 </p:commandButton>
 
                 <p:button id="downScheduleEquipment" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-equipamento.xhtml"
-                          rendered="#{scheduling.type eq msg.equipment and view.viewId == '/home.xhtml' and schedulerChanger}">
+                          rendered="#{scheduling.type eq msg.equipment and schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="downScheduleEquipment" value="Baixar agendamento"/> 
                 </p:button>
 
                 <p:button id="downScheduleRoom" title="Dar baixa no agendamento" icon="ui-icon ui-icon-arrowthickstop-1-s" style="font-size: 10px" outcome="/Agendador/agendamento/baixa-sala.xhtml"
-                          rendered="#{scheduling.type eq msg.room and view.viewId == '/home.xhtml' and schedulerChanger}">
+                          rendered="#{scheduling.type eq msg.room and schedulerChanger}">
                     <f:param  name="scheduling" value="#{scheduling.id}"/>
                     <p:tooltip for="downScheduleRoom" value="Baixar agendamento"/>
                 </p:button>
             </p:column>
 
             <f:facet name="footer">
-                <p:outputLabel value="Há #{fn:length(schedulingBean.openedSchedulings)} agendamentos ativos" 
-                               rendered="#{view.viewId == '/home.xhtml'}" />
-                <p:outputLabel value="Há #{fn:length(schedulingBean.closedSchedulings)} agendamentos finalizados" 
+                
+                <c:set var="ifManyActiveSchedulings" value="#{fn:length(schedulingBean.openedSchedulings) > 1 ? 's' : ''}" scope="request"/>
+                <c:set var="ifManyClosedSchedulings" value="#{fn:length(schedulingBean.closedSchedulings) > 1 ? 's' : ''}" scope="request"/>
+                
+                <p:outputLabel value="#{fn:length(schedulingBean.openedSchedulings)} agendamento#{ifManyActiveSchedulings} ativo#{ifManyActiveSchedulings}" 
+                               rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-abertos.xhtml' and fn:length(schedulingBean.openedSchedulings) > 0}" />
+                <p:outputLabel value="#{fn:length(schedulingBean.closedSchedulings)} agendamento#{ifManyClosedSchedulings} finalizado#{ifManyClosedSchedulings}" 
                                rendered="#{view.viewId == '/Agendador/agendamento/listar-agendamentos-finalizados.xhtml'}" />
             </f:facet>
 

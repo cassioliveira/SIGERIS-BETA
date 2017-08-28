@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/layout-sem-menu.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <div id="container-box-welcome-screen">
+
+            <p:link href="/Agendador/agendamento/listar-agendamentos-abertos.xhtml" class="nounderscore-link">
+                <div class="box-home">
+                    <p align="center" 
+                       style="font-weight: bold; 
+                       font-size: 20px; 
+                       color: white; text-align: center; margin-top: 20%">
+                        Agendamentos
+                    </p>
+                </div>
+            </p:link>
+
+            <div class="box-home">
+                <p align="center" 
+                   style="font-weight: bold; 
+                   font-size: 20px; 
+                   color: white; text-align: center; margin-top: 15%">
+                    Lançamento de ponto
+                </p>
+            </div>
+
+            <div class="box-home">
+                <p align="center" 
+                   style="font-weight: bold; 
+                   font-size: 20px; 
+                   color: white; text-align: center; margin-top: 15%">
+                    Cadastro de professores
+                </p>
+            </div>
+            
+        </div>
+
+    </ui:define>        
+</ui:composition> 

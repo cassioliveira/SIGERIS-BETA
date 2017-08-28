@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
+    @Override
     public SystemUserDetailsService userDetailsService() {
         return new SystemUserDetailsService();
     }
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 
         .authorizeRequests()//
                 .antMatchers("/login.xhtml", "/error.xhtml", "/javax.faces.resource/**").permitAll()
-                .antMatchers("/home.xhtml", "/acesso-negado.xhtml", "/Agendador/agendamento/listar-agendamentos-abertos.xhtml").authenticated()
+                .antMatchers("/welcome.xhtml","/acesso-negado.xhtml", "/Agendador/agendamento/listar-agendamentos-abertos.xhtml").authenticated()
                 .antMatchers("/Agendador/usuario/**").hasRole("ADMINISTRADORES")
                 .antMatchers("/Agendador/sala/**", "/Agendador/equipamento/**", "/pessoa/**", "/Agendador/agendamento/**").hasAnyRole("SECRETARIAS", "COORDENACOES", "DIRECAO", "ADMINISTRADORES")
                 .and()

@@ -8,11 +8,11 @@
 
         <p:dock id="dock" proximity="100">
 
-            <p:menuitem value="#{msg.home}" icon="/resources/images/home.png" title="#{msg.homeScreen}" id="homeButton" outcome="/home.xhtml">
+            <p:menuitem value="#{msg.home}" icon="/resources/images/home.png" title="#{msg.homeScreen}" id="homeButton" outcome="/welcome.xhtml">
                 <p:ajax update="@form"/>
             </p:menuitem>
 
-            <p:menuitem value="#{msg.scheduling}" icon="/resources/images/calendar.png" title="#{msg.scheduling}" id="scheduling" outcome="/Agendador/agendamento/cadastro-agendamento.xhtml" rendered="#{schedulerChanger}">
+            <p:menuitem value="#{msg.scheduling}" icon="/resources/images/calendar.png" title="#{msg.scheduling}" id="scheduling" outcome="/Agendador/agendamento/listar-agendamentos-abertos.xhtml" rendered="#{schedulerChanger}">
                 <p:ajax update="@form"/>
             </p:menuitem>
 
@@ -41,30 +41,3 @@
     </h:form>
 
 </html>
-<!--            <p:menuitem value="#{msg.driver}" icon="/resources/images/icon/driver.png" title="#{msg.driver}" id="driver" outcome="/Agendador/motorista/cadastro-motorista.xhtml">
-                <p:ajax update="@form"/>
-            </p:menuitem>
-
-            <p:menuitem value="#{msg.transport}" icon="/resources/images/icon/car.svg" title="#{msg.transport}" id="transport" outcome="/veiculo/cadastro-veiculo.xhtml">
-                <p:ajax update="@form"/>
-            </p:menuitem>-->
-
-<!--            <p:menuitem value="#{msg.user}" icon="/resources/images/icon/user.png" title="#{msg.user}" id="user" outcome="/subject/CadastreSubject.xhtml">
-                <p:ajax update="@form"/>
-            </p:menuitem>
-            
-            <p:menuitem value="#{msg.group}" icon="/resources/images/icon/user.png" title="#{msg.group}" id="group" outcome="/group/CadastreGroup.xhtml">
-                <p:ajax update="@form"/>
-            </p:menuitem>-->
-
-<!--        <p:menubar autoDisplay="true" style="font-size: 13px; padding: 0px">
-
-            <p:menuitem icon="fa fa-home" title="Tela incicial" id="homeButton" outcome="/home.xhtml"/>
-
-            <p:menuitem value="Schedulings" icon="fa fa-clock-o" title="Scheduling" id="scheduling" outcome="/Agendador/agendamento/cadastro-agendamento.xhtml"/>
-
-            <p:menuitem value="Room" icon="fa fa-institution" title="Room" id="room" outcome="/room/CadastreRoom.xhtml"/>
-
-            <p:menuitem icon="fa fa-power-off" title="Clique para sair" value="Sair" id="exitButton" outcome="/login.xhtml"/>
-
-        </p:menubar>-->
