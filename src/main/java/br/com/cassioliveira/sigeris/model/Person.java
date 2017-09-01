@@ -4,6 +4,7 @@ import br.com.cassioliveira.sigeris.enumerations.Gender;
 import br.com.cassioliveira.sigeris.enumerations.States;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,18 +34,29 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /*Aqui é algo como o cargo*/
+    @Column(name = "job_role", length = 50)
+    private String role;
+    
+    /*Aqui informa se tem função, como coordenador/adjunto, diretor/adjunto, etc.*/
+    @Column(name = "job_function", length = 50)
+    private List<String> jobFunction;
+    
+    @Column(name = "sector", length = 100)
+    private List<String> sector;
+    
     @Column(name = "name", length = 200, nullable = false)
     private String name;
     
-    @Column(name = "registration", length = 20)
+    @Column(name = "registration", length = 20, unique = true)
     private String registration;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
 
-    @Column(name = "cpf_cnpj", length = 14)
-    private String cpfCnpj;
+    @Column(name = "cpf", length = 11)
+    private String cpf;
 
     @Pattern(regexp = "^$|[a-zA-Z\\d/.-]{1,}",
             message = "Apenas letras números ou os caracteres a seguir são aceitos para o RG: / . -")
@@ -58,15 +70,15 @@ public class Person implements Serializable {
     @Column(name = "address_street", length = 100)
     private String street;
 
+    @Column(name = "address_number", length = 5)
+    private int number;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "address_uf")
     private States uf;
 
     @Column(name = "address_neighborhood", length = 50)
     private String neighborhood;
-
-    @Column(name = "address_number", length = 5)
-    private int number;
 
     @Column(name = "address_city", length = 70)
     private String city;

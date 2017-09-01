@@ -3,6 +3,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:cadastroPessoa="http://xmlns.jcp.org/jsf/composite/components/cadastro-pessoa"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="/WEB-INF/templates/Layout.xhtml"> 
@@ -13,117 +14,23 @@
 
     <ui:define name="content">
         <h:form id="formCacastreResponsible">
-            <p:growl id="messages" autoUpdate="true"/>
-
-            <p:fieldset legend="#{responsibleBean.editing ? 'Alterar dados do solicitante' : 'Novo solicitante'}" >
-
-                <h:panelGrid columns="2" style="margin-left: 20px; margin-bottom: 5px">
-                    <p:outputLabel for="name" value="#{msg.name}: "/>
-                    <p:inputText id="name" value="#{responsibleBean.responsible.name}" size="25" maxlength="200"
-                                 required="true" requiredMessage="#{msg.mandatoryName}"/>
-                </h:panelGrid>
-
-                <p:tabView>
-
-                    <p:tab title="#{msg.personal}">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="registration" value="#{msg.registration}: "/>
-                            <p:inputText id="registration" value="#{responsibleBean.responsible.registration}" size="13" maxlength="20"/>
-
-                            <p:outputLabel for="gender" value="#{msg.gender}: " style="margin-right: 42px;"/>
-                            <p:selectOneMenu id="gender" value="#{responsibleBean.responsible.gender}" style="width: 111px">
-                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                                <f:selectItems value="#{responsibleBean.genders}" var="gender" itemLabel="#{gender.description}" itemValue="#{gender}"/>
-                            </p:selectOneMenu>
-
-                            <p:outputLabel for="birthDate" value="#{msg.birthDate}: " style="margin-right: 1px"/>
-                            <p:calendar id="birthDate" navigator="true" pattern="dd/MM/yyyy" yearRange="c-100:c+100" showOn="button" maxlength="10" mask="true"
-                                        size="7" locale="pt" value="#{responsibleBean.responsible.birthDate}" maxdate="#{dateTimeUtilBean.dateToday}" >
-                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" timeZone="#{initParam.timezone}"/>
-                            </p:calendar>
-                        </h:panelGrid>
-                    </p:tab>
-
-                    <p:tab title="#{msg.contact}">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="phone1" value="#{msg.phone1}: "/>
-                            <p:inputText id="phone1" value="#{responsibleBean.responsible.phone1}" size="13" maxlength="15" class="phone"/>
-
-                            <p:outputLabel for="phone2" value="#{msg.phone2}: "/>
-                            <p:inputText id="phone2" value="#{responsibleBean.responsible.phone2}" size="13" maxlength="20" class="phone"/>
-
-                            <p:outputLabel for="email" value="#{msg.email}: "/>
-                            <p:inputText id="email" value="#{responsibleBean.responsible.email}" size="30" maxlength="100"/>
-                        </h:panelGrid>
-                    </p:tab>
-
-                    <p:tab title="#{msg.address}">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="uf" value="#{msg.state}: "/>
-                            <p:selectOneMenu id="uf" value="#{responsibleBean.responsible.uf}" style="width: 280px">
-                                <p:ajax process="@this" event="change" update="city" listener="#{responsibleBean.returnCities}"/>
-                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                                <f:selectItems value="#{responsibleBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}"/>
-                            </p:selectOneMenu>
-
-                            <p:outputLabel for="city" value="#{msg.city}: " />
-                            <p:selectOneMenu id="city" value="#{responsibleBean.responsible.city}" style="width: 280px" filter="true"
-                                             disabled="#{responsibleBean.responsible.uf eq null}">
-                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                                <f:selectItems value="#{responsibleBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="2">
-                            <h:panelGroup>
-                                <p:outputLabel for="street" value="#{msg.street}: " style="margin-right: 20px"/>
-                                <p:inputText id="street" value="#{responsibleBean.responsible.street}" size="30" maxlength="100"/>
-
-                                <p:inputText id="number" value="#{responsibleBean.responsible.number}" size="2" maxlength="5" placeholder="Nº" style="margin-left: 1px"/>
-                                <p:outputLabel/>
-                            </h:panelGroup>
-                            <p:outputLabel/>
-
-                            <h:panelGroup>
-                                <p:outputLabel for="neighborhood" value="#{msg.neighborhood}: " style="margin-right: 10px"/>
-                                <p:inputText id="neighborhood" value="#{responsibleBean.responsible.neighborhood}" size="18" maxlength="50"/>
-
-                                <p:outputLabel for="postalCode" value="#{msg.postalCode}: "  style="margin-left: 5px"/>
-                                <p:inputMask id="postalCode" mask="99999-999" value="#{responsibleBean.responsible.postalCode}" size="7" maxlength="9"/>
-                            </h:panelGroup>
-                            <p:outputLabel/>
-
-                        </h:panelGrid>
-
-                    </p:tab>
-
-                    <p:tab title="#{msg.documentation}">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="rg" value="#{msg.rg}: "/>
-                            <p:inputText id="rg" value="#{responsibleBean.responsible.rg}" size="13" maxlength="20"/>
-
-                            <p:outputLabel for="cpf" value="#{msg.cpf}: "/>
-                            <p:inputMask id="cpf" mask="999.999.999-99" value="#{responsibleBean.responsible.cpfCnpj}" size="13" maxlength="14" 
-                                         validator="StellaCPFValidator" converter="cpfConverter"/>
-                        </h:panelGrid>
-                    </p:tab>
-
-                </p:tabView>
-
-                <p:toolbar id="panelButtonsConsult" style="margin-top: 10px;">
-                    <f:facet name="left">
-                        <p:commandButton style="font-size: 13px;" value="#{responsibleBean.editing ? msg.change :msg.save}" action="#{responsibleBean.save}"  
-                                         id="saveButton" update="@form" icon="ui-icon ui-icon-disk"/>
-
-                        <p:button style="font-size: 13px;" value="#{msg.cancel}" outcome="/pessoa/listar-responsaveis"
-                                  id="deleteButton" icon="ui-icon ui-icon-cancel">
-                        </p:button>
-                    </f:facet>    
-                </p:toolbar> 
-            </p:fieldset>
-            <p:blockUI id="blockResponsibleForm" block="formCacastreResponsible" trigger="saveButton">
-                <p:graphicImage library="images" name="loading.gif"/>
-            </p:blockUI>
+            
+            <cadastroPessoa:form-cadastro-pessoa name="#{responsibleBean.responsible.name}"
+                                                 registration="#{responsibleBean.responsible.registration}"
+                                                 gender="#{responsibleBean.responsible.gender}"
+                                                 birthDate="#{responsibleBean.responsible.birthDate}"
+                                                 phone1="#{responsibleBean.responsible.phone1}"
+                                                 phone2="#{responsibleBean.responsible.phone2}"
+                                                 email="#{responsibleBean.responsible.email}"
+                                                 uf="#{responsibleBean.responsible.uf}"
+                                                 city="#{responsibleBean.responsible.city}"
+                                                 street="#{responsibleBean.responsible.street}"
+                                                 number="#{responsibleBean.responsible.number}"
+                                                 neighborhood="#{responsibleBean.responsible.neighborhood}"
+                                                 postalCode="#{responsibleBean.responsible.postalCode}"
+                                                 rg="#{responsibleBean.responsible.rg}"
+                                                 cpf="#{responsibleBean.responsible.cpf}"/>
+                                                 
         </h:form>
 
     </ui:define>

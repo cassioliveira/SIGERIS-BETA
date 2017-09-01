@@ -49,6 +49,7 @@
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/DateTimeUtilBean.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/services/RoomService.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/converters/EquimentConverter.java
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/enumerations/WorkType.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/converters/RoomConverter.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/converters/TransportConverter.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/EmployeeBean.java
