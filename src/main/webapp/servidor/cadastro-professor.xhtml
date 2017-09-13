@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/layout-sem-menu.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="teacher" value="#{teacherBean.teacher}" />
+    </f:metadata>
+
+    <ui:define name="content">
+
+        <p:fieldset legend="#{teacherBean.editing ? 'Alterar cadastro' : 'Novo cadastro'}" >
+
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <h:form id="formCadastreTeacher">
+
+                <h:panelGrid columns="4" style="margin-left: 20px; margin-bottom: 5px">
+
+                    <!--<div style="border: 0px solid red; width: 115px; position: relative">-->
+                    <!--<h:panelGroup>-->
+
+<!--                <p:fileUpload id="photoUpload" cancelLabel="#{msg.cancel}" dragDropSupport="true" fileLimit="1" label="Selecione..." 
+              mode="simple" uploadLabel="Enviar..." skinSimple="true"/>-->
+                    <!--</h:panelGroup>-->
+                    <!--</div>-->
+
+                    <p:outputLabel for="name" value="#{msg.name}: "/>
+                    <p:inputText id="name" value="#{teacherBean.teacher.name}" size="30" maxlength="200"
+                                 required="true" requiredMessage="#{msg.mandatoryName}"/>
+                </h:panelGrid>
+
+                <p:tabView>
+
+                    <p:tab title="#{msg.personal}">
+                        <h:panelGrid columns="2">
+
+                            <p:graphicImage library="images" name="avatar.png" style="height: 100px; margin-bottom: 5px; text-align: center; margin-right: 10px"/>
+
+                            <h:panelGroup>
+
+                                <h:panelGrid columns="2">
+
+                                    <p:outputLabel for="registration" value="#{msg.registration}: "/>
+                                    <p:inputText id="registration" value="#{teacherBean.teacher.registration}" size="13" maxlength="20"/>
+
+                                    <p:outputLabel for="gender" value="#{msg.gender}: " style="margin-right: 42px;"/>
+                                    <p:selectOneMenu id="gender" value="#{teacherBean.teacher.gender}" style="width: 140px">
+                                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                        <f:selectItems value="#{teacherBean.genders}" var="gender" itemLabel="#{gender.description}" 
+                                                       itemValue="#{gender}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="birthDate" value="#{msg.birthDate}: " style="margin-right: 1px"/>
+                                    <p:calendar id="birthDate" navigator="true" pattern="dd/MM/yyyy" yearRange="c-100:c+100" maxlength="10" mask="true"
+                                                size="13" locale="pt" value="#{teacherBean.teacher.birthDate}" maxdate="#{dateTimeUtilBean.dateToday}" >
+                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy" locale="pt_BR" timeZone="#{initParam.timezone}"/>
+                                    </p:calendar>
+
+                                </h:panelGrid>
+
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="#{msg.contact}">
+                        <h:panelGrid columns="3">
+                            <p:outputLabel for="phone1" value="#{msg.phone1}: "/>
+                            <h:panelGroup>
+                                <p:inputText id="phone1" value="#{teacherBean.teacher.phone1}" size="9" maxlength="15" class="phone"/>
+                                <p:outputLabel for="phone2" value="#{msg.phone2}: " style="margin-left: 5px"/>
+                                <p:inputText id="phone2" value="#{teacherBean.teacher.phone2}" size="9" maxlength="20" class="phone"/>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
+                            <p:outputLabel for="email" value="#{msg.email}: "/>
+                            <p:inputText id="email" value="#{teacherBean.teacher.email}" size="33" maxlength="100"/>
+                            <p:outputLabel/>
+
+                            <p:outputLabel for="email2" value="#{msg.email} 2: "/>
+                            <p:inputText id="email2" value="#{teacherBean.teacher.email2}" size="33" maxlength="100"/>
+                            <p:outputLabel/>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="#{msg.address}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="uf" value="#{msg.state}: "/>
+                            <p:selectOneMenu id="uf" value="#{teacherBean.teacher.uf}" style="width: 310px">
+                                <p:ajax process="@this" event="change" update="city" listener="#{responsibleBean.returnCities}"/>
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{teacherBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="city" value="#{msg.city}: " />
+                            <p:selectOneMenu id="city" value="#{teacherBean.teacher.city}" style="width: 310px" filter="true"
+                                             disabled="#{teacherBean.teacher.uf eq null}">
+                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                <f:selectItems value="#{teacherBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2">
+                            <h:panelGroup>
+                                <p:outputLabel for="street" value="#{msg.street}: " style="margin-right: 22px"/>
+                                <p:inputText id="street" value="#{teacherBean.teacher.street}" size="24" maxlength="200"/>
+
+                                <p:inputText id="number" value="#{teacherBean.teacher.number}" size="2" maxlength="5" placeholder="Nº" style="margin-left: 1px"/>
+                                <p:outputLabel/>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
+                            <h:panelGroup>
+                                <p:outputLabel for="neighborhood" value="#{msg.neighborhood}: " style="margin-right: 7px"/>
+                                <p:inputText id="neighborhood" value="#{teacherBean.teacher.neighborhood}" size="17" maxlength="50"/>
+
+                                <p:outputLabel for="postalCode" value="#{msg.postalCode}: "  style="margin-left: 5px"/>
+                                <p:inputMask id="postalCode" mask="99999-999" value="#{teacherBean.teacher.postalCode}" size="5" maxlength="9"/>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
+                            <h:panelGroup>
+                                <p:outputLabel for="complement" value="Complemento: " style="margin-right: 10px"/>
+                                <p:inputText id="complement" value="#{teacherBean.teacher.complement}" size="26" maxlength="200"/>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
+                        </h:panelGrid>
+
+                    </p:tab>
+
+                    <p:tab title="#{msg.documentation}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="rg" value="#{msg.rg}: "/>
+                            <p:inputText id="rg" value="#{teacherBean.teacher.rg}" size="13" maxlength="20"/>
+
+                            <p:outputLabel for="cpf" value="#{msg.cpf}: "/>
+                            <p:inputMask id="cpf" mask="999.999.999-99" value="#{teacherBean.teacher.cpf}" size="13" maxlength="14" 
+                                         validator="StellaCPFValidator" converter="cpfConverter"/>
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab id="dados-academicos" title="Dados acadêmicos">
+
+                        <h:panelGrid columns="2" cellpadding="0" cellspacing="2">
+
+                            <p:outputLabel for="workType" value="Carga horária: "/>
+                            <p:selectOneRadio id="workType" value="#{teacherBean.teacher.workType}">
+                                <f:selectItems var="chs" itemLabel="#{chs.description}" itemValue="#{chs}" value="#{teacherBean.workTypes}"/>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel for="isEfective" value="Categoria: "/>
+                            <p:selectOneRadio id="isEfective" value="#{teacherBean.teacher.category}">
+                                <f:selectItems var="category" itemLabel="#{category.description}" itemValue="#{category}" value="#{teacherBean.employeeCategories}"/>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel for="area" value="Área: ">
+                                <p:tooltip for="area" value="Selecione uma categia ou informe uma se não estiver na lista"/>
+                            </p:outputLabel>
+                            <p:selectOneMenu id="area" value="#{teacherBean.teacher.area}" editable="true" filter="true" 
+                                             filterMatchMode="contains" style="width: 265px; margin-bottom: 4px" label="Digite ou selecione">
+                                <f:selectItems id="areas" value="#{teacherBean.teacherAreas}" var="area" itemLabel="#{area}" 
+                                               itemValue="#{area}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="theme" value="Disciplina(s): ">
+                                <p:tooltip for="theme" value="Selecione uma ou mais disciplinas"/>
+                            </p:outputLabel>
+                            <p:selectCheckboxMenu id="theme" label="Selecione..." filter="true" filterMatchMode="startsWith" 
+                                                  updateLabel="true" style="width: 294px; margin-bottom: 4px">
+                                <f:selectItem itemLabel="Sociologia"/>
+                                <f:selectItem itemLabel="OTEC"/>
+                                <f:selectItem itemLabel="Semântica"/>
+                            </p:selectCheckboxMenu>
+
+                            <p:outputLabel for="situation" value="Situação: ">
+                                <p:tooltip for="situation" value="EX.: Ativo, Inativo, Afastado, Licença, etc"/>
+                            </p:outputLabel>
+
+                            <p:selectOneMenu id="situation" value="#{teacherBean.teacher.situation}" style="width: 265px" label="Digite ou selecione">
+                                <f:selectItems id="situations" value="#{teacherBean.employeeSituations}" var="situation" itemLabel="#{situation.description}"  
+                                               itemValue="#{situation}"/>
+                                <f:ajax execute="situation" render="panelOtherSituation" event="change"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel/>
+                            <h:panelGroup id="panelOtherSituation" >
+                                <p:inputText id="otherSituation" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Informe o motivo"
+                                             rendered="#{teacherBean.teacher.situation eq 'OTHER'}"/>
+                                <p:inputText id="otherSituationAfastamento" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Motivo do afastamento"
+                                             rendered="#{teacherBean.teacher.situation eq 'AFASTAMENTO'}"/>
+                                <p:inputText id="otherSituationLicenca" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Tipo de licença"
+                                             rendered="#{teacherBean.teacher.situation eq 'LICENCA'}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="observations" value="#{msg.observations}: " style="margin-right: 17px;"/>
+                            <p:inputTextarea id="observations" rows="3" cols="30" maxlength="255" value="#{teacherBean.teacher.observations}"
+                                             autoResize="false" counter="counterDescription" counterTemplate="{0} #{msg.charactersLeft}"/>
+                            <p:outputLabel/>
+                            <p:outputLabel id="counterDescription" style="font-size: 12px;"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+
+                </p:tabView>
+
+                <p:toolbar id="panelButtonsTeacher" style="margin-top: 10px;" >
+                    <f:facet name="left">
+                        <p:commandButton style="font-size: 13px;" value="#{teacherBean.editing ? msg.change :msg.save}" action="#{teacherBean.save}"  
+                                         id="saveTeacher" update="@form" icon="ui-icon ui-icon-disk"/>
+
+                        <p:button style="font-size: 13px;" value="#{msg.cancel}" outcome="/servidor/listar-servidores"
+                                  id="deleteTeacher" icon="ui-icon ui-icon-cancel">
+                        </p:button>
+                    </f:facet>    
+                </p:toolbar> 
+
+                <p:blockUI id="blockTeacherForm" block="formCadastreTeacher" trigger="saveTeacher">
+                    <p:graphicImage library="images" name="loading.gif"/>
+                </p:blockUI>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>

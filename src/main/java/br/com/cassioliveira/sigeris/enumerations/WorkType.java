@@ -10,8 +10,7 @@ import lombok.Getter;
 public enum WorkType implements Serializable {
 
     T20("T-20"),
-    T40("T-40"),
-    OTHER("Outro");
+    T40("T-40");
 
     @Getter
     private final String description;

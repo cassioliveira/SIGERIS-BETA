@@ -1,9 +1,14 @@
 package br.com.cassioliveira.sigeris.controllers;
 
+import br.com.cassioliveira.sigeris.enumerations.Gender;
+import br.com.cassioliveira.sigeris.enumerations.States;
+import br.com.cassioliveira.sigeris.enumerations.WorkType;
 import br.com.cassioliveira.sigeris.model.Employee;
 import br.com.cassioliveira.sigeris.services.EmployeeService;
 import br.com.cassioliveira.sigeris.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -37,8 +42,29 @@ public class EmployeeBean implements Serializable {
 
     private List<Employee> employees;
 
+    @Getter
+    private List<Gender> genders;
+
+    @Getter
+    private List<WorkType> workTypes;
+
+    @Getter
+    private List<String> teacherAreas;
+
+    @Getter
+    private List<String> teacherSituations;
+
+    @Getter
+    private final List<String> cities = new ArrayList<>();
+
+    @Getter
+    private List<States> states = new ArrayList<>();
+
     @PostConstruct
     public void init() {
+        this.states = Arrays.asList(States.values());
+        this.workTypes = Arrays.asList(WorkType.values());
+        this.genders = Arrays.asList(Gender.values());
         this.employees = employeeService.findAll();
     }
 
@@ -56,6 +82,19 @@ public class EmployeeBean implements Serializable {
     public void remove() {
         this.employeeService.delete(selectedEmployee);
         FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
+    }
+
+    /**
+     * Método que carrega uma lista de cidades de acordo com o estado
+     * selecionado.
+     */
+    public void returnCities() {
+        this.cities.clear();
+        if (employee.getUf() != null) {
+            employeeService.getCities(employee.getUf().getCode()).forEach((filteredCities) -> {
+                this.cities.add(filteredCities);
+            });
+        }
     }
 
     /*

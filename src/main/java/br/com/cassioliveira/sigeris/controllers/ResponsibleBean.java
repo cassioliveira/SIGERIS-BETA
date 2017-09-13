@@ -64,14 +64,14 @@ public class ResponsibleBean implements Serializable {
         } else {
             FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
         }
-        FacesUtil.redirectTo("listar-responsaveis.xhtml");
+        FacesUtil.redirectTo("listar-servidores.xhtml");
         responsible = new Responsible();
     }
 
     public void remove() {
         this.responsibleService.delete(selectedResponsible);
         FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
-        FacesUtil.redirectTo("listar-responsaveis.xhtml");
+        FacesUtil.redirectTo("listar-servidores.xhtml");
     }
 
     /*

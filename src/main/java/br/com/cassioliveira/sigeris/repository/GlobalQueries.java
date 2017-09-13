@@ -19,7 +19,6 @@ public class GlobalQueries extends Generic<GlobalQueries> implements Serializabl
     public List<String> returnCities(int ufCode) {
         Query createQuery;
         createQuery = getEntityManager().createNativeQuery("SELECT c.nome FROM cidades c where c.estado = " + ufCode);
-        System.out.println("DAO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + createQuery.getResultList());
         return createQuery.getResultList();
     }
 }

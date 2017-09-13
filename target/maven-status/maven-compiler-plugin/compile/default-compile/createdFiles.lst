@@ -3,6 +3,7 @@ br/com/cassioliveira/sigeris/util/jpa/Transactional.class
 br/com/cassioliveira/sigeris/enumerations/SubjectGroups.class
 br/com/cassioliveira/sigeris/repository/Transports.class
 br/com/cassioliveira/sigeris/controllers/RoomBean.class
+br/com/cassioliveira/sigeris/services/TeacherService.class
 br/com/cassioliveira/sigeris/security/SystemUser.class
 br/com/cassioliveira/sigeris/converters/EquimentConverter.class
 br/com/cassioliveira/sigeris/repository/Responsibles.class
@@ -26,6 +27,7 @@ br/com/cassioliveira/sigeris/services/GroupService.class
 br/com/cassioliveira/sigeris/enumerations/States.class
 br/com/cassioliveira/sigeris/controllers/EmployeeBean.class
 br/com/cassioliveira/sigeris/security/Security.class
+br/com/cassioliveira/sigeris/converters/EmployeeConverter.class
 br/com/cassioliveira/sigeris/services/ResponsibleService.class
 br/com/cassioliveira/sigeris/controllers/GroupBean.class
 br/com/cassioliveira/sigeris/model/Driver.class
@@ -34,12 +36,14 @@ br/com/cassioliveira/sigeris/model/Scheduling.class
 br/com/cassioliveira/sigeris/enumerations/RoomsType.class
 br/com/cassioliveira/sigeris/security/JsfLoginUrlAuthenticationEntryPoint.class
 br/com/cassioliveira/sigeris/services/DriverService.class
+br/com/cassioliveira/sigeris/converters/TeacherConverter.class
 br/com/cassioliveira/sigeris/model/Enterprise.class
 br/com/cassioliveira/sigeris/model/Employee.class
 br/com/cassioliveira/sigeris/controllers/LoginBean.class
 br/com/cassioliveira/sigeris/util/jsf/JsfExceptionHandler.class
 br/com/cassioliveira/sigeris/util/cdi/CDIServiceLocator.class
 br/com/cassioliveira/sigeris/controllers/SubjectBean.class
+br/com/cassioliveira/sigeris/enumerations/EmployeeCategory.class
 br/com/cassioliveira/sigeris/model/Subject.class
 br/com/cassioliveira/sigeris/controllers/ResponsibleBean.class
 br/com/cassioliveira/sigeris/security/SystemUserDetailsService.class
@@ -53,12 +57,14 @@ br/com/cassioliveira/sigeris/repository/Generic.class
 br/com/cassioliveira/sigeris/converters/RoomConverter.class
 br/com/cassioliveira/sigeris/model/Person.class
 br/com/cassioliveira/sigeris/model/Equipment.class
+br/com/cassioliveira/sigeris/enumerations/EmployeeSituation.class
 br/com/cassioliveira/sigeris/util/jsf/FacesUtil.class
 br/com/cassioliveira/sigeris/repository/Employees.class
 br/com/cassioliveira/sigeris/model/Grupo.class
 br/com/cassioliveira/sigeris/services/RoomService.class
 br/com/cassioliveira/sigeris/security/SecurityConfig.class
 br/com/cassioliveira/sigeris/converters/SubjectConverter.class
+br/com/cassioliveira/sigeris/controllers/TeacherBean.class
 br/com/cassioliveira/sigeris/repository/Equipments.class
 br/com/cassioliveira/sigeris/model/Teacher.class
 br/com/cassioliveira/sigeris/model/Responsible.class
@@ -77,6 +83,7 @@ br/com/cassioliveira/sigeris/controllers/EquipmentBean.class
 br/com/cassioliveira/sigeris/converters/SchedulingConverter.class
 br/com/cassioliveira/sigeris/repository/GlobalQueries.class
 br/com/cassioliveira/sigeris/repository/Drivers.class
+br/com/cassioliveira/sigeris/repository/Teachers.class
 br/com/cassioliveira/sigeris/util/jpa/TransactionInterceptor.class
 br/com/cassioliveira/sigeris/services/EmployeeService.class
 br/com/cassioliveira/sigeris/enumerations/EquipmentType.class

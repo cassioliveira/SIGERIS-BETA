@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.xhtml", "/error.xhtml", "/javax.faces.resource/**").permitAll()
                 .antMatchers("/welcome.xhtml","/acesso-negado.xhtml", "/Agendador/agendamento/listar-agendamentos-abertos.xhtml").authenticated()
                 .antMatchers("/Agendador/usuario/**").hasRole("ADMINISTRADORES")
-                .antMatchers("/Agendador/sala/**", "/Agendador/equipamento/**", "/pessoa/**", "/Agendador/agendamento/**").hasAnyRole("SECRETARIAS", "COORDENACOES", "DIRECAO", "ADMINISTRADORES")
+                .antMatchers("/Agendador/sala/**", "/Agendador/equipamento/**", "/servidor/**", "/Agendador/agendamento/**").hasAnyRole("SECRETARIAS", "COORDENACOES", "DIRECAO", "ADMINISTRADORES")
                 .and()
                 
         .formLogin()//

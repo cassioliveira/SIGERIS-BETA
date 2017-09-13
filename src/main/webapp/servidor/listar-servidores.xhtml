@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/layout-sem-menu.xhtml"> 
+
+    <ui:define name="content">
+
+        <h:form id="searchEmployee">
+
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <p:fieldset legend="Solicitantes cadastrados" >
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:button outcome="/servidor/cadastro-servidor" value="#{msg.newRegistering}" style="text-align: right"
+                                  icon="ui-icon ui-icon-plus" styleClass="botao-novo-cadastro"/>
+                    </f:facet>
+                </p:toolbar>    
+
+                <p:dataTable id="datatableEmployee" var="employee" value="#{teacherBean.teachers}" widgetVar="employeeSearch"
+                             paginatorAlwaysVisible="false" style="margin-top: 1px; " paginator="true"
+                             rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}"  
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50,100"
+                             scrollable="true" scrollRows="20" scrollHeight="250">
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <p:inputText id="globalFilter" onkeyup="PF('employeeSearch').filter()" style="width:300px" placeholder="Pesquisa..."/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="#{msg.name}" width="50%" filterStyle="display:none" priority="1"
+                              filterBy="#{employee.name}" filterMatchMode="contains">
+                        <h:outputText value="#{employee.name}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{msg.phone1}" width="10%" filterStyle="display:none" priority="2"
+                              filterBy="#{employee.phone1}" filterMatchMode="contains">
+                        <h:outputText value="#{employee.phone1}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{msg.email}" width="20%" filterStyle="display:none" priority="2"
+                              filterBy="#{employee.email}" filterMatchMode="contains">
+                        <h:outputText value="#{employee.email}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.actions}" style="text-align: center" width="10%" priority="1">
+
+                        <p:button id="editButton" title="#{msg.edit}" icon="ui-icon ui-icon-pencil" style="font-size: 10px" outcome="/servidor/cadastro-servidor">
+                            <f:param  name="employee" value="#{employee.id}"/>
+                            <p:tooltip for="editButton" value="#{msg.editSelectedRow}"/>
+                        </p:button>
+
+                        <p:commandButton id="deleteButton" title="#{msg.delete}" icon="ui-icon ui-icon-trash" style="font-size: 10px" 
+                                         action="#{teacherBean.remove}" process="@this" update="datatableEmployee">
+                            <f:setPropertyActionListener target="#{teacherBean.selectedTeacher}" value="#{employee}"/>
+                            <p:tooltip for="deleteButton" value="#{msg.deleteSelectedRow}"/>
+                            <p:confirm icon="ui-icon-alert" header="#{msg.exclusionCadastre}" message="#{msg.realyExclude}?"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

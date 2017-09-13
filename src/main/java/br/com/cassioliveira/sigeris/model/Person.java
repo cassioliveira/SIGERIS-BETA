@@ -1,5 +1,7 @@
 package br.com.cassioliveira.sigeris.model;
 
+import br.com.cassioliveira.sigeris.enumerations.EmployeeCategory;
+import br.com.cassioliveira.sigeris.enumerations.EmployeeSituation;
 import br.com.cassioliveira.sigeris.enumerations.Gender;
 import br.com.cassioliveira.sigeris.enumerations.States;
 import java.io.Serializable;
@@ -14,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -45,11 +49,23 @@ public class Person implements Serializable {
     @Column(name = "sector", length = 100)
     private List<String> sector;
     
+    @NotNull
     @Column(name = "name", length = 200, nullable = false)
     private String name;
     
     @Column(name = "registration", length = 20, unique = true)
     private String registration;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situation")
+    private EmployeeSituation situation;
+    
+    @Column(name = "other_situation", length = 200)
+    private String otherSituation;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
+    private EmployeeCategory category;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
@@ -67,11 +83,14 @@ public class Person implements Serializable {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @Column(name = "address_street", length = 100)
+    @Column(name = "address_street", length = 200)
     private String street;
+    
+    @Column(name = "address_complement", length = 200)
+    private String complement;
 
-    @Column(name = "address_number", length = 5)
-    private int number;
+    @Column(name = "address_number", length = 10)
+    private String number;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "address_uf")
@@ -96,5 +115,14 @@ public class Person implements Serializable {
             message = "E-mail com formato incorreto")
     @Column(name = "email", length = 100)
     private String email;
+    
+    @Pattern(regexp = "^$|^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$",
+            message = "E-mail com formato incorreto")
+    @Column(name = "email2", length = 100)
+    private String email2;
+    
+    @Lob
+    @Column(name = "observations")
+    private String observations;
 
 }

@@ -2,10 +2,12 @@ package br.com.cassioliveira.sigeris.services;
 
 import br.com.cassioliveira.sigeris.model.Employee;
 import br.com.cassioliveira.sigeris.repository.Employees;
+import br.com.cassioliveira.sigeris.repository.GlobalQueries;
 import br.com.cassioliveira.sigeris.util.jpa.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
+import lombok.Getter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,6 +23,10 @@ public class EmployeeService implements Serializable {
 
     @Inject
     private Employees employees;
+
+    @Inject
+    @Getter
+    private GlobalQueries globalQueries;
 
     @Transactional
     public void save(Employee employee) {
@@ -39,4 +45,16 @@ public class EmployeeService implements Serializable {
     public List<Employee> findAll() {
         return employees.findAll();
     }
+
+    public List<String> getCities(int ufCode) {
+        return globalQueries.returnCities(ufCode);
+    }
+    
+//    public List<String> getTeacherAreas() {
+//        return employees.getTeacherAreas();
+//    }
+//    
+//    public List<String> getTeacherSituations() {
+//        return employees.getTeacherSituations();
+//    }
 }
