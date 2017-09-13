@@ -1,9 +1,12 @@
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/model/Discipline.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/security/JsfLoginUrlAuthenticationEntryPoint.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/TeacherBean.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/repository/Generic.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/security/SecurityWebApplicationInitializer.java
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/repository/Disciplines.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/repository/Groups.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/services/SchedulingService.java
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/services/DisciplineService.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/converters/CPFConverter.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/model/Travel.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/util/report/ReportExecutor.java
@@ -44,6 +47,8 @@
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/DriverBean.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/RoomBean.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/validators/CPFValidator.java
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/controllers/DisciplineBean.java
+/home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/converters/DisciplineConverter.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/util/jsf/JsfExceptionHandler.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/enumerations/TravelReasons.java
 /home/cassio/workspaces/NetBeansProjects/Pessoais/SIGERIS/src/main/java/br/com/cassioliveira/sigeris/repository/Schedulings.java

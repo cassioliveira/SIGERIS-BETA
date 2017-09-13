@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/layout-sem-menu.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="discipline" value="#{disciplineBean.discipline}" />
+    </f:metadata>
+
+    <ui:define name="content">
+
+        <p:fieldset legend="#{disciplineBean.editing ? 'Alterar cadastro' : 'Novo cadastro'}" >
+
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <h:form id="formCadastreDiscipline">
+
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel for="code" value="#{msg.code}: "/>
+                    <p:inputText id="code" value="#{disciplineBean.discipline.code}" size="10" maxlength="20" style="text-transform: uppercase"/>
+                    
+                    <p:outputLabel for="cargaHorariaSemanal" value="C.H.S.: "/>
+                    <p:spinner id="cargaHorariaSemanal" value="#{disciplineBean.discipline.cargaHorariaSemanal}" converterMessage="#{msg.fieldOnlyAcceptsNumber}" size="8" 
+                               placeholder="Quant. aulas/semana" min="0" title="#{msg.typeOrClickButtons}">
+                        <f:convertNumber integerOnly="true" type="number"/>
+                    </p:spinner>
+                    
+                    <p:outputLabel for="name" value="#{msg.name}: "/>
+                    <p:inputText id="name" value="#{disciplineBean.discipline.name}" size="30" maxlength="200"
+                                 required="true" requiredMessage="#{msg.mandatoryName}"/>
+
+                </h:panelGrid>
+
+
+                <p:toolbar id="panelButtonsDiscipline" style="margin-top: 10px;" >
+                    <f:facet name="left">
+                        <p:commandButton style="font-size: 13px;" value="#{disciplineBean.editing ? msg.change :msg.save}" action="#{disciplineBean.save}"  
+                                         id="saveDiscipline" update="@form" icon="ui-icon ui-icon-disk"/>
+
+                        <p:button style="font-size: 13px;" value="#{msg.cancel}" outcome="/componente-curricular/listar-disciplinas"
+                                  id="deleteDiscipline" icon="ui-icon ui-icon-cancel">
+                        </p:button>
+                    </f:facet>    
+                </p:toolbar> 
+
+                <p:blockUI id="blockDisciplineForm" block="formCadastreDiscipline" trigger="saveDiscipline">
+                    <p:graphicImage library="images" name="loading.gif"/>
+                </p:blockUI>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>
