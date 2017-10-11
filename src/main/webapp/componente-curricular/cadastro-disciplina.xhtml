@@ -22,7 +22,7 @@
                 <h:panelGrid columns="2">
 
                     <p:outputLabel for="code" value="#{msg.code}: "/>
-                    <p:inputText id="code" value="#{disciplineBean.discipline.code}" size="10" maxlength="20" style="text-transform: uppercase"/>
+                    <p:inputText id="code" value="#{disciplineBean.discipline.disciplineCode}" size="10" maxlength="20" style="text-transform: uppercase"/>
                     
                     <p:outputLabel for="cargaHorariaSemanal" value="C.H.S.: "/>
                     <p:spinner id="cargaHorariaSemanal" value="#{disciplineBean.discipline.cargaHorariaSemanal}" converterMessage="#{msg.fieldOnlyAcceptsNumber}" size="8" 

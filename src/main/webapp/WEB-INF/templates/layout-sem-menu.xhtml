@@ -61,6 +61,14 @@
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
                                  icon="ui-icon-check"/>
             </p:confirmDialog>
+            
+             <p:idleMonitor onidle="PF('idleDialog').show()" timeout="1800000"/>
+            <p:dialog header="Sessão expirada" resizable="false" widgetVar="idleDialog" modal="true" 
+                      width="200" closable="false" styleClass="box-sessao-expirada">
+                <h:outputText value="Faça login novamente!"  style="text-align: center !important"/>
+                <br/>
+                <p:button value="OK" outcome="/welcome.xhtml" styleClass="botao-ok-sessao-expirada"/>
+            </p:dialog>
         </h:form>
 
         <!--This script changes the mask of money format-->

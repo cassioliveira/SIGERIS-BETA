@@ -25,8 +25,8 @@ public class Discipline implements Serializable {
     @Column(name = "name", length = 200)
     private String name;
 
-    @Column(name = "code", length = 20)
-    private String code;
+    @Column(name = "discipline_code", length = 20)
+    private String disciplineCode;
 
     @Column(name = "carga_horaria_semanal")
     private int cargaHorariaSemanal;

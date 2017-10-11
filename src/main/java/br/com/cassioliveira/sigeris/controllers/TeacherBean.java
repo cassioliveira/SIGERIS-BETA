@@ -5,7 +5,9 @@ import br.com.cassioliveira.sigeris.enumerations.EmployeeSituation;
 import br.com.cassioliveira.sigeris.enumerations.Gender;
 import br.com.cassioliveira.sigeris.enumerations.States;
 import br.com.cassioliveira.sigeris.enumerations.WorkType;
+import br.com.cassioliveira.sigeris.model.Discipline;
 import br.com.cassioliveira.sigeris.model.Teacher;
+import br.com.cassioliveira.sigeris.services.DisciplineService;
 import br.com.cassioliveira.sigeris.services.TeacherService;
 import br.com.cassioliveira.sigeris.util.jsf.FacesUtil;
 import java.io.Serializable;
@@ -31,10 +33,8 @@ public class TeacherBean implements Serializable {
     @Getter
     @Setter
     private Teacher teacher;
-
+    
     @Inject
-    @Getter
-    @Setter
     private TeacherService teacherService;
 
     @Inject
@@ -49,10 +49,16 @@ public class TeacherBean implements Serializable {
 
     @Getter
     private List<WorkType> workTypes;
+    
+    @Inject
+    private DisciplineService disciplineService;
+    
+    @Getter
+    private List<Discipline> disciplines;
 
     @Getter
     private List<EmployeeSituation> employeeSituations;
-    
+
     @Getter
     private List<EmployeeCategory> employeeCategories;
 
@@ -73,6 +79,7 @@ public class TeacherBean implements Serializable {
         this.employeeSituations = Arrays.asList(EmployeeSituation.values());
         this.employeeCategories = Arrays.asList(EmployeeCategory.values());
         this.teachers = teacherService.findAll();
+        this.disciplines = disciplineService.findAll();
         this.teacherAreas = teacherService.getTeacherAreas();
     }
 
@@ -89,7 +96,7 @@ public class TeacherBean implements Serializable {
 
     public void remove() {
         this.teacherService.delete(selectedTeacher);
-        FacesUtil.sucessMessage("Exclusão efetuada com sucesso!");
+        FacesUtil.sucessAndRedirect("Exclusão efetuada com sucesso!", "listar-servidores.xhtml");
     }
 
     /**
@@ -110,7 +117,7 @@ public class TeacherBean implements Serializable {
      * Se sim, refere-se a um novo cadastro, senao refere-se a um produto a ser editado
      */
     public boolean getEditing() {
-        return this.teacher.getId() != null;
+        return teacher.getId() != null;
     }
 
     public List<Teacher> getTeachers() {

@@ -25,6 +25,7 @@ br/com/cassioliveira/sigeris/enumerations/EmployeeSituation.class
 br/com/cassioliveira/sigeris/util/jsf/FacesUtil.class
 br/com/cassioliveira/sigeris/model/Grupo.class
 br/com/cassioliveira/sigeris/security/SecurityConfig.class
+.netbeans_automatic_build
 br/com/cassioliveira/sigeris/converters/CPFConverter.class
 br/com/cassioliveira/sigeris/security/SecurityWebApplicationInitializer.class
 br/com/cassioliveira/sigeris/exceptions/SchedulerException.class

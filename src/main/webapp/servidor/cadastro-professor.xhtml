@@ -39,16 +39,25 @@
                     <p:tab title="#{msg.personal}">
                         <h:panelGrid columns="2">
 
-                            <p:graphicImage library="images" name="avatar.png" style="height: 100px; margin-bottom: 5px; text-align: center; margin-right: 10px"/>
+
+                            <h:panelGroup>
+                                <div style="border: 0px solid red; width: 100px; position: relative">
+                                    <p:graphicImage library="images" name="avatar.png" style="height: 95px; margin-bottom: 5px; text-align: center"/>
+
+                                    <p:fileUpload id="photoUpload" cancelLabel="#{msg.cancel}" dragDropSupport="true" fileLimit="1" label="Selecione" 
+                                                  mode="simple" uploadLabel="Enviar..." skinSimple="true" style="width: 100px; font-size: 12px"/>
+                                </div>
+                            </h:panelGroup>
+
 
                             <h:panelGroup>
 
                                 <h:panelGrid columns="2">
 
                                     <p:outputLabel for="registration" value="#{msg.registration}: "/>
-                                    <p:inputText id="registration" value="#{teacherBean.teacher.registration}" size="13" maxlength="20"/>
+                                    <p:inputMask id="registration" value="#{teacherBean.teacher.registration}" size="13" maxlength="20" mask="9.99999-9"/>
 
-                                    <p:outputLabel for="gender" value="#{msg.gender}: " style="margin-right: 42px;"/>
+                                    <p:outputLabel for="gender" value="Sexo: " style="margin-right: 42px;"/>
                                     <p:selectOneMenu id="gender" value="#{teacherBean.teacher.gender}" style="width: 140px">
                                         <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                                         <f:selectItems value="#{teacherBean.genders}" var="gender" itemLabel="#{gender.description}" 
@@ -64,6 +73,7 @@
                                 </h:panelGrid>
 
                             </h:panelGroup>
+
                         </h:panelGrid>
                     </p:tab>
 
@@ -88,23 +98,39 @@
                     </p:tab>
 
                     <p:tab title="#{msg.address}">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="uf" value="#{msg.state}: "/>
-                            <p:selectOneMenu id="uf" value="#{teacherBean.teacher.uf}" style="width: 310px">
-                                <p:ajax process="@this" event="change" update="city" listener="#{responsibleBean.returnCities}"/>
-                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                                <f:selectItems value="#{teacherBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}" />
-                            </p:selectOneMenu>
+                        <!--                        <h:panelGrid columns="2">
+                                                    <p:outputLabel for="uf" value="#{msg.state}: "/>
+                                                    <p:selectOneMenu id="uf" value="#{teacherBean.teacher.uf}" style="width: 310px">
+                                                        <p:ajax process="@this" event="change" update="city" listener="#{teacherBean.returnCities}"/>
+                                                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                                        <f:selectItems value="#{teacherBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}" />
+                                                    </p:selectOneMenu>
+                        
+                                                    <p:outputLabel for="city" value="#{msg.city}: " />
+                                                    <p:selectOneMenu id="city" value="#{teacherBean.teacher.city}" style="width: 310px" filter="true"
+                                                                     disabled="#{teacherBean.teacher.uf eq null}">
+                                                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                                        <f:selectItems value="#{teacherBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
+                                                    </p:selectOneMenu>
+                                                </h:panelGrid>-->
 
-                            <p:outputLabel for="city" value="#{msg.city}: " />
-                            <p:selectOneMenu id="city" value="#{teacherBean.teacher.city}" style="width: 310px" filter="true"
-                                             disabled="#{teacherBean.teacher.uf eq null}">
-                                <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
-                                <f:selectItems value="#{teacherBean.cities}" var="city" itemLabel="#{city}" itemValue="#{city}"/>
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-
                         <h:panelGrid columns="2">
+
+                            <h:panelGroup>
+                                <p:outputLabel for="uf" value="#{msg.state}: "/>
+                                <p:selectOneMenu id="uf" value="#{teacherBean.teacher.uf}" style="width: 310px; margin-left: 2px">
+                                    <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                                    <f:selectItems value="#{teacherBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}" />
+                                </p:selectOneMenu>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
+                            <h:panelGroup>
+                                <p:outputLabel for="city" value="#{msg.city}: " style="margin-right: 2px"/>
+                                <p:inputText id="city" value="#{teacherBean.teacher.city}" size="32" maxlength="200"/>
+                            </h:panelGroup>
+                            <p:outputLabel/>
+
                             <h:panelGroup>
                                 <p:outputLabel for="street" value="#{msg.street}: " style="margin-right: 22px"/>
                                 <p:inputText id="street" value="#{teacherBean.teacher.street}" size="24" maxlength="200"/>
@@ -149,9 +175,14 @@
                         <h:panelGrid columns="2" cellpadding="0" cellspacing="2">
 
                             <p:outputLabel for="workType" value="Carga horária: "/>
-                            <p:selectOneRadio id="workType" value="#{teacherBean.teacher.workType}">
-                                <f:selectItems var="chs" itemLabel="#{chs.description}" itemValue="#{chs}" value="#{teacherBean.workTypes}"/>
-                            </p:selectOneRadio>
+                            <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <p:selectOneRadio id="workType" value="#{teacherBean.teacher.workType}">
+                                        <f:selectItems var="chs" itemLabel="#{chs.description}" itemValue="#{chs}" value="#{teacherBean.workTypes}"/>
+                                    </p:selectOneRadio>
+                                    <p:selectBooleanCheckbox itemLabel="Dedicação Exclusiva"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
 
                             <p:outputLabel for="isEfective" value="Categoria: "/>
                             <p:selectOneRadio id="isEfective" value="#{teacherBean.teacher.category}">
@@ -166,36 +197,38 @@
                                 <f:selectItems id="areas" value="#{teacherBean.teacherAreas}" var="area" itemLabel="#{area}" 
                                                itemValue="#{area}"/>
                             </p:selectOneMenu>
+                                <!--<f:selectItems id="areas" value="#{teacherBean.teacherAreas ne null}" var="area" itemLabel="#{area}"--> 
 
-                            <p:outputLabel for="theme" value="Disciplina(s): ">
-                                <p:tooltip for="theme" value="Selecione uma ou mais disciplinas"/>
-                            </p:outputLabel>
-                            <p:selectCheckboxMenu id="theme" label="Selecione..." filter="true" filterMatchMode="startsWith" 
+                            <p:outputLabel for="discipline" value="Disciplina(s): "/>
+                            <p:selectCheckboxMenu id="discipline" label="Selecione..." 
+                                                  filter="true" filterMatchMode="contains" 
+                                                  value="#{teacherBean.teacher.disciplines}"
                                                   updateLabel="true" style="width: 294px; margin-bottom: 4px">
-                                <f:selectItem itemLabel="Sociologia"/>
-                                <f:selectItem itemLabel="OTEC"/>
-                                <f:selectItem itemLabel="Semântica"/>
+                                <f:selectItems id="disciplines" value="#{teacherBean.disciplines}" var="discipline" 
+                                               itemLabel="#{discipline.name}" itemValue="#{discipline}"/>
                             </p:selectCheckboxMenu>
 
-                            <p:outputLabel for="situation" value="Situação: ">
-                                <p:tooltip for="situation" value="EX.: Ativo, Inativo, Afastado, Licença, etc"/>
-                            </p:outputLabel>
+                            <!-- ****************   PROVIDENCIAR TELA PARA INFORMAR AFASTAMENTO OU LICENÇA DE PROFESSOR **********************-->
 
-                            <p:selectOneMenu id="situation" value="#{teacherBean.teacher.situation}" style="width: 265px" label="Digite ou selecione">
-                                <f:selectItems id="situations" value="#{teacherBean.employeeSituations}" var="situation" itemLabel="#{situation.description}"  
-                                               itemValue="#{situation}"/>
-                                <f:ajax execute="situation" render="panelOtherSituation" event="change"/>
-                            </p:selectOneMenu>
+                            <!--                            <p:outputLabel for="situation" value="Situação: ">
+                                                            <p:tooltip for="situation" value="EX.: Ativo, Inativo, Afastado, Licença, etc"/>
+                                                        </p:outputLabel>
+                            
+                                                        <p:selectOneMenu id="situation" value="#{teacherBean.teacher.situation}" style="width: 265px" label="Digite ou selecione">
+                                                            <f:selectItems id="situations" value="#{teacherBean.employeeSituations}" var="situation" itemLabel="#{situation.description}"  
+                                                                           itemValue="#{situation}"/>
+                                                            <f:ajax execute="situation" render="panelOtherSituation" event="change"/>
+                                                        </p:selectOneMenu>-->
 
-                            <p:outputLabel/>
-                            <h:panelGroup id="panelOtherSituation" >
-                                <p:inputText id="otherSituation" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Informe o motivo"
-                                             rendered="#{teacherBean.teacher.situation eq 'OTHER'}"/>
-                                <p:inputText id="otherSituationAfastamento" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Motivo do afastamento"
-                                             rendered="#{teacherBean.teacher.situation eq 'AFASTAMENTO'}"/>
-                                <p:inputText id="otherSituationLicenca" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Tipo de licença"
-                                             rendered="#{teacherBean.teacher.situation eq 'LICENCA'}"/>
-                            </h:panelGroup>
+                            <!--                            <p:outputLabel/>
+                                                        <h:panelGroup id="panelOtherSituation" >
+                                                            <p:inputText id="otherSituation" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Informe o motivo"
+                                                                         rendered="#{teacherBean.teacher.situation eq 'OTHER'}"/>
+                                                            <p:inputText id="otherSituationAfastamento" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Motivo do afastamento"
+                                                                         rendered="#{teacherBean.teacher.situation eq 'AFASTAMENTO'}"/>
+                                                            <p:inputText id="otherSituationLicenca" value="#{teacherBean.teacher.otherSituation}" size="27" placeholder="Tipo de licença"
+                                                                         rendered="#{teacherBean.teacher.situation eq 'LICENCA'}"/>
+                                                        </h:panelGroup>-->
 
                             <p:outputLabel for="observations" value="#{msg.observations}: " style="margin-right: 17px;"/>
                             <p:inputTextarea id="observations" rows="3" cols="30" maxlength="255" value="#{teacherBean.teacher.observations}"

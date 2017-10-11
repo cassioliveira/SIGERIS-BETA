@@ -88,7 +88,7 @@ public class ResponsibleBean implements Serializable {
      */
     public void returnCities() {
         this.cities.clear();
-        if (responsible.getUf()!= null) {
+        if (responsible.getUf() != null) {
             for (String filteredCities : responsibleService.getCities(responsible.getUf().getCode())) {
                 this.cities.add(filteredCities);
             }

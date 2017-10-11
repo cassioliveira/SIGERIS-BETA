@@ -23,11 +23,11 @@
                 </p:toolbar>    
 
                 <p:dataTable id="datatableDiscipline" var="discipline" value="#{disciplineBean.allDisciplines}" widgetVar="disciplineSearch"
-                             paginatorAlwaysVisible="false" style="margin-top: 1px; " paginator="true"
-                             rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}"  
+                             paginatorAlwaysVisible="false"  sortBy="#{discipline.name}" sortOrder="ascending" paginator="true" rowHover="true"
+                             rows="10" paginatorPosition="bottom" emptyMessage="#{msg.noRegistersFound}"  style="margin-top: 1px; " 
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
                              {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50,100"
-                             scrollable="true" scrollRows="20" scrollHeight="250">
+                             scrollable="true" scrollRows="20" scrollHeight="250" >
 
                     <f:facet name="header">
                         <p:outputPanel>
@@ -36,13 +36,13 @@
                     </f:facet>
 
                     <p:column headerText="#{msg.code}" width="10%" filterStyle="display:none" priority="1"
-                              filterBy="#{discipline.code}" filterMatchMode="contains">
-                        <h:outputText value="#{discipline.code}" style="text-transform: uppercase"/>
+                              filterBy="#{discipline.disciplineCode}" filterMatchMode="contains">
+                        <h:outputText value="#{discipline.disciplineCode}" style="text-transform: uppercase"/>
                     </p:column>
                     
                     <p:column headerText="#{msg.name}" width="60%" filterStyle="display:none" priority="2"
                               filterBy="#{discipline.name}" filterMatchMode="contains">
-                        <h:outputText value="#{discipline.name}" style="font-weight: bold; font-size: 16px"/>
+                        <h:outputText value="#{discipline.name}" style="font-weight: bold; font-size: 15px"/>
                     </p:column>
                     
                     <p:column headerText="Carga Horária Semanal" width="20%" filterStyle="display:none" priority="2" style="text-align: center"

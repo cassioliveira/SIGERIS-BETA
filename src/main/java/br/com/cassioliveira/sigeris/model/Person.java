@@ -53,7 +53,7 @@ public class Person implements Serializable {
     @Column(name = "name", length = 200, nullable = false)
     private String name;
     
-    @Column(name = "registration", length = 20, unique = true)
+    @Column(name = "registration", length = 20)
     private String registration;
     
     @Enumerated(EnumType.STRING)
