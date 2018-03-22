@@ -41,20 +41,19 @@ public class RoomBean implements Serializable {
     @Getter
     @Setter
     private Room selectedRoom;
-    
+
     @Getter
     @Setter
     private boolean linkedCourseSelection;
 
     @Getter
     private List<Courses> associatedCourses;
-    
+
     @Getter
     private List<RoomsType> roomTypes;
 
     @Getter
     private List<Room> allRooms;
-
 
     @PostConstruct
     public void init() {

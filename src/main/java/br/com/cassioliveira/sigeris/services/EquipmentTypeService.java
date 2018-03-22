@@ -5,7 +5,7 @@ package br.com.cassioliveira.sigeris.services;
 //import br.com.cassioliveira.sigeris.exceptions.BusinessException;
 //import br.com.cassioliveira.sigeris.model.EquipmentType;
 //import br.com.cassioliveira.sigeris.repository.EquipmentTypes;
-//import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+//import javax.transaction.Transactional;
 //import java.io.Serializable;
 //import java.util.List;
 //import javax.inject.Inject;

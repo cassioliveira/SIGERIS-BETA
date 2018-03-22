@@ -101,8 +101,8 @@ public class SchedulingBean implements Serializable {
     }
 
     /**
-     * Verifica se o objeto esta nulo quando for recuperado. Se sim, refere-se a um novo cadastro, senao
-     * refere-se a um produto a ser editado
+     * Verifica se o objeto esta nulo quando for recuperado. Se sim, refere-se a
+     * um novo cadastro, senao refere-se a um produto a ser editado
      *
      * @return
      */
@@ -119,8 +119,9 @@ public class SchedulingBean implements Serializable {
     }
 
     /**
-     * Verifica se há agendamentos onde a data de previsão de finalização do mesmo é anterior à data e hora
-     * atual. Caso seja, o agendamento é finalizado e a sala é liberada.
+     * Verifica se há agendamentos onde a data de previsão de finalização do
+     * mesmo é anterior à data e hora atual. Caso seja, o agendamento é
+     * finalizado e a sala é liberada.
      */
     public void checkDateScheduledRoomNow() {
         Date now = new Date();
@@ -139,9 +140,10 @@ public class SchedulingBean implements Serializable {
     }
 
     /**
-     * Fecha um agendamento aberto, definindo a data do fechamento com a hora atual. ********AQUI TEM QUE
-     * FAZER UM STRATEGY ENTRE O FECHAMENTO DE AGENDAMENTO DE SALA E EQUIPAMENTO JÁ QUE O EQUIPAMENTO TEM QUE
-     * RETORNAR AO ESTOQUE*********
+     * Fecha um agendamento aberto, definindo a data do fechamento com a hora
+     * atual. ********AQUI TEM QUE FAZER UM STRATEGY ENTRE O FECHAMENTO DE
+     * AGENDAMENTO DE SALA E EQUIPAMENTO JÁ QUE O EQUIPAMENTO TEM QUE RETORNAR
+     * AO ESTOQUE*********
      */
     public void closeSchedule() {
         scheduling.setStatus(Status.CLOSE);

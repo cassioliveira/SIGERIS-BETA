@@ -1,6 +1,8 @@
 package br.com.cassioliveira.sigeris.util.jpa;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -16,22 +18,25 @@ import javax.persistence.EntityTransaction;
  * annotation, this object intercept him and call the begin, roolback or commit
  * methods.
  *
- * @see Transactional * Based on estructure of codes of Algaworks GitHub
+ * //@see Transactional * Based on estructure of codes of Algaworks GitHub
  * Repository (http://github.com/algaworks)
  */
 @Interceptor
-@Transactional
+//@Transactional
 public class TransactionInterceptor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
-    public EntityManager entityManager;
+    transient EntityManager entityManager;
+
+    public TransactionInterceptor() {
+    }
 
     /* The annotation @AroundInvoke sign this method for to be called automatically before the 
      method annotated with @Transactional */
     @AroundInvoke
-    public Object invoke(InvocationContext context) throws Exception {
+    public Object invoke(InvocationContext context) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         boolean owner = false;
 
@@ -52,13 +57,18 @@ public class TransactionInterceptor implements Serializable {
                 //Any anomaly operation and the changes are undone
                 entityTransaction.rollback();
             }
-            throw e;
+            try {
+                throw e;
+            } catch (Exception ex) {
+                Logger.getLogger(TransactionInterceptor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } finally {
             if (entityTransaction != null && entityTransaction.isActive() && owner) {
                 //Finaly, without any errors, the changes are sended to the database.
                 entityTransaction.commit();
             }
         }
+        return null;
     }
 
 }

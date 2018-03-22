@@ -40,7 +40,7 @@ public class Equipment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "other_type")
@@ -67,7 +67,7 @@ public class Equipment implements Serializable {
     @Column(name = "register_date")
     private Date registerDate;
 
-    @Lob
+    
     @Column(name = "observations")
     private String observations;
 

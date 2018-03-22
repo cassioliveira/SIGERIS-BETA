@@ -3,7 +3,6 @@ package br.com.cassioliveira.sigeris.model;
 import br.com.cassioliveira.sigeris.enumerations.States;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,15 +17,15 @@ import lombok.EqualsAndHashCode;
  *
  * @author cassio
  */
-@Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Entity
 public class Enterprise implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", length = 200, nullable = false)
@@ -40,7 +39,6 @@ public class Enterprise implements Serializable {
 
 //    @Embedded
 //    private Address address;
-    
     @Column(name = "address_street", length = 100)
     private String street;
 

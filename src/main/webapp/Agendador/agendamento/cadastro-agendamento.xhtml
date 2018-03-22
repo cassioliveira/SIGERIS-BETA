@@ -83,13 +83,13 @@
                                            value="#{msg.requestor}: " 
                                            style="margin-right: 20px"/>
                             <p:selectOneMenu id="requestor" 
-                                             value="#{schedulingBean.scheduling.responsible}" 
+                                             value="#{schedulingBean.scheduling.requester}" 
                                              required="true" 
                                              style="width: 250px"
                                              requiredMessage="#{msg.mandatorySchedulingRequestor}">
                                 <f:selectItem itemLabel="#{msg.selectIt}..." 
                                               noSelectionOption="true"/>
-                                <f:selectItems value="#{responsibleBean.responsibles}" 
+                                <f:selectItems value="#{requesterBean.requesters}" 
                                                itemLabel="#{requestorRoom.name}" 
                                                itemValue="#{requestorRoom}" 
                                                var="requestorRoom"/>

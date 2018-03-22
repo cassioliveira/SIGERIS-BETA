@@ -25,7 +25,7 @@ public class Subjects extends Generic<Subject> implements Serializable {
     public Subject byUser(String userName) {
 
         return (Subject) getEntityManager().createNamedQuery("Subject.byUser").setParameter("userName", userName.toLowerCase()).getSingleResult();
-        
+
 //        Query query;
 //        query = getEntityManager().createQuery("FROM Subject AS s WHERE s.user = :user", Subject.class)
 //                .setParameter("user", user.toLowerCase());

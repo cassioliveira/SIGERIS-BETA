@@ -4,7 +4,7 @@ import br.com.cassioliveira.sigeris.enumerations.Status;
 import br.com.cassioliveira.sigeris.exceptions.BusinessException;
 import br.com.cassioliveira.sigeris.model.Scheduling;
 import br.com.cassioliveira.sigeris.repository.Schedulings;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,10 +61,12 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Gera um código para identificar o agendamento. Esse código pega o id do responsável pelo agendamento, o
-     * id da sala ou equipamento a ser agendado e o minuto e segundo em que o agendamento está sendo feito.
-     * Esse código é antecedido de um prefixo que identifica o tipo do agendamento. Para sala, o prefixo
-     * inicia com AS (Agendamento de Sala) e AE (Agendamento de Equipamento) para equipamento.
+     * Gera um código para identificar o agendamento. Esse código pega o id do
+     * responsável pelo agendamento, o id da sala ou equipamento a ser agendado
+     * e o minuto e segundo em que o agendamento está sendo feito. Esse código é
+     * antecedido de um prefixo que identifica o tipo do agendamento. Para sala,
+     * o prefixo inicia com AS (Agendamento de Sala) e AE (Agendamento de
+     * Equipamento) para equipamento.
      *
      * @param scheduling
      * @return
@@ -73,11 +75,11 @@ public class SchedulingService implements Serializable {
         LocalDateTime dateToday = LocalDateTime.now();
         String code = "";
         if (scheduling.getType().equals("Sala")) {
-            code = "AS" + scheduling.getResponsible().getId()
+            code = "AS" + scheduling.getRequester().getId()
                     + scheduling.getRoom().getId()
                     + dateToday.format(DateTimeFormatter.ofPattern("MMss"));
         } else if (scheduling.getType().equals("Equipamento")) {
-            code = "AE" + scheduling.getResponsible().getId()
+            code = "AE" + scheduling.getRequester().getId()
                     + scheduling.getEquipment().getId()
                     + dateToday.format(DateTimeFormatter.ofPattern("MMss"));
         }
@@ -86,9 +88,10 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Retorna todos os agendamentos nos quais o status está como ABERTO. ******** ACREDITO QUE AQUI DÁ PRA
-     * FAZER UM STRATEGY POIS O METODO PRA RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO,
-     * SÓ ALTERANDO O STATUS PARA RETORNO.
+     * Retorna todos os agendamentos nos quais o status está como ABERTO.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
      *
      * @return
      */
@@ -103,9 +106,10 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Retorna todos os agendamentos nos quais o status está como FECHADO. ******** ACREDITO QUE AQUI DÁ PRA
-     * FAZER UM STRATEGY POIS O METODO PRA RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO,
-     * SÓ ALTERANDO O STATUS PARA RETORNO.
+     * Retorna todos os agendamentos nos quais o status está como FECHADO.
+     * ******** ACREDITO QUE AQUI DÁ PRA FAZER UM STRATEGY POIS O METODO PRA
+     * RETORNAR OS AGENDAMENTOS ABERTOS E FECHADOS É PRATICAMENTE O MESMO, SÓ
+     * ALTERANDO O STATUS PARA RETORNO.
      *
      * @return
      */
@@ -120,9 +124,9 @@ public class SchedulingService implements Serializable {
     }
 
     /**
-     * Verifica a se a tela de atual é a de cadastro ou baixa do agendamento e retira uma unidade da
-     * quantidade do estoque do item agendado ou adiciona uma unidade na quantidade do estoque do item
-     * agendado, respectivamente.
+     * Verifica a se a tela de atual é a de cadastro ou baixa do agendamento e
+     * retira uma unidade da quantidade do estoque do item agendado ou adiciona
+     * uma unidade na quantidade do estoque do item agendado, respectivamente.
      *
      * @param scheduling
      * @param registerPage

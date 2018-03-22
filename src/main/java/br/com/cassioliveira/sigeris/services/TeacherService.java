@@ -1,16 +1,13 @@
 package br.com.cassioliveira.sigeris.services;
 
-import br.com.cassioliveira.sigeris.model.Discipline;
 import br.com.cassioliveira.sigeris.model.Teacher;
-import br.com.cassioliveira.sigeris.repository.Disciplines;
 import br.com.cassioliveira.sigeris.repository.Teachers;
 import br.com.cassioliveira.sigeris.repository.GlobalQueries;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -26,7 +23,7 @@ public class TeacherService implements Serializable {
 
     @Inject
     private Teachers teachers;
-    
+
 //    @Inject
 //    private Disciplines disciplines;
 //    
@@ -34,14 +31,12 @@ public class TeacherService implements Serializable {
 //    @Getter
 //    @Setter
 //    private Discipline discipline;
-
     @Inject
     @Getter
     private GlobalQueries globalQueries;
 
     @Transactional
     public void save(Teacher teacher) {
-//        this.disciplines.save(discipline);
         this.teachers.save(teacher);
     }
 
@@ -61,7 +56,7 @@ public class TeacherService implements Serializable {
     public List<String> getCities(int ufCode) {
         return globalQueries.returnCities(ufCode);
     }
-    
+
     public List<String> getTeacherAreas() {
         return teachers.getTeacherAreas();
     }

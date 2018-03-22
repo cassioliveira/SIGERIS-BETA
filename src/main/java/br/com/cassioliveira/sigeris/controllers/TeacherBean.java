@@ -33,7 +33,7 @@ public class TeacherBean implements Serializable {
     @Getter
     @Setter
     private Teacher teacher;
-    
+
     @Inject
     private TeacherService teacherService;
 
@@ -49,10 +49,10 @@ public class TeacherBean implements Serializable {
 
     @Getter
     private List<WorkType> workTypes;
-    
+
     @Inject
     private DisciplineService disciplineService;
-    
+
     @Getter
     private List<Discipline> disciplines;
 
@@ -99,18 +99,18 @@ public class TeacherBean implements Serializable {
         FacesUtil.sucessAndRedirect("Exclusão efetuada com sucesso!", "listar-servidores.xhtml");
     }
 
-    /**
-     * Método que carrega uma lista de cidades de acordo com o estado
-     * selecionado.
-     */
-    public void returnCities() {
-        this.cities.clear();
-        if (teacher.getUf() != null) {
-            for (String filteredCities : teacherService.getCities(teacher.getUf().getCode())) {
-                this.cities.add(filteredCities);
-            }
-        }
-    }
+//    /**
+//     * Método que carrega uma lista de cidades de acordo com o estado
+//     * selecionado.
+//     */
+//    public void returnCities() {
+//        this.cities.clear();
+//        if (teacher.getUf() != null) {
+//            for (String filteredCities : teacherService.getCities(teacher.getUf().getCode())) {
+//                this.cities.add(filteredCities);
+//            }
+//        }
+//    }
 
     /*
      * Metodo que verifica se o objeto esta nulo quando for recuperado.

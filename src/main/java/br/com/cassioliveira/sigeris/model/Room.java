@@ -23,14 +23,15 @@ import lombok.Data;
 @Data
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Room.freeRooms", query = "SELECT r FROM Room AS r WHERE r.status = br.com.cassioliveira.sigeris.enumerations.Status.FREE"),
+    @NamedQuery(name = "Room.freeRooms", query = "SELECT r FROM Room AS r WHERE r.status = br.com.cassioliveira.sigeris.enumerations.Status.FREE")
+    ,
     @NamedQuery(name = "Room.roomsNumber", query = "SELECT r.number FROM Room as r")})
 public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description", length = 200)
@@ -46,7 +47,7 @@ public class Room implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "associated_course")
     private Courses associatedCourse;
@@ -81,7 +82,7 @@ public class Room implements Serializable {
     @Column(name = "is_sound")
     private boolean sound;
 
-    @Lob
+    
     @Column(name = "observations")
     private String observations;
 

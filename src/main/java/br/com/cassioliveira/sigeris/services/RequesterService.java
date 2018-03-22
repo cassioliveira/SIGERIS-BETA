@@ -1,8 +1,8 @@
 package br.com.cassioliveira.sigeris.services;
 
-import br.com.cassioliveira.sigeris.model.Driver;
-import br.com.cassioliveira.sigeris.repository.Drivers;
+import br.com.cassioliveira.sigeris.model.Requester;
 import br.com.cassioliveira.sigeris.repository.GlobalQueries;
+import br.com.cassioliveira.sigeris.repository.Requesters;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
@@ -15,35 +15,35 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author elisangela
  */
-public class DriverService implements Serializable {
+public class RequesterService implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Log LOGGER = LogFactory.getLog(DriverService.class);
+    private static final Log LOGGER = LogFactory.getLog(RequesterService.class);
 
     @Inject
-    private Drivers drivers;
+    private Requesters requesters;
 
     @Inject
     @Getter
     private GlobalQueries globalQueries;
 
     @Transactional
-    public void save(Driver driver) {
-        this.drivers.save(driver);
+    public void save(Requester requester) {
+        this.requesters.save(requester);
     }
 
     @Transactional
-    public void delete(Driver driver) {
-        drivers.delete(findById(driver.getId()));
+    public void delete(Requester requester) {
+        requesters.delete(findById(requester.getId()));
     }
 
-    public Driver findById(Long id) {
-        return drivers.findById(id);
+    public Requester findById(Long id) {
+        return requesters.findById(id);
     }
 
-    public List<Driver> findAll() {
-        return drivers.findAll();
+    public List<Requester> findAll() {
+        return requesters.findAll();
     }
 
     public List<String> getCities(int ufCode) {

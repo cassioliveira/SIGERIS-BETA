@@ -27,8 +27,8 @@ import lombok.Data;
  *
  * @author cassio
  */
-@Entity
 @Data
+@Entity
 @NamedQueries({
     @NamedQuery(name = "Scheduling.isRoomScheduled",
             query = "SELECT s FROM Scheduling s WHERE s.forecastSchedulingDateTime > CURRENT_TIMESTAMP")})
@@ -37,7 +37,7 @@ public class Scheduling implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "code", length = 20)
@@ -46,7 +46,7 @@ public class Scheduling implements Serializable {
     @Column(name = "type", length = 100)
     private String type;
 
-    @Lob
+    
     @Column(name = "observations")
     private String observations;
 
@@ -78,7 +78,7 @@ public class Scheduling implements Serializable {
     @Column(name = "reason", length = 150)
     private String schedulingReason;
 
-    @Lob
+    
     @Column(name = "file")
     private byte[] craft;
 
@@ -95,8 +95,8 @@ public class Scheduling implements Serializable {
     private Room room;
 
     @OneToOne
-    @JoinColumn(name = "responsiblefk_id")
-    private Responsible responsible;
+    @JoinColumn(name = "requesterfk_id")
+    private Requester requester;
 
     @PostConstruct
     public void init() {

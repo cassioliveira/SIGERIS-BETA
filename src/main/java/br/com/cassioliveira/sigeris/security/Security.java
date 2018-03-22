@@ -39,7 +39,8 @@ public class Security {
 
         SystemUser systemUser = null;
 
-        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) 
+                FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
 
         if (authenticationToken != null && authenticationToken.getPrincipal() != null) {
             systemUser = (SystemUser) authenticationToken.getPrincipal();

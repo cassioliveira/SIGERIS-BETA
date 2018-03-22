@@ -15,8 +15,8 @@ public class Schedulings extends Generic<Scheduling> implements Serializable {
     public Schedulings() {
         super(Scheduling.class);
     }
-    
-    public List<Scheduling> scheduledRoom(){
+
+    public List<Scheduling> scheduledRoom() {
         return getEntityManager().createNamedQuery("Scheduling.isRoomScheduled").getResultList();
     }
 }

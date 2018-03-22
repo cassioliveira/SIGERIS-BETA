@@ -44,14 +44,14 @@ public class SubjectBean implements Serializable {
 
     @Getter
     private List<Subject> subjects;
-    
+
     @Getter
     private List<SubjectGroups> subjectGroups;
-    
+
     @Getter
     @Setter
     private Grupo group;
-    
+
     public SubjectBean() {
     }
 
@@ -62,10 +62,10 @@ public class SubjectBean implements Serializable {
     }
 
     public void save() {
-        
+
         this.subjectService.save(subject);
         if (getEditing()) {
-            FacesUtil.sucessMessage("Cadastro do usuário " + subject.getUserName()+ " atualizado com sucesso!");
+            FacesUtil.sucessMessage("Cadastro do usuário " + subject.getUserName() + " atualizado com sucesso!");
         } else {
             FacesUtil.sucessMessage("Cadastro efetuado com sucesso!");
         }

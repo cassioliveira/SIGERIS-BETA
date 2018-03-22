@@ -13,9 +13,9 @@ import lombok.EqualsAndHashCode;
  *
  * @author cassio
  */
-@Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Entity
 public class Driver extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;

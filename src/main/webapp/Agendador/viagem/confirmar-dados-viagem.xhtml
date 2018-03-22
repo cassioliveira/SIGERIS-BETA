@@ -15,8 +15,8 @@
             <f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" locale="pt_BR" timeZone="#{initParam.timezone}"/>
         </p:outputLabel>
 
-        <p:outputLabel for="outRequestor" value="#{msg.responsible}: " style="margin-right: 20px"/>
-        <p:outputLabel id="outRequestor" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+        <p:outputLabel for="outRequestor" value="#{msg.requester}: " style="margin-right: 20px"/>
+        <p:outputLabel id="outRequestor" value="#{schedulingBean.scheduling.requester.name}" style="font-weight: bold;"/>
 
         <p:outputLabel for="outDateForecast" value="#{msg.forecastReturn}: "/>
         <p:outputLabel id="outDateForecast" value="#{schedulingBean.scheduling.endingSchedulingDateTime}" style="font-weight: bold;">

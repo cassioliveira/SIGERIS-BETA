@@ -16,12 +16,14 @@ public class Teachers extends Generic<Teacher> implements Serializable {
         super(Teacher.class);
 //        Teacher teacher = new Teacher();
     }
-    
+
     /**
-     * Retorna todas as áreas de conhecimento associadas ao professor cadastradas 
-     * @return 
+     * Retorna todas as áreas de conhecimento associadas ao professor
+     * cadastradas
+     *
+     * @return
      */
-    public List<String> getTeacherAreas(){
+    public List<String> getTeacherAreas() {
         return getEntityManager().createNamedQuery("Teacher.areas").getResultList();
     }
 }

@@ -2,7 +2,7 @@ package br.com.cassioliveira.sigeris.services;
 
 import br.com.cassioliveira.sigeris.model.Grupo;
 import br.com.cassioliveira.sigeris.repository.Groups;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -39,8 +39,8 @@ public class GroupService implements Serializable {
     public List<Grupo> findAll() {
         return groups.findAll();
     }
-    
-    public List<Grupo> gruposDeUsuarios(){
+
+    public List<Grupo> gruposDeUsuarios() {
         return groups.gruposDeUsuarios();
     }
 }

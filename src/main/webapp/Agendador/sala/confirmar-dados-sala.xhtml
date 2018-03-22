@@ -13,8 +13,8 @@
         <p:outputLabel for="outRoomNumber" value="#{msg.roomNumber}: " />
         <p:outputLabel id="outRoomNumber" value="#{schedulingBean.scheduling.room.number}" style="font-weight: bold;" styleClass="upper"/>
 
-        <p:outputLabel for="roomRequestor" value="#{msg.responsible}: " style="margin-right: 20px"/>
-        <p:outputLabel id="roomRequestor" value="#{schedulingBean.scheduling.responsible.name}" style="font-weight: bold;"/>
+        <p:outputLabel for="roomRequestor" value="#{msg.requester}: " style="margin-right: 20px"/>
+        <p:outputLabel id="roomRequestor" value="#{schedulingBean.scheduling.requester.name}" style="font-weight: bold;"/>
 
         <p:outputLabel for="roomSchedulingReason" value="#{msg.reason}: " style="margin-right: 20px"/>
         <p:outputLabel id="roomSchedulingReason" value="#{schedulingBean.scheduling.schedulingReason}" style="font-weight: bold;"/>

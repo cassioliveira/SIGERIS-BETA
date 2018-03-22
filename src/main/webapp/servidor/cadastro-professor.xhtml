@@ -165,8 +165,7 @@
                             <p:inputText id="rg" value="#{teacherBean.teacher.rg}" size="13" maxlength="20"/>
 
                             <p:outputLabel for="cpf" value="#{msg.cpf}: "/>
-                            <p:inputMask id="cpf" mask="999.999.999-99" value="#{teacherBean.teacher.cpf}" size="13" maxlength="14" 
-                                         validator="StellaCPFValidator" converter="cpfConverter"/>
+                            <p:inputMask id="cpf" mask="999.999.999-99" value="#{teacherBean.teacher.cpf}" size="13" maxlength="14"/>
                         </h:panelGrid>
                     </p:tab>
 
@@ -180,14 +179,30 @@
                                     <p:selectOneRadio id="workType" value="#{teacherBean.teacher.workType}">
                                         <f:selectItems var="chs" itemLabel="#{chs.description}" itemValue="#{chs}" value="#{teacherBean.workTypes}"/>
                                     </p:selectOneRadio>
-                                    <p:selectBooleanCheckbox itemLabel="Dedicação Exclusiva"/>
+                                    <p:selectBooleanCheckbox id="dedicacao-exclusiva" itemLabel="DE"/>
                                 </h:panelGrid>
+                                <p:tooltip for="dedicacao-exclusiva" value="Dedicação Exclusiva"/>
                             </h:panelGroup>
 
                             <p:outputLabel for="isEfective" value="Categoria: "/>
                             <p:selectOneRadio id="isEfective" value="#{teacherBean.teacher.category}">
                                 <f:selectItems var="category" itemLabel="#{category.description}" itemValue="#{category}" value="#{teacherBean.employeeCategories}"/>
                             </p:selectOneRadio>
+                            
+                            <p:outputLabel for="isfunction" value="Função"/>
+                            <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <p:selectOneRadio id="isfunction" value="#{teacherBean.teacher.function}">
+                                        <f:selectItem id="function-yes" itemLabel="Sim" itemValue="SIM"/>
+                                        <f:selectItem id="function-no" itemLabel="Não" itemValue="NAO"/>
+                                        <f:ajax execute="isfunction" render="function-description" event="change"/>
+                                    </p:selectOneRadio>
+                                    <h:panelGroup id="function-description" rendered="#{teacherBean.teacher.function eq 'SIM'}">
+                                        <p:inputText id="funcionDescription" value="#{teacherBean.teacher.functionDescription}" 
+                                                      size="10"/>
+                                    </h:panelGroup>
+                                </h:panelGrid>
+                            </h:panelGroup>
 
                             <p:outputLabel for="area" value="Área: ">
                                 <p:tooltip for="area" value="Selecione uma categia ou informe uma se não estiver na lista"/>
@@ -201,8 +216,7 @@
 
                             <p:outputLabel for="discipline" value="Disciplina(s): "/>
                             <p:selectCheckboxMenu id="discipline" label="Selecione..." 
-                                                  filter="true" filterMatchMode="contains" 
-                                                  value="#{teacherBean.teacher.disciplines}"
+                                                  filter="true" filterMatchMode="contains"
                                                   updateLabel="true" style="width: 294px; margin-bottom: 4px">
                                 <f:selectItems id="disciplines" value="#{teacherBean.disciplines}" var="discipline" 
                                                itemLabel="#{discipline.name}" itemValue="#{discipline}"/>

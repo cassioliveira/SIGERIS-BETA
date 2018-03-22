@@ -6,7 +6,6 @@ import br.com.cassioliveira.sigeris.enumerations.Gender;
 import br.com.cassioliveira.sigeris.enumerations.States;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,42 +26,40 @@ import lombok.Data;
  *
  * @author cassio
  */
-@Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
+@Entity
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /*Aqui é algo como o cargo*/
     @Column(name = "job_role", length = 50)
     private String role;
-    
+
     /*Aqui informa se tem função, como coordenador/adjunto, diretor/adjunto, etc.*/
-    @Column(name = "job_function", length = 50)
-    private List<String> jobFunction;
-    
-    @Column(name = "sector", length = 100)
-    private List<String> sector;
-    
+//    @Column(name = "job_function", length = 50)
+//    private List<String> jobFunction;
+//    @Column(name = "sector", length = 100)
+//    private List<String> sector;
     @NotNull
     @Column(name = "name", length = 200, nullable = false)
     private String name;
-    
+
     @Column(name = "registration", length = 20)
     private String registration;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "situation")
     private EmployeeSituation situation;
-    
+
     @Column(name = "other_situation", length = 200)
     private String otherSituation;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private EmployeeCategory category;
@@ -85,7 +82,7 @@ public class Person implements Serializable {
 
     @Column(name = "address_street", length = 200)
     private String street;
-    
+
     @Column(name = "address_complement", length = 200)
     private String complement;
 
@@ -115,13 +112,13 @@ public class Person implements Serializable {
             message = "E-mail com formato incorreto")
     @Column(name = "email", length = 100)
     private String email;
-    
+
     @Pattern(regexp = "^$|^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$",
             message = "E-mail com formato incorreto")
     @Column(name = "email2", length = 100)
     private String email2;
+
     
-    @Lob
     @Column(name = "observations")
     private String observations;
 

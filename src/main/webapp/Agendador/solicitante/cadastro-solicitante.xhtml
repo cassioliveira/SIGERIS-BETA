@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/layout-sem-menu.xhtml"> 
+
+    <f:metadata>
+        <f:viewParam name="teacher" value="#{requesterBean.requester}" />
+    </f:metadata>
+
+    <ui:define name="content">
+
+        <p:fieldset legend="#{requesterBean.editing ? 'Atualizar cadastro de solicitante  ' : 'Cadastro de solicitante'}" >
+
+            <p:growl id="messages" autoUpdate="true"/>
+
+            <h:form id="formCadastreTeacher">
+
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel for="name" value="Órgão: "/>
+                    <p:inputText id="name" value="#{requesterBean.requester.name}" size="32" maxlength="200"
+                                 required="true" requiredMessage="#{msg.mandatoryName}"/>
+
+                    <p:outputLabel for="phone1" value="#{msg.phone1}: "/>
+                    <h:panelGroup>
+                        <p:inputText id="phone1" value="#{requesterBean.requester.phone1}" size="9" maxlength="15" class="phone"/>
+                        <p:outputLabel for="phone2" value="#{msg.phone1}: " style="margin-left: 8px"/>
+                        <p:inputText id="phone2" value="#{requesterBean.requester.phone2}" size="9" maxlength="20" class="phone"/>
+                    </h:panelGroup>
+
+                    <p:outputLabel for="email" value="#{msg.email}: "/>
+                    <p:inputText id="email" value="#{requesterBean.requester.email}" size="32" maxlength="100"/>
+
+                    <p:outputLabel for="email2" value="#{msg.email} 2: "/>
+                    <p:inputText id="email2" value="#{requesterBean.requester.email2}" size="32" maxlength="100"/>
+
+
+                    <p:outputLabel for="uf" value="#{msg.state}: "/>
+                    <p:selectOneMenu id="uf" value="#{requesterBean.requester.uf}" style="width: 310px">
+                        <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
+                        <f:selectItems value="#{requesterBean.states}" var="state" itemLabel="#{state.description}" itemValue="#{state}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="city" value="#{msg.city}: " style="margin-right: 2px"/>
+                    <p:inputText id="city" value="#{requesterBean.requester.city}" size="32" maxlength="200"/>
+
+                    <p:outputLabel for="street" value="#{msg.street}: " style="margin-right: 22px"/>
+                    <h:panelGroup>
+                        <p:inputText id="street" value="#{requesterBean.requester.street}" size="24" maxlength="200"/>
+                        <p:inputText id="number" value="#{requesterBean.requester.number}" size="2" maxlength="5" placeholder="Nº" style="margin-left: 1px"/>
+                    </h:panelGroup>
+
+                    <p:outputLabel for="neighborhood" value="#{msg.neighborhood}: " style="margin-right: 7px"/>
+                    <h:panelGroup>
+                        <p:inputText id="neighborhood" value="#{requesterBean.requester.neighborhood}" size="17" maxlength="50"/>
+                        <p:outputLabel for="postalCode" value="#{msg.postalCode}: "  style="margin-left: 5px"/>
+                        <p:inputMask id="postalCode" mask="99999-999" value="#{requesterBean.requester.postalCode}" size="5" maxlength="9"/>
+                    </h:panelGroup>
+
+                    <p:outputLabel for="complement" value="Complemento: " style="margin-right: 10px"/>
+                    <p:inputText id="complement" value="#{requesterBean.requester.complement}" size="32" maxlength="200"/>
+
+                </h:panelGrid>
+
+
+                <p:toolbar id="panelButtonsTeacher" style="margin-top: 10px;" >
+                    <f:facet name="left">
+                        <p:commandButton style="font-size: 13px;" value="#{requesterBean.editing ? msg.change :msg.save}" action="#{requesterBean.save}"  
+                                         id="saveTeacher" update="@form" icon="ui-icon ui-icon-disk"/>
+
+                        <p:button style="font-size: 13px;" value="#{msg.cancel}" outcome="/Agendador/solicitante/listar-solicitantes"
+                                  id="deleteTeacher" icon="ui-icon ui-icon-cancel">
+                        </p:button>
+                    </f:facet>    
+                </p:toolbar> 
+
+                <p:blockUI id="blockTeacherForm" block="formCadastreTeacher" trigger="saveTeacher">
+                    <p:graphicImage library="images" name="loading.gif"/>
+                </p:blockUI>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>

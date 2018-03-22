@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Subject implements Serializable {
 
     @Id
 //    @SequenceGenerator(name = "seq_subject", sequenceName = "seq_subject", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username", length = 200, nullable = false)
@@ -37,7 +38,7 @@ public class Subject implements Serializable {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "subject_group", joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
     private List<Grupo> groups = new ArrayList<>();

@@ -1,6 +1,5 @@
 package br.com.cassioliveira.sigeris.controllers;
 
-
 import br.com.cassioliveira.sigeris.model.Grupo;
 import br.com.cassioliveira.sigeris.services.GroupService;
 import br.com.cassioliveira.sigeris.util.jsf.FacesUtil;

@@ -2,7 +2,6 @@ package br.com.cassioliveira.sigeris.repository;
 
 import br.com.cassioliveira.sigeris.model.Employee;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -16,7 +15,7 @@ public class Employees extends Generic<Employee> implements Serializable {
         super(Employee.class);
 //        Teacher teacher = new Teacher();
     }
-    
+
 //    /**
 //     * Retorna todas as áreas de conhecimento associadas ao professor cadastradas 
 //     * @return 

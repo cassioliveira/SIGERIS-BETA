@@ -26,7 +26,7 @@ public class Travel implements Serializable {
     @Column(name = "reason")
     private TravelReasons reason;
 
-    @Lob
+    
     @Column(name = "reason_details")
     private String reasonDetails;
 
@@ -46,7 +46,7 @@ public class Travel implements Serializable {
     @Column(name = "origin_street", length = 100)
     private String originStreet;
 
-    @Column(name = "dorigin_number", length = 50)
+    @Column(name = "origin_number", length = 50)
     private String originNumber;
 
     @Column(name = "origin_neighborhood", length = 250)
@@ -82,5 +82,5 @@ public class Travel implements Serializable {
 //    private Driver driver;
 //
 //    @ManyToOne
-//    private Responsible responsible;
+//    private Requester requester;
 }

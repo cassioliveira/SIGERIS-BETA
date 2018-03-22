@@ -105,7 +105,7 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel for="uf" value="#{msg.state}: "/>
                     <p:selectOneMenu id="uf" value="#{cc.attrs.uf}" style="width: 280px">
-                        <p:ajax process="@this" event="change" update="city" listener="#{responsibleBean.returnCities}"/>
+                        <p:ajax process="@this" event="change" update="city" listener="#{requesterBean.returnCities}"/>
                         <f:selectItem itemLabel="#{msg.selectIt}..." noSelectionOption="true"/>
                         <f:selectItems value="#{teacherBean.states}" var="state" itemLabel="#{state.description}" 
                                        itemValue="#{state}" rendered="#{employeeBean.employee.role eq 'professor'}"/>
@@ -153,8 +153,7 @@
                     <p:inputText id="rg" value="#{cc.attrs.rg}" size="13" maxlength="20"/>
 
                     <p:outputLabel for="cpf" value="#{msg.cpf}: "/>
-                    <p:inputMask id="cpf" mask="999.999.999-99" value="#{cc.attrs.cpf}" size="13" maxlength="14" 
-                                 validator="StellaCPFValidator" converter="cpfConverter"/>
+                    <p:inputMask id="cpf" mask="999.999.999-99" value="#{cc.attrs.cpf}" size="13" maxlength="14"/>
                 </h:panelGrid>
             </p:tab>
 

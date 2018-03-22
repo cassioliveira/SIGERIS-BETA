@@ -3,7 +3,7 @@ package br.com.cassioliveira.sigeris.services;
 import br.com.cassioliveira.sigeris.enumerations.EquipmentType;
 import br.com.cassioliveira.sigeris.model.Equipment;
 import br.com.cassioliveira.sigeris.repository.Equipments;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;

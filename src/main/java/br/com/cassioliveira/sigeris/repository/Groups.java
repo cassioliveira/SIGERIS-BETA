@@ -18,10 +18,11 @@ public class Groups extends Generic<Grupo> implements Serializable {
 
     /**
      * Retorna todos os grupos cadastrados na tabela @see Grupo.
-     * @return 
+     *
+     * @return
      */
-    public List<Grupo> gruposDeUsuarios(){
+    public List<Grupo> gruposDeUsuarios() {
         return getEntityManager().createNamedQuery("Grupo.todos").getResultList();
     }
-    
+
 }

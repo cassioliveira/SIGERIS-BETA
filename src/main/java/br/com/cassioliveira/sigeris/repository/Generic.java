@@ -2,8 +2,8 @@ package br.com.cassioliveira.sigeris.repository;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
@@ -15,7 +15,7 @@ public abstract class Generic<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Inject
+    @PersistenceContext
     private EntityManager entityManager;
 
     private Class<T> entity;

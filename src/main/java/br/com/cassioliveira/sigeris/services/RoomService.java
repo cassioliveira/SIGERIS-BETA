@@ -3,7 +3,7 @@ package br.com.cassioliveira.sigeris.services;
 import br.com.cassioliveira.sigeris.enumerations.Status;
 import br.com.cassioliveira.sigeris.model.Room;
 import br.com.cassioliveira.sigeris.repository.Rooms;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -25,8 +25,8 @@ public class RoomService implements Serializable {
 
     @Transactional
     public void save(Room room) {
-            room.setStatus(Status.FREE);
-            this.rooms.save(room);
+        room.setStatus(Status.FREE);
+        this.rooms.save(room);
 //        if (isRoomDuplicated(room.getNumber()) && room.getId() == null) {
 //            throw new BusinessException("Uma sala com esse nome/número já existe");
 //        } else {
@@ -45,11 +45,11 @@ public class RoomService implements Serializable {
     public List<Room> findAll() {
         return rooms.findAll();
     }
-    
-    public List<Room> getFreeRooms(){
+
+    public List<Room> getFreeRooms() {
         return rooms.getFreeRooms();
     }
-    
+
     /**
      * Metodo que verifica se a sala que está sendo informada já existe no
      * sistema baseada no nome da mesma, que não pode ser repetida.

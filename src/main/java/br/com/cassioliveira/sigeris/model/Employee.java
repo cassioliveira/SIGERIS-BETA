@@ -10,9 +10,9 @@ import lombok.EqualsAndHashCode;
  *
  * @author cassio
  */
-@Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Entity
 public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class Employee extends Person implements Serializable {
 //    private List<Driver> drivers;
 //
 //    @OneToMany(mappedBy = "employee")
-//    private List<Responsible> responsibles;
+//    private List<Requester> requesters;
 //
 //    @OneToMany(mappedBy = "employee")
 //    private List<Room> rooms;

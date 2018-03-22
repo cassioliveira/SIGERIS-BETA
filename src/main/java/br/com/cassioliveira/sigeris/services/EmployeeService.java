@@ -3,7 +3,7 @@ package br.com.cassioliveira.sigeris.services;
 import br.com.cassioliveira.sigeris.model.Employee;
 import br.com.cassioliveira.sigeris.repository.Employees;
 import br.com.cassioliveira.sigeris.repository.GlobalQueries;
-import br.com.cassioliveira.sigeris.util.jpa.Transactional;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -49,7 +49,7 @@ public class EmployeeService implements Serializable {
     public List<String> getCities(int ufCode) {
         return globalQueries.returnCities(ufCode);
     }
-    
+
 //    public List<String> getTeacherAreas() {
 //        return employees.getTeacherAreas();
 //    }
