@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.cassioliveira</groupId>
-    <artifactId>SIGERIS</artifactId>
+    <artifactId>SIGERIS-BETA</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>SIGERIS</name>
+    <name>SIGERIS-BETA</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
